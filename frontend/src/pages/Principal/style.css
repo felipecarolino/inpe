@@ -1,0 +1,57 @@
+.principal{
+    display: flex;
+    max-width: 1000px;
+    margin-left: 30px;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.principal-card{
+    display: flex;
+    flex: 1;
+    border: none;
+}
+
+.principal-card-text{
+    padding: 20px 20px 0;
+}
+
+.principal-card-body{
+    padding: 0;
+}
+
+.table{
+    margin-bottom: 0;
+}
+
+.view, .edit, .delete{
+    height: 20px;
+    width: 18px;
+}
+  
+td a{
+    margin-right: 5px;
+}
+
+@media only screen and (max-width: 576px){
+    .principal{
+        margin: 0;
+    }
+
+    .card-header{
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    .principal-card-text{
+        padding: 10px 5px 0 5px;
+    }
+
+    .table thead th {
+        padding: 6px;
+    }
+
+    .table td {
+        padding: 6px;
+    }
+}

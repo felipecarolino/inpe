@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.css';
-import logo from './../../assets/img/logo.jpg';
+import logo from './../../assets/img/logo.png';
 import brazilThumbnail from './../../assets/img/brazil_thumbnail.png';
 import usaThumbnail from './../../assets/img/usa_thumbnail.png';
 import Navbar from 'react-bootstrap/Navbar';
