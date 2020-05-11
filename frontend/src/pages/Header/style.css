@@ -101,20 +101,38 @@
     .header{
         display: flex;
         flex-direction: column;
+        margin: 0;
     }
 
     .header-top{
+        flex-direction: column;
         justify-content: center;
     }
 
-    .logo{
-        width: 100px;
-        height: 80px;
+    .header-logo{
+        align-self: center;
+        max-width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .header-title{
+        align-self: center;
+        max-width: 100%;
     }
 
     .header-title h1{
         text-align: center;
         font-size: 26px;
+    }
+
+    .header-flags{
+        max-width: 100%;
+        align-self: flex-end;
+    }
+
+    .logo{
+        width: 100px;
+        height: 80px;
     }
 
     .header-flag-br, .header-flag-us{
@@ -123,7 +141,7 @@
     }
 
     .navbar{
-        justify-content: center;
+        justify-content: flex-end;
     }
 
     .navbar-nav{

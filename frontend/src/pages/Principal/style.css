@@ -46,6 +46,14 @@ td a{
     .principal-card-text{
         padding: 10px 5px 0 5px;
     }
+    
+    th:nth-child(3){
+        display: none;
+    }
+
+    td:nth-child(3){
+        display: none;
+    }
 
     .table thead th {
         padding: 6px;

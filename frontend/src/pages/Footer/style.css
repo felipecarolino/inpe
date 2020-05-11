@@ -1,0 +1,11 @@
+.footer{
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #E6E6FA;
+    width: 100%;
+  }
+  
+  .footer p{
+    margin: 0 auto;
+    text-align: center;
+  }
