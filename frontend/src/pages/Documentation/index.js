@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 
 
-export default function(){
+export default function Documentation(){
     return (
         <h1>Documentation</h1>
     )

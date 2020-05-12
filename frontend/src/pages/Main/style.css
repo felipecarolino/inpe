@@ -1,4 +1,4 @@
-.principal{
+.main{
     display: flex;
     max-width: 1000px;
     margin-left: 30px;
@@ -6,17 +6,17 @@
     box-sizing: border-box;
 }
 
-.principal-card{
+.main-card{
     display: flex;
     flex: 1;
     border: none;
 }
 
-.principal-card-text{
+.main-card-text{
     padding: 20px 20px 0;
 }
 
-.principal-card-body{
+.main-card-body{
     padding: 0;
 }
 
@@ -34,7 +34,7 @@ td a{
 }
 
 @media only screen and (max-width: 576px){
-    .principal{
+    .main{
         margin: 0;
     }
 
@@ -43,7 +43,7 @@ td a{
         text-align: center;
     }
 
-    .principal-card-text{
+    .main-card-text{
         padding: 10px 5px 0 5px;
     }
     

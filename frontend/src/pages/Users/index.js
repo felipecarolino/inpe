@@ -1,8 +1,14 @@
 import React from 'react';
 import './style.css';
 
-export default function() {
+import Sidebar from './../Sidebar/index';
+import Main from './../Main/index';
+
+export default function Users() {
     return (
-        <h1>Permissions</h1>
+        <div className="content">
+            <Sidebar />
+            <Main />
+        </div>
     )
 }

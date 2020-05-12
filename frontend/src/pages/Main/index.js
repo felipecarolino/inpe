@@ -6,17 +6,17 @@ import Delete from './../../assets/img/trash.svg';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 
-export default function Principal() {
+export default function Main() {
 
     return (
-        <div className="principal">
-                <Card className="principal-card">
+        <div className="main">
+                <Card className="main-card">
                     <Card.Header as="h5">Roles List</Card.Header>
-                    <Card.Body className="principal-card-body">
-                        <Card.Text className="principal-card-text">
+                    <Card.Body className="main-card-body">
+                        <Card.Text className="main-card-text">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo nunc a lectus sodales cursus.
                         </Card.Text>
-                        <div className="principal-table">
+                        <div className="main-table">
                             <Table striped bordered hover>
                                 <thead>
                                     <tr>

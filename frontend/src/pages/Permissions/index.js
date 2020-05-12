@@ -1,8 +1,8 @@
 import React from 'react';
 import './style.css';
 
-export default function() {
+export default function Permissions() {
     return (
-        <h1>Users</h1>
+        <h1>Permissions</h1>
     )
 }

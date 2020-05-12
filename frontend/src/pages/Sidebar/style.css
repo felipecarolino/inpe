@@ -1,4 +1,4 @@
-.menu{
+.sidebar{
     display: flex;
     max-width: 200px;
     justify-content: flex-start;
@@ -8,6 +8,12 @@
 .nav{
     display: flex;
     flex: 1;
+}
+
+.nav-link.disabled{
+    font-weight: bold;
+    color: black;
+    background-color: rgba(0,0,0,.03);
 }
 
 .nav-pills .nav-link.active{
@@ -25,7 +31,7 @@ a:hover {
 }
 
 @media only screen and (max-width: 576px){
-    .menu{
+    .sidebar{
         margin-bottom: 10px;
         max-width: 100%;
         margin: 0 auto 10px;
@@ -33,5 +39,9 @@ a:hover {
 
     .nav{
         justify-content: center;
+    }
+
+    .nav-link.disabled{
+        display: none;
     }
 }
