@@ -71,10 +71,6 @@
     color: #C1C4C9;
 }
 
-.navbar-light .navbar-nav .nav-link.active{
-    color: #C1C4C9;
-}
-
 @media (min-width: 576px) and (max-width: 768px){
     .header-top{
         justify-content: space-between;

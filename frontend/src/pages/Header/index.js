@@ -1,5 +1,6 @@
 import React from 'react';
 import './style.css';
+import { Link } from "react-router-dom";
 import logo from './../../assets/img/logo.png';
 import brazilThumbnail from './../../assets/img/brazil_thumbnail.png';
 import usaThumbnail from './../../assets/img/usa_thumbnail.png';
@@ -28,10 +29,10 @@ export default function Header() {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">
-                            <Nav.Link href="#users">Users</Nav.Link>
-                            <Nav.Link href="#cataclysmic-variables">Cataclysmic Variables</Nav.Link>
-                            <Nav.Link href="#submissions">Submissions</Nav.Link>
-                            <Nav.Link href="#documentation">Documentation</Nav.Link>
+                            <Link to="/" className="nav-link">Users</Link>
+                            <Link to="/cataclysmic-variables" className="nav-link">Cataclysmic Variables</Link>
+                            <Link to="/submissions" className="nav-link">Submissions</Link>
+                            <Link to="/documentation" className="nav-link">Documentation</Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
