@@ -8,7 +8,7 @@ import Documentation from './pages/Documentation/index';
 
 export default function Routes() {
     return (
-        <div>
+        <div className="routes">
             <Switch>
                 <Route path="/users" component={Users}/>
                 <Route path='/cataclysmic-variables' component={CataclysmicVariables}/>
