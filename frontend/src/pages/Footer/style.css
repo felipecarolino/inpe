@@ -1,11 +1,17 @@
 .footer{
-    max-width: 1200px;
-    margin: 0 auto;
-    background: #E6E6FA;
-    width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #E6E6FA;
+  width: 100%;
 }
   
-  .footer p{
-    margin: 0 auto;
-    text-align: center;
+.footer p{
+  margin: 0 auto;
+  text-align: center;
+}
+
+@media only screen and (max-width: 576px){
+  .footer{
+    font-size: 12px;
   }
+}
