@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import './app.css';
 
 import Header from './pages/Header/index';
-import Routes from './Routes';
+import Main from './pages/Main/index';
 import Footer from './pages/Footer/index';
 
 function App() {
@@ -10,8 +11,8 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Header />
-        <Routes />
-        {/* <Footer /> */}
+        <Main />
+        <Footer />
       </BrowserRouter>
     </div>
   );

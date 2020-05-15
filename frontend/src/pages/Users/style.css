@@ -5,6 +5,7 @@
     flex-direction: row;
     align-items: flex-start;
     max-width: 1200px;
+    width: 100%;
 }
 
 @media (min-width: 576px) and (max-width: 768px){
