@@ -6,10 +6,45 @@
     box-sizing: border-box;
 }
 
+.view-role{
+    max-width: 700px;
+    width: 100%;
+    margin-left: 30px;
+}
+
+.view-role-card{
+    border: none;
+}
+
+.view-role-card-body{
+    padding: 10px 0 0;
+}
+
 .roles-card{
     display: flex;
     flex: 1;
     border: none;
+}
+
+.card-header h5{
+    display: inline-block;
+    margin: 0;
+    height: 100%;
+    vertical-align: middle;
+    
+}
+
+.btn-new{
+    background-color: #0E4097;
+    border-color: #0E4097;
+    float: right;
+}
+
+.btn-back{
+    background-color: #0E4097;
+    border-color: #0E4097;
+    float: left;
+    margin-right: 15px;
 }
 
 .roles-card-text{
@@ -24,7 +59,7 @@
     margin-bottom: 0;
 }
 
-.view, .edit, .delete{
+.viewIcon, .editIcon, .deleteIcon{
     height: 20px;
     width: 18px;
 }
@@ -39,7 +74,17 @@ td a{
         padding: 10px;
     }
 
+    .view-role{
+        margin: 0;
+        padding: 10px;
+    }
+
     .card-header{
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    .view-role-card-header{
         padding: 10px 0;
         text-align: center;
     }

@@ -1,30 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
-import View from './../../assets/img/eye.svg';
-import Edit from './../../assets/img/edit.svg';
-import Delete from './../../assets/img/trash.svg';
+import api from '../../services/api';
+import Button from 'react-bootstrap/Button';
+import ViewIcon from './../../assets/img/eye.svg';
+import EditIcon from './../../assets/img/edit.svg';
+import DeleteIcon from './../../assets/img/trash.svg';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
-import api from '../../services/api';
 
 export default function Roles() {
 
-    const [data, setData] = useState([]);
+    const [roles, setRoles] = useState([]);
 
     useEffect(() => {
-        const GetData = async () => {
-            const result = await api.get('users');
-            //const result = await api.get('roles');
-            setData(result.data);
+        const GetRoles = async () => {
+            const result = await api.get('roles');
+            setRoles(result.data);
             console.log(result)
         };
-        GetData();
+        GetRoles();
     }, []);
 
     return (
         <div className="roles">
             <Card className="roles-card">
-                <Card.Header as="h5">Roles List</Card.Header>
+                <Card.Header><h5>Roles List</h5><Button size="sm" className="btn-new">New</Button></Card.Header>
                 <Card.Body className="roles-card-body">
                     <Card.Text className="roles-card-text">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo nunc a lectus sodales cursus.
@@ -41,15 +41,15 @@ export default function Roles() {
                             </thead>
                             <tbody>
                                 {
-                                    data.map((item, idx) => {
+                                    roles.map((item, idx) => {
                                         return <tr>
                                             <td>{item.id}</td>
                                             <td>{item.name}</td>
-                                            <td>{item.email}</td>
+                                            <td>{item.description}</td>
                                             <td>
-                                                <a href="#view"><img src={View} alt="View Icon" className="view" /></a>
-                                                <a href="#edit"><img src={Edit} alt="Edit Icon" className="edit" /></a>
-                                                <a href="#delete"><img src={Delete} alt="Delete Icon" className="delete" /></a>
+                                                <a href="/users/roles/view"><img src={ViewIcon} alt="View Icon" className="viewIcon" /></a>
+                                                <a href="#edit"><img src={EditIcon} alt="Edit Icon" className="editIcon" /></a>
+                                                <a href="#delete"><img src={DeleteIcon} alt="Delete Icon" className="deleteIcon" /></a>
                                             </td>
                                         </tr>
                                     })}
