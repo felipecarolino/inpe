@@ -17,7 +17,6 @@ export default function Roles() {
         const GetRoles = async () => {
             const result = await api.get('roles');
             setRoles(result.data);
-            console.log(result)
         };
         GetRoles();
     }, []);
@@ -48,7 +47,9 @@ export default function Roles() {
                                             <td>{item.name}</td>
                                             <td>{item.description}</td>
                                             <td>
-                                                <Link to="/users/roles/view" className="nav-link"><img src={ViewIcon} alt="View Icon" className="viewIcon" /></Link>
+                                                <Link to={{
+                                                    pathname: `/users/roles/view/${item.id}`
+                                                }} className="nav-link"><img src={ViewIcon} alt="View Icon" className="viewIcon" /></Link>
                                                 <Link to="/users/roles/edit" className="nav-link"><img src={EditIcon} alt="Edit Icon" className="editIcon" /></Link>
                                                 <Link to="/users/roles/delete" className="nav-link"><img src={DeleteIcon} alt="Delete Icon" className="deleteIcon" /></Link>
                                             </td>

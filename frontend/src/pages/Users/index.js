@@ -13,7 +13,7 @@ export default function Users() {
             <Sidebar />
             <Switch>
                 <Route path="/users/roles" exact component={Roles} />
-                <Route path="/users/roles/view" component={View} />
+                <Route path="/users/roles/view/:id" component={View} />
             </Switch>
         </div>
     )

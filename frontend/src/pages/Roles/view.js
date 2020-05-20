@@ -12,20 +12,17 @@ export default function View(props) {
 
     useEffect(() => {
         const GetRole = async () => {
-            const result = await api.get('roles/1');
+            const result = await api.get('roles/' + props.match.params.id);
             setRole(result.data.data);
-            console.log(result)
         };
         GetRole();
-    }, []);
-
-    console.log(props.id)
+    }, [props.match.params.id]);
 
     return (
         <div className="view-role">
             <Card className="view-role-card">
                 <Card.Header>
-                    <Link to="/users/roles" className="nav-link"><Button size="sm" href="/users/roles" className="btn-back">Back</Button></Link>
+                    <Link to="/users/roles" className="nav-link"><Button size="sm" className="btn-back">Back</Button></Link>
                     <h5>View Role</h5></Card.Header>
                 <Card.Body className="view-role-card-body">
                     <div className="view-role-table">
