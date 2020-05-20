@@ -1,6 +1,7 @@
 import React from 'react';
 import './style.css';
 import Nav from 'react-bootstrap/Nav';
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
 
@@ -8,9 +9,9 @@ export default function Sidebar() {
         <div className="sidebar">
             <Nav defaultActiveKey="/users" variant="pills" className="flex-sm-column">
                 <Nav.Link eventKey="disabled" disabled>User Management</Nav.Link>
-                <Nav.Link eventKey="/users/roles" href="/users/roles">Roles</Nav.Link>
-                <Nav.Link eventKey="/users/users" href="/users/users">Users</Nav.Link>
-                <Nav.Link eventKey="/users/Permissions" href="/users/permissions">Permissions</Nav.Link>
+                <Link to="/users/roles" className="nav-link">Roles</Link>
+                <Link to="/users/users" className="nav-link">Users</Link>
+                <Link to="/users/permissions" className="nav-link">Permissions</Link>
             </Nav>
         </div>
     )

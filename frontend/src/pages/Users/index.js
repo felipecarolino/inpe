@@ -1,8 +1,9 @@
 import React from 'react';
 import './style.css';
-import { Route, Switch } from 'react-router-dom';
 
 import Sidebar from './../Sidebar/index';
+import { Route, Switch } from 'react-router-dom';
+
 import Roles from './../Roles/index';
 import View from './../Roles/view';
 

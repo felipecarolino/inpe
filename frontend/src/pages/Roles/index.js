@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
+import { Link } from "react-router-dom";
 import api from '../../services/api';
 import Button from 'react-bootstrap/Button';
 import ViewIcon from './../../assets/img/eye.svg';
@@ -47,9 +48,9 @@ export default function Roles() {
                                             <td>{item.name}</td>
                                             <td>{item.description}</td>
                                             <td>
-                                                <a href="/users/roles/view"><img src={ViewIcon} alt="View Icon" className="viewIcon" /></a>
-                                                <a href="#edit"><img src={EditIcon} alt="Edit Icon" className="editIcon" /></a>
-                                                <a href="#delete"><img src={DeleteIcon} alt="Delete Icon" className="deleteIcon" /></a>
+                                                <Link to="/users/roles/view" className="nav-link"><img src={ViewIcon} alt="View Icon" className="viewIcon" /></Link>
+                                                <Link to="/users/roles/edit" className="nav-link"><img src={EditIcon} alt="Edit Icon" className="editIcon" /></Link>
+                                                <Link to="/users/roles/delete" className="nav-link"><img src={DeleteIcon} alt="Delete Icon" className="deleteIcon" /></Link>
                                             </td>
                                         </tr>
                                     })}

@@ -68,6 +68,13 @@ td a{
     margin-right: 5px;
 }
 
+td a.nav-link{
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    margin-right: 5px;
+}
+
 @media only screen and (max-width: 576px){
     .roles{
         margin: 0;

@@ -5,6 +5,8 @@ import Users from './pages/Users/index';
 import CataclysmicVariables from './pages/CatclysmicVariables/index';
 import Submissions from './pages/Submissions/index';
 import Documentation from './pages/Documentation/index';
+import Roles from './pages/Roles/index';
+import View from './pages/Roles/view';
 
 export default function Routes() {
     return (
