@@ -1,0 +1,26 @@
+import React from 'react';
+import { Link } from "react-router-dom";
+import Form from './form';
+
+import Card from 'react-bootstrap/Card';
+
+import IconBack from './../../assets/img/arrowLeft.svg';
+
+export default function Create() {
+
+    return (
+        <div className="create-role">
+            <Card className="create-role-card">
+                <Card.Header>
+                    <Link to="/users/roles" className="nav-link">
+                        <img src={IconBack} alt="Back Icon" className="iconBack" />
+                    </Link>
+                    <h5>Create Role</h5>
+                </Card.Header>
+                <Card.Body className="create-role-card-body">
+                    <Form />
+                </Card.Body>
+            </Card>
+        </div>
+    )
+}

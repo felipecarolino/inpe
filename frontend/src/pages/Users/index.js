@@ -6,6 +6,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import Roles from './../Roles/index';
 import View from './../Roles/view';
+import Create from './../Roles/create';
 
 export default function Users() {
     return (
@@ -14,6 +15,7 @@ export default function Users() {
             <Switch>
                 <Route path="/users/roles" exact component={Roles} />
                 <Route path="/users/roles/view/:id" component={View} />
+                <Route path="/users/roles/create" component={Create} />
             </Switch>
         </div>
     )

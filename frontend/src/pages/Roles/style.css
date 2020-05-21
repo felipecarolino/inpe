@@ -1,3 +1,4 @@
+/* Component Roles */
 .roles{
     display: flex;
     max-width: 1000px;
@@ -6,130 +7,185 @@
     box-sizing: border-box;
 }
 
-.view-role{
-    max-width: 700px;
-    width: 100%;
-    margin-left: 30px;
-}
-
-.view-role-card{
-    border: none;
-}
-
-.view-role-card-body{
-    padding: 10px 0 0;
-}
-
 .roles-card{
     display: flex;
     flex: 1;
     border: none;
 }
 
-.view-role-card .card-header{
-    padding-left: 10px;
+.roles-card .card-header {
+    display: flex;
+    justify-content: space-between;
 }
 
-.view-role-card .card-header a{
-    display: inline;
+.roles-card .card-header h5{
+    margin: 0;
+}
+
+.roles-card .card-header .nav-link{
     padding: 0;
-    margin: 0;
-}
-
-.card-header h5{
-    display: inline-block;
-    margin: 0;
-    height: 100%;
-    vertical-align: middle;
-}
-
-.btn-new{
-    background-color: #0E4097;
-    border-color: #0E4097;
-    float: right;
-}
-
-.btn-back{
-    background-color: #0E4097;
-    border-color: #0E4097;
-    float: left;
-    margin-right: 15px;
-}
-
-.roles-card-text{
-    padding: 20px 20px 0;
 }
 
 .roles-card-body{
     padding: 0;
 }
 
-.table{
+.roles-card-text{
+    padding: 20px;
+    margin: 0;
+}
+
+.roles-card-text p{
+    margin: 0;
+}
+
+.roles-table .table{
     margin-bottom: 0;
 }
 
-.viewIcon, .editIcon, .deleteIcon{
+.iconView, .iconEdit, .iconDelete{
     height: 20px;
     width: 18px;
 }
   
-td a{
-    margin-right: 5px;
-}
-
 td a.nav-link{
     padding: 0;
-    margin: 0;
     display: inline-block;
     margin-right: 5px;
 }
 
+/* Component View */
+.view-role{
+    display: flex;
+    max-width: 1000px;
+    margin-left: 30px;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.view-role-card{
+    display: flex;
+    flex: 1;
+    border: none;
+}
+
+.view-role-card .card-header{
+    display: flex;
+}
+
+.iconBack{
+    margin-right: 15px;
+}
+
+.view-role-card .card-header h5{
+    margin: 0;
+}
+
+.view-role-card .card-header .nav-link{
+    padding: 0;
+}
+
+.view-role-card-body{
+    padding: 0;
+    margin-top: 10px;
+}
+
+/* Component Form */
+form{
+    padding-left: 25px;
+}
+
+.form-row{
+    margin: 0;
+}
+
+.form-group{
+    width: 50%;
+}
+
+/* Component Create */
+.create-role{
+    display: flex;
+    max-width: 1000px;
+    margin-left: 30px;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.create-role-card{
+    display: flex;
+    flex: 1;
+    border: none;
+}
+
+.create-role-card .card-header{
+    display: flex;
+}
+
+.iconBack{
+    margin-right: 15px;
+}
+
+.create-role-card .card-header h5{
+    margin: 0;
+}
+
+.create-role-card .card-header .nav-link{
+    padding: 0;
+}
+
+.create-role-card-body{
+    padding: 0;
+    margin-top: 10px;
+}
+
+
+
 @media only screen and (max-width: 576px){
+    /* Component Roles */
     .roles{
         margin: 0;
         padding: 10px;
     }
 
-    .view-role{
-        margin: 0;
-        padding: 10px;
-    }
-
-    .card-header{
+    .roles-card .card-header{
         padding: 10px 0;
-        text-align: center;
-    }
-
-    .view-role-card-header{
-        padding: 10px 0;
-        text-align: center;
     }
 
     .roles-card-text{
-        padding: 10px 5px 0 5px;
+        padding: 10px 0;
+        text-align: justify;
     }
 
-    thead tr{
+    .roles-table .table thead tr{
         text-align: center;
     }
-    
-    th:nth-child(3){
-        display: none;
-    }
 
-    td:nth-child(3){
-        display: none;
-    }
-
-    td:nth-child(4){
-        text-align: right;
-    }
-
-    .table thead th {
+    .roles-table .table thead th {
         padding: 6px;
     }
 
-    .table td {
+    .roles-table .table td {
         padding: 6px;
+        text-align: center;
+    }
+
+    .roles-table .table th:nth-child(3){
+        display: none;
+    }
+
+    .roles-table .table td:nth-child(3){
+        display: none;
+    }
+
+    /* Component View */
+    .view-role{
+        margin: 0;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .view-role-card .card-header{
+        padding: 10px 0;
     }
 }
