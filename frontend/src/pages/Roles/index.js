@@ -58,7 +58,7 @@ export default function Roles() {
                                                 <Link to={{pathname: `/users/roles/view/${item.id}`}} className="nav-link">
                                                     <img src={IconView} alt="View Icon" className="iconView" />
                                                 </Link>
-                                                <Link to="/users/roles/edit" className="nav-link">
+                                                <Link to={{pathname: `/users/roles/edit/${item.id}`}} className="nav-link">
                                                     <img src={IconEdit} alt="Edit Icon" className="iconEdit" />
                                                 </Link>
                                                 <Link to="/users/roles/delete" className="nav-link">

@@ -139,6 +139,41 @@ form{
     margin-top: 10px;
 }
 
+/* Component Edit */
+.edit-role{
+    display: flex;
+    max-width: 1000px;
+    margin-left: 30px;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.edit-role-card{
+    display: flex;
+    flex: 1;
+    border: none;
+}
+
+.edit-role-card .card-header{
+    display: flex;
+}
+
+.iconBack{
+    margin-right: 15px;
+}
+
+.edit-role-card .card-header h5{
+    margin: 0;
+}
+
+.edit-role-card .card-header .nav-link{
+    padding: 0;
+}
+
+.edit-role-card-body{
+    padding: 0;
+    margin-top: 10px;
+}
 
 
 @media only screen and (max-width: 576px){
@@ -186,6 +221,37 @@ form{
     }
 
     .view-role-card .card-header{
+        padding: 10px 0;
+    }
+
+    /* Component Form */
+    form{
+        padding-left: 0;
+    }
+
+    .form-group{
+        width: 100%;
+    }
+
+    /* Component Create */
+    .create-role{
+        margin: 0;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .create-role-card .card-header{
+        padding: 10px 0;
+    }
+
+    /* Component Edit */
+    .edit-role{
+        margin: 0;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .edit-role-card .card-header{
         padding: 10px 0;
     }
 }

@@ -16,7 +16,7 @@ export default function FormRoles(props) {
         }
 
         setValidated(true);
-    };
+    }
 
     return (
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
@@ -28,6 +28,7 @@ export default function FormRoles(props) {
                         type="text"
                         placeholder="Enter name"
                         defaultValue={props.name}
+                        onChange={(event) => props.setRoleName(event.target.value)}
                     />
                 </Form.Group>
             </Form.Row>
@@ -39,6 +40,7 @@ export default function FormRoles(props) {
                         type="text"
                         placeholder="Enter description"
                         defaultValue={props.description}
+                        onChange={(event) => props.setRoleDescription(event.target.value)}
                     />
                 </Form.Group>
             </Form.Row>
