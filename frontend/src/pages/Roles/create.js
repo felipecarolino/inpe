@@ -51,6 +51,7 @@ export default function Create() {
                     <Form
                         setRoleName={setRoleName}
                         setRoleDescription={setRoleDescription}
+                        submit={createRole}
                     />
                 </Card.Body>
             </Card>

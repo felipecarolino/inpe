@@ -25,6 +25,16 @@ export default function Edit(props) {
         })
     }
 
+    const editRole = () => {
+        api.put('roles/' + props.match.params.id, role)
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
     useEffect(() => {
         const GetRole = async () => {
             const result = await api.get('roles/' + props.match.params.id);
@@ -50,6 +60,7 @@ export default function Edit(props) {
                         description={role.description}
                         setRoleName={setRoleName}
                         setRoleDescription={setRoleDescription}
+                        submit={editRole}
                         />
                 </Card.Body>
             </Card>
