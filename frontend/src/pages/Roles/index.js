@@ -35,7 +35,7 @@ export default function Roles() {
                 </Card.Header>
                 <Card.Body className="roles-card-body">
                     <Card.Text className="roles-card-text">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo nunc a lectus sodales cursus.</p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo nunc a lectus sodales cursus.
                     </Card.Text>
                     <div className="roles-table">
                         <Table striped bordered hover>

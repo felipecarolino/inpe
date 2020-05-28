@@ -34,8 +34,8 @@ export default function View(props) {
                     <div className="view-role-table">
                         <Table striped bordered hover>
                             <tbody>
-                                <tr>
-                                    <th>ID</th>
+                                <tr >
+                                    <th className="w-25">ID</th>
                                     <td>{role.id}</td>
                                 </tr>
                                 <tr>
@@ -43,7 +43,7 @@ export default function View(props) {
                                     <td>{role.name}</td>
                                 </tr>
                                 <tr>
-                                    <th>Description</th>
+                                    <th className="w-25">Description</th>
                                     <td>{role.description}</td>
                                 </tr>
                             </tbody>

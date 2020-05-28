@@ -10,3 +10,15 @@ html, body, #root, .App{
     justify-content: center;
     max-width: 1200px;
 }
+
+.hidden{
+    display:none;
+}
+
+.block{
+    display:block;
+}
+
+.w-25{
+    width:25%;
+}
