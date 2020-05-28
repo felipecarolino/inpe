@@ -4,6 +4,8 @@ import api from '../../services/api';
 
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 import IconView from './../../assets/img/eye.svg';
 import IconEdit from './../../assets/img/edit.svg';
@@ -15,6 +17,8 @@ import './style.css';
 export default function Roles() {
 
     const [roles, setRoles] = useState([]);
+    const [modalShow, setModalShow] = useState(false);
+    const [id, setId] = useState();
 
     useEffect(() => {
         const GetRoles = async () => {
@@ -23,6 +27,35 @@ export default function Roles() {
         };
         GetRoles();
     }, []);
+
+    async function deleteRole() {
+        try {
+            await api.delete('roles/' + id);
+            setModalShow(false);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    function DeleteModal(props) {
+        return (
+          <Modal
+            {...props}
+            centered
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Are you sure?</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                Do you really want to delete this role? This process cannot be undone.
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="danger" onClick={props.onHide}>Cancel</Button>
+              <Button variant="primary" onClick={deleteRole}>Confirm</Button>
+            </Modal.Footer>
+          </Modal>
+        );
+      }
 
     return (
         <div className="roles">
@@ -55,15 +88,19 @@ export default function Roles() {
                                             <td>{item.name}</td>
                                             <td>{item.description}</td>
                                             <td>
-                                                <Link to={{pathname: `/users/roles/view/${item.id}`}} className="nav-link">
+                                                <Link to={{ pathname: `/users/roles/view/${item.id}` }} className="nav-link">
                                                     <img src={IconView} alt="View Icon" className="iconView" />
                                                 </Link>
-                                                <Link to={{pathname: `/users/roles/edit/${item.id}`}} className="nav-link">
+                                                <Link to={{ pathname: `/users/roles/edit/${item.id}` }} className="nav-link">
                                                     <img src={IconEdit} alt="Edit Icon" className="iconEdit" />
                                                 </Link>
-                                                <Link to="/users/roles/delete" className="nav-link">
-                                                    <img src={IconDelete} alt="Delete Icon" className="iconDelete" />
-                                                </Link>
+                                                <img
+                                                    className="iconDelete"
+                                                    src={IconDelete} alt="Delete Icon"
+                                                    onClick={() => {
+                                                        setId(item.id);
+                                                        setModalShow(true);}}
+                                                />
                                             </td>
                                         </tr>
                                     })}
@@ -72,6 +109,10 @@ export default function Roles() {
                     </div>
                 </Card.Body>
             </Card>
+            <DeleteModal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+            />
         </div>
     )
 }
