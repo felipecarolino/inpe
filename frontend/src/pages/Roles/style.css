@@ -47,6 +47,10 @@
     height: 20px;
     width: 18px;
 }
+
+.iconDelete:hover{
+    cursor: pointer;
+}
   
 td a.nav-link{
     padding: 0;

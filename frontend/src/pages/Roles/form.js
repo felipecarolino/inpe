@@ -18,7 +18,7 @@ export default function FormRoles(props) {
 
     useEffect(() => {
 
-        if (id) {
+        if (props.id) {
             const GetRole = async () => {
                 const result = await api.get('roles/' + props.id);
                 setName(result.data.data.name);
@@ -27,7 +27,7 @@ export default function FormRoles(props) {
             };
             GetRole();
         }
-    }, [id, props.id]);
+    }, [props.id]);
 
     async function create(data) {
 
