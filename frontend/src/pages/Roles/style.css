@@ -217,6 +217,10 @@ form{
         display: none;
     }
 
+    .modal-footer{
+        flex-wrap: nowrap;
+    }
+
     /* Component View */
     .view-role{
         margin: 0;
