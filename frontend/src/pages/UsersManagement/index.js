@@ -14,31 +14,31 @@ import IconAdd from './../../assets/img/add.svg';
 
 import './style.css';
 
-export default function Roles() {
+export default function UsersManagement() {
 
-    const [roles, setRoles] = useState([]);
+    const [users, setusers] = useState([]);
     const [modalShow, setModalShow] = useState(false);
     const [id, setId] = useState();
     const [errorsList, setErrorsList] = useState([]);
     const [classErrors, setClassErros] = useState("hidden")
 
     useEffect(() => {
-        const GetRoles = async () => {
-            const result = await api.get('roles');
-            setRoles(result.data);
+        const Getusers = async () => {
+            const result = await api.get('users');
+            setusers(result.data);
         };
-        GetRoles();
+        Getusers();
     }, []);
 
-    async function deleteRole() {
+    async function deleteuser() {
         try {
-            await api.delete('roles/' + id);
+            await api.delete('users/' + id);
             setModalShow(false);
-            setRoles(roles.filter(role => role.id !== id))
+            setusers(users.filter(user => user.id !== id))
         } catch (error) {
             setErrorsList([
                 {
-                    "id": 1, "message": "Error to delete role"
+                    "id": 1, "message": "Error to delete user"
                 }
             ]);
 
@@ -57,7 +57,7 @@ export default function Roles() {
                     <Modal.Title>Are you sure?</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Do you really want to delete this role? This process cannot be undone.
+                    Do you really want to delete this user? This process cannot be undone.
             </Modal.Body>
                 <Modal.Footer>
                     <div className={"alert alert-danger " + classErrors} >
@@ -66,44 +66,48 @@ export default function Roles() {
                         ))}
                     </div>
                     <Button variant="danger" onClick={props.onHide}>Cancel</Button>
-                    <Button variant="primary" onClick={deleteRole}>Confirm</Button>
+                    <Button variant="primary" onClick={deleteuser}>Confirm</Button>
                 </Modal.Footer>
             </Modal>
         );
     }
 
     return (
-        <div className="roles">
-            <Card className="roles-card">
+        <div className="users">
+            <Card className="users-card">
                 <Card.Header>
-                    <h5>Roles List</h5>
-                    <Link to="/users/roles/create" className="nav-link">
+                    <h5>Users List</h5>
+                    <Link to="/users/users/create" className="nav-link">
                         <img src={IconAdd} alt="Add Icon" className="iconAdd" />
                     </Link>
                 </Card.Header>
-                <Card.Body className="roles-card-body">
-                    <div className="roles-table">
+                <Card.Body className="users-card-body">
+                    <div className="users-table">
                         <Table striped bordered hover>
                             <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>Description</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    roles.map((item, idx) => {
+                                    users.map((item, idx) => {
                                         return <tr key={item.id}>
                                             <td>{item.id}</td>
                                             <td>{item.name}</td>
-                                            <td>{item.description}</td>
+                                            <td>{item.username}</td>
+                                            <td>{item.email}</td>
+                                            <td>{item.role.name}</td>
                                             <td>
-                                                <Link to={{ pathname: `/users/roles/view/${item.id}` }} className="nav-link">
+                                                <Link to={{ pathname: `/users/users/view/${item.id}` }} className="nav-link">
                                                     <img src={IconView} alt="View Icon" className="iconView" />
                                                 </Link>
-                                                <Link to={{ pathname: `/users/roles/edit/${item.id}` }} className="nav-link">
+                                                <Link to={{ pathname: `/users/users/edit/${item.id}` }} className="nav-link">
                                                     <img src={IconEdit} alt="Edit Icon" className="iconEdit" />
                                                 </Link>
                                                 <img

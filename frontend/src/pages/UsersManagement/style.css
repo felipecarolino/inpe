@@ -1,5 +1,5 @@
-/* Component Roles */
-.roles{
+/* Component users */
+.users{
     display: flex;
     max-width: 1000px;
     margin-left: 30px;
@@ -7,31 +7,31 @@
     box-sizing: border-box;
 }
 
-.roles-card{
+.users-card{
     display: flex;
     flex: 1;
     border: none;
 }
 
-.roles-card .card-header {
+.users-card .card-header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
 }
 
-.roles-card .card-header h5{
+.users-card .card-header h5{
     margin: 0;
 }
 
-.roles-card .card-header .nav-link{
+.users-card .card-header .nav-link{
     padding: 0;
 }
 
-.roles-card-body{
+.users-card-body{
     padding: 0;
 }
 
-.roles-table .table{
+.users-table .table{
     margin-bottom: 0;
 }
 
@@ -51,7 +51,7 @@ td a.nav-link{
 }
 
 /* Component View */
-.view-role{
+.view-user{
     display: flex;
     max-width: 1000px;
     margin-left: 30px;
@@ -59,13 +59,13 @@ td a.nav-link{
     box-sizing: border-box;
 }
 
-.view-role-card{
+.view-user-card{
     display: flex;
     flex: 1;
     border: none;
 }
 
-.view-role-card .card-header{
+.view-user-card .card-header{
     display: flex;
 }
 
@@ -73,15 +73,15 @@ td a.nav-link{
     margin-right: 15px;
 }
 
-.view-role-card .card-header h5{
+.view-user-card .card-header h5{
     margin: 0;
 }
 
-.view-role-card .card-header .nav-link{
+.view-user-card .card-header .nav-link{
     padding: 0;
 }
 
-.view-role-card-body{
+.view-user-card-body{
     padding: 0;
     margin-top: 10px;
 }
@@ -100,7 +100,7 @@ form{
 }
 
 /* Component Create */
-.create-role{
+.create-user{
     display: flex;
     max-width: 1000px;
     margin-left: 30px;
@@ -108,13 +108,13 @@ form{
     box-sizing: border-box;
 }
 
-.create-role-card{
+.create-user-card{
     display: flex;
     flex: 1;
     border: none;
 }
 
-.create-role-card .card-header{
+.create-user-card .card-header{
     display: flex;
 }
 
@@ -122,21 +122,21 @@ form{
     margin-right: 15px;
 }
 
-.create-role-card .card-header h5{
+.create-user-card .card-header h5{
     margin: 0;
 }
 
-.create-role-card .card-header .nav-link{
+.create-user-card .card-header .nav-link{
     padding: 0;
 }
 
-.create-role-card-body{
+.create-user-card-body{
     padding: 0;
     margin-top: 10px;
 }
 
 /* Component Edit */
-.edit-role{
+.edit-user{
     display: flex;
     max-width: 1000px;
     margin-left: 30px;
@@ -144,13 +144,13 @@ form{
     box-sizing: border-box;
 }
 
-.edit-role-card{
+.edit-user-card{
     display: flex;
     flex: 1;
     border: none;
 }
 
-.edit-role-card .card-header{
+.edit-user-card .card-header{
     display: flex;
 }
 
@@ -158,50 +158,50 @@ form{
     margin-right: 15px;
 }
 
-.edit-role-card .card-header h5{
+.edit-user-card .card-header h5{
     margin: 0;
 }
 
-.edit-role-card .card-header .nav-link{
+.edit-user-card .card-header .nav-link{
     padding: 0;
 }
 
-.edit-role-card-body{
+.edit-user-card-body{
     padding: 0;
     margin-top: 10px;
 }
 
 
 @media only screen and (max-width: 576px){
-    /* Component Roles */
-    .roles{
+    /* Component users */
+    .users{
         margin: 0;
         padding: 10px;
         width: 100%;
     }
 
-    .roles-card .card-header{
+    .users-card .card-header{
         padding: 10px 0;
     }
 
-    .roles-table .table thead tr{
+    .users-table .table thead tr{
         text-align: center;
     }
 
-    .roles-table .table thead th {
+    .users-table .table thead th {
         padding: 6px;
     }
 
-    .roles-table .table td {
+    .users-table .table td {
         padding: 6px;
         text-align: center;
     }
 
-    .roles-table .table th:nth-child(3){
+    .users-table .table th:nth-child(3){
         display: none;
     }
 
-    .roles-table .table td:nth-child(3){
+    .users-table .table td:nth-child(3){
         display: none;
     }
 
@@ -210,13 +210,13 @@ form{
     }
 
     /* Component View */
-    .view-role{
+    .view-user{
         margin: 0;
         padding: 10px;
         width: 100%;
     }
 
-    .view-role-card .card-header{
+    .view-user-card .card-header{
         padding: 10px 0;
     }
 
@@ -230,24 +230,24 @@ form{
     }
 
     /* Component Create */
-    .create-role{
+    .create-user{
         margin: 0;
         padding: 10px;
         width: 100%;
     }
 
-    .create-role-card .card-header{
+    .create-user-card .card-header{
         padding: 10px 0;
     }
 
     /* Component Edit */
-    .edit-role{
+    .edit-user{
         margin: 0;
         padding: 10px;
         width: 100%;
     }
 
-    .edit-role-card .card-header{
+    .edit-user-card .card-header{
         padding: 10px 0;
     }
 }

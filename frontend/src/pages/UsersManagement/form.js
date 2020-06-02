@@ -6,38 +6,42 @@ import api from '../../services/api';
 
 import './style.css';
 
-export default function FormRoles(props) {
+export default function FormUsers(props) {
 
     const history = useHistory();
     const [errorsList, setErrorsList] = useState([]);
     const [classErrors, setClassErros] = useState("hidden")
     const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [roleId, setRoleId] = useState();
   
     const [id, setId] = useState(props.id);
 
     useEffect(() => {
 
         if (props.id) {
-            const GetRole = async () => {
-                const result = await api.get('roles/' + props.id);
+            const Getuser = async () => {
+                const result = await api.get('users/' + props.id);
                 setName(result.data.data.name);
-                setDescription(result.data.data.description);
+                setUsername(result.data.data.username);
+                setEmail(result.data.data.email);
+                setRoleId(result.data.data.role_id);
                 setId(props.id);
             };
-            GetRole();
+            Getuser();
         }
     }, [props.id]);
 
     async function create(data) {
 
         try {
-            await api.post('roles', data);
-            history.push('/users/roles');
+            await api.post('users', data);
+            history.push('/users/users');
         } catch (error) {
             setErrorsList([
                 {
-                    "id": 1, "message": "Error to create new role"
+                    "id": 1, "message": "Error to create new user"
                 }
             ]);
         }
@@ -46,13 +50,13 @@ export default function FormRoles(props) {
     async function edit(data) {
 
         try {
-            await api.put('roles/' + props.id, data);
-            history.push('/users/roles');
+            await api.put('users/' + props.id, data);
+            history.push('/users/users');
         } catch (error) {
             setErrorsList([
                 ...errorsList,
                 {
-                    "id": 1, "message": "Error to edit role"
+                    "id": 1, "message": "Error to edit user"
                 }
             ]);
         }
@@ -69,8 +73,18 @@ export default function FormRoles(props) {
             validade = false
         };
 
-        if (description === "") {
-            errors.push({ "id": "2", "message": "Description cannot be empty" });
+        if (username === "") {
+            errors.push({ "id": "2", "message": "Username cannot be empty" });
+            validade = false
+        }
+
+        if (email === "") {
+            errors.push({ "id": "3", "message": "Email cannot be empty" });
+            validade = false
+        }
+
+        if (roleId === "") {
+            errors.push({ "id": "4", "message": "Role cannot be empty" });
             validade = false
         }
 
@@ -91,7 +105,9 @@ export default function FormRoles(props) {
         if (formValidation(e)) {
             const data = {
                 name,
-                description
+                username,
+                email,
+                roleId
             };
 
             if (id) {
@@ -114,8 +130,8 @@ export default function FormRoles(props) {
 
             <Form onSubmit={handleSave}>
                 <Form.Row>
-                    <Form.Group controlId="roleName">
-                        <Form.Label>Role name</Form.Label>
+                    <Form.Group controlId="userName">
+                        <Form.Label>Name</Form.Label>
                         <Form.Control
                             type="text"
                             placeholder="Enter name"
@@ -125,13 +141,24 @@ export default function FormRoles(props) {
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
-                    <Form.Group controlId="roleDescription">
-                        <Form.Label>Role description</Form.Label>
+                    <Form.Group controlId="userUsername">
+                        <Form.Label>Username</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder="Enter description"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
+                            placeholder="Enter username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group controlId="userEmail">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                     </Form.Group>
                 </Form.Row>

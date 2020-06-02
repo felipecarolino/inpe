@@ -11,7 +11,7 @@ export default function Sidebar() {
                 <Nav.Link eventKey="disabled" disabled>User Management</Nav.Link>
                 <Link to="/users/roles" className="nav-link">Roles</Link>
                 <Link to="/users/users" className="nav-link">Users</Link>
-                <Link to="/users/permissions" className="nav-link">Permissions</Link>
+                {/* <Link to="/users/permissions" className="nav-link">Permissions</Link> */}
             </Nav>
         </div>
     )
