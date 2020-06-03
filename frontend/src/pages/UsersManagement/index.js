@@ -30,7 +30,7 @@ export default function UsersManagement() {
         Getusers();
     }, []);
 
-    async function deleteuser() {
+    async function deleteUser() {
         try {
             await api.delete('users/' + id);
             setModalShow(false);
@@ -66,7 +66,7 @@ export default function UsersManagement() {
                         ))}
                     </div>
                     <Button variant="danger" onClick={props.onHide}>Cancel</Button>
-                    <Button variant="primary" onClick={deleteuser}>Confirm</Button>
+                    <Button variant="primary" onClick={deleteUser}>Confirm</Button>
                 </Modal.Footer>
             </Modal>
         );

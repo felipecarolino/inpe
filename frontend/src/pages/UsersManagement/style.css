@@ -205,6 +205,14 @@ form{
         display: none;
     }
 
+    .users-table .table th:nth-child(4){
+        display: none;
+    }
+
+    .users-table .table td:nth-child(4){
+        display: none;
+    }
+
     .modal-footer{
         flex-wrap: nowrap;
     }

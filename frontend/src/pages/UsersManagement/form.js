@@ -10,12 +10,16 @@ export default function FormUsers(props) {
 
     const history = useHistory();
     const [errorsList, setErrorsList] = useState([]);
-    const [classErrors, setClassErros] = useState("hidden")
+    const [classErrors, setClassErros] = useState("hidden");
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const [roleId, setRoleId] = useState();
-  
+    const [role_id, setrole_id] = useState();
+    const [roles, setRoles] = useState([]);
+
+    const [showPassword, setShowPassword] = useState("block");
+
     const [id, setId] = useState(props.id);
 
     useEffect(() => {
@@ -26,11 +30,19 @@ export default function FormUsers(props) {
                 setName(result.data.data.name);
                 setUsername(result.data.data.username);
                 setEmail(result.data.data.email);
-                setRoleId(result.data.data.role_id);
+                setrole_id(result.data.data.role_id);
                 setId(props.id);
+                setShowPassword("hidden");
             };
             Getuser();
         }
+
+        const GetRoles = async () => {
+            const result = await api.get('roles');
+            setRoles(result.data);
+        };
+        GetRoles();
+
     }, [props.id]);
 
     async function create(data) {
@@ -83,9 +95,16 @@ export default function FormUsers(props) {
             validade = false
         }
 
-        if (roleId === "") {
+        if (role_id === "") {
             errors.push({ "id": "4", "message": "Role cannot be empty" });
             validade = false
+        }
+
+        if (!id){
+            if (password === "") {
+                errors.push({ "id": "5", "message": "Password cannot be empty" });
+                validade = false
+            }
         }
 
         if (errors.length > 0) {
@@ -103,18 +122,26 @@ export default function FormUsers(props) {
     const handleSave = (e) => {
 
         if (formValidation(e)) {
-            const data = {
-                name,
-                username,
-                email,
-                roleId
-            };
-
             if (id) {
+                const data = {
+                    username,
+                    name,
+                    email,
+                    role_id
+                };
+
                 edit(data);
             }
 
             else {
+                const data = {
+                    username,
+                    name,
+                    email,
+                    password,
+                    role_id
+                };
+
                 create(data);
             }
         }
@@ -151,15 +178,46 @@ export default function FormUsers(props) {
                         />
                     </Form.Group>
                 </Form.Row>
+                <Form.Row className={"passwordRow " + showPassword}>
+                    <Form.Group controlId="userPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control
+                            type="password"
+                            placeholder="Enter password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </Form.Group>
+                </Form.Row>
                 <Form.Row>
                     <Form.Group controlId="userEmail">
                         <Form.Label>Email</Form.Label>
                         <Form.Control
-                            type="text"
-                            placeholder="Enter email"
+                            type="email"
+                            placeholder="name@example.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group controlId="userRole">
+                        <Form.Label>Role</Form.Label>
+                        <Form.Control
+                            as="select"
+                            value={role_id}
+                            onChange={(e) => setrole_id(e.target.value)}
+                        >
+                            {
+                                roles.map(item =>
+                                    <option
+                                        key={item.id}
+                                        value={item.id}>
+                                        {item.name}
+                                    </option>
+                                )
+                            }
+                        </Form.Control>
                     </Form.Group>
                 </Form.Row>
                 <Button type="submit">Save</Button>
