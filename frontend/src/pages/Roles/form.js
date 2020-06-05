@@ -33,7 +33,7 @@ export default function FormRoles(props) {
 
         try {
             await api.post('roles', data);
-            history.push('/users/roles');
+            history.push('/user-management/roles');
         } catch (error) {
             setErrorsList([
                 {
@@ -47,7 +47,7 @@ export default function FormRoles(props) {
 
         try {
             await api.put('roles/' + props.id, data);
-            history.push('/users/roles');
+            history.push('/user-management/roles');
         } catch (error) {
             setErrorsList([
                 ...errorsList,

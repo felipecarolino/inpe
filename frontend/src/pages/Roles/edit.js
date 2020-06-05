@@ -13,7 +13,7 @@ export default function Edit(props) {
         <div className="edit-role">
             <Card className="edit-role-card">
                 <Card.Header>
-                    <Link to="/users/roles" className="nav-link">
+                    <Link to="/user-management/roles" className="nav-link">
                         <img src={IconBack} alt="Back Icon" className="iconBack" />
                     </Link>
                     <h5>Edit Role</h5>

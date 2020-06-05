@@ -29,7 +29,7 @@ export default function Header() {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">
-                            <Link to="/users" className="nav-link">Users</Link>
+                            <Link to="/user-management" className="nav-link">User Management</Link>
                             <Link to="/cataclysmic-variables" className="nav-link">Cataclysmic Variables</Link>
                             <Link to="/submissions" className="nav-link">Submissions</Link>
                             <Link to="/documentation" className="nav-link">Documentation</Link>

@@ -25,7 +25,7 @@ export default function View(props) {
         <div className="view-role">
             <Card className="view-role-card">
                 <Card.Header>
-                    <Link to="/users/roles" className="nav-link">
+                    <Link to="/user-management/roles" className="nav-link">
                         <img src={IconBack} alt="Back Icon" className="iconBack" />
                     </Link>
                     <h5>View Role</h5>

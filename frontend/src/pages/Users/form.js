@@ -39,7 +39,7 @@ export default function FormUsers(props) {
 
         const GetRoles = async () => {
             const result = await api.get('roles');
-            setRoles(result.data);
+            setRoles(result.data.data);
         };
         GetRoles();
 
@@ -49,33 +49,50 @@ export default function FormUsers(props) {
 
         try {
             await api.post('users', data);
-            history.push('/users/users');
+            history.push('/user-management/users');
         } catch (error) {
             setErrorsList([
                 {
-                    "id": 1, "message": "Error to create new user"
+                    "id": 9, "message": "Error to create new user"
+                },
+                {
+                    "id": 10, "message": error.response.data.errors.username
+                },
+                {
+                    "id": 11, "message": error.response.data.errors.password
+                },
+                {
+                    "id": 12, "message": error.response.data.errors.email
+                },
+                {
+                    "id": 13, "message": error.response.data.errors.role_id
                 }
             ]);
+            setClassErros("block");
         }
     }
 
     async function edit(data) {
-
         try {
             await api.put('users/' + props.id, data);
-            history.push('/users/users');
+            history.push('/user-management/users');
         } catch (error) {
             setErrorsList([
-                ...errorsList,
                 {
-                    "id": 1, "message": "Error to edit user"
+                    "id": 6, "message": "Error to edit user",
+                },
+                {
+                    "id": 7, "message": error.response.data.errors.username
+                },
+                {
+                    "id": 8, "message": error.response.data.errors.email
                 }
             ]);
+                setClassErros("block");
         }
     }
 
     const formValidation = (e) => {
-
         let errors = [];
         let validade = true;
         e.preventDefault();
@@ -95,7 +112,7 @@ export default function FormUsers(props) {
             validade = false
         }
 
-        if (role_id === "") {
+        if (!role_id || role_id === "0") {
             errors.push({ "id": "4", "message": "Role cannot be empty" });
             validade = false
         }
@@ -208,6 +225,7 @@ export default function FormUsers(props) {
                             value={role_id}
                             onChange={(e) => setrole_id(e.target.value)}
                         >
+                            <option value="0">Select a role</option>
                             {
                                 roles.map(item =>
                                     <option

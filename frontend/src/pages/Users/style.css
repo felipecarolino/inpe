@@ -1,25 +1,261 @@
-.content{
-    margin: 0 auto;
-    padding: 50px 20px;
+/* Component users */
+.users{
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    max-width: 1200px;
-    width: 100%;
+    max-width: 1000px;
+    margin-left: 30px;
+    flex: 1;
+    box-sizing: border-box;
 }
 
-@media (min-width: 576px) and (max-width: 768px){
-    .content{
-        padding: 0 10px;
-        margin: 30px auto;
-        max-width: 100%;
-    }
+.users-card{
+    display: flex;
+    flex: 1;
+    border: none;
 }
+
+.users-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.users-card .card-header h5{
+    margin: 0;
+}
+
+.users-card .card-header .nav-link{
+    padding: 0;
+}
+
+.users-card-body{
+    padding: 0;
+}
+
+.users-table .table{
+    margin-bottom: 0;
+}
+
+.iconView, .iconEdit, .iconDelete{
+    height: 20px;
+    width: 18px;
+}
+
+.iconDelete:hover{
+    cursor: pointer;
+}
+  
+td a.nav-link{
+    padding: 0;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+/* Component View */
+.view-user{
+    display: flex;
+    max-width: 1000px;
+    margin-left: 30px;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.view-user-card{
+    display: flex;
+    flex: 1;
+    border: none;
+}
+
+.view-user-card .card-header{
+    display: flex;
+}
+
+.iconBack{
+    margin-right: 15px;
+}
+
+.view-user-card .card-header h5{
+    margin: 0;
+}
+
+.view-user-card .card-header .nav-link{
+    padding: 0;
+}
+
+.view-user-card-body{
+    padding: 0;
+    margin-top: 10px;
+}
+
+/* Component Form */
+form{
+    padding-left: 25px;
+}
+
+.form-row{
+    margin: 0;
+}
+
+.form-group{
+    width: 50%;
+}
+
+/* Component Create */
+.create-user{
+    display: flex;
+    max-width: 1000px;
+    margin-left: 30px;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.create-user-card{
+    display: flex;
+    flex: 1;
+    border: none;
+}
+
+.create-user-card .card-header{
+    display: flex;
+}
+
+.iconBack{
+    margin-right: 15px;
+}
+
+.create-user-card .card-header h5{
+    margin: 0;
+}
+
+.create-user-card .card-header .nav-link{
+    padding: 0;
+}
+
+.create-user-card-body{
+    padding: 0;
+    margin-top: 10px;
+}
+
+/* Component Edit */
+.edit-user{
+    display: flex;
+    max-width: 1000px;
+    margin-left: 30px;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.edit-user-card{
+    display: flex;
+    flex: 1;
+    border: none;
+}
+
+.edit-user-card .card-header{
+    display: flex;
+}
+
+.iconBack{
+    margin-right: 15px;
+}
+
+.edit-user-card .card-header h5{
+    margin: 0;
+}
+
+.edit-user-card .card-header .nav-link{
+    padding: 0;
+}
+
+.edit-user-card-body{
+    padding: 0;
+    margin-top: 10px;
+}
+
 
 @media only screen and (max-width: 576px){
-    .content{
-        margin: 10px auto;
-        padding: 0;
-        flex-direction: column;
+    /* Component users */
+    .users{
+        margin: 0;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .users-card .card-header{
+        padding: 10px 0;
+    }
+
+    .users-table .table thead tr{
+        text-align: center;
+    }
+
+    .users-table .table thead th {
+        padding: 6px;
+    }
+
+    .users-table .table td {
+        padding: 6px;
+        text-align: center;
+    }
+
+    .users-table .table th:nth-child(3){
+        display: none;
+    }
+
+    .users-table .table td:nth-child(3){
+        display: none;
+    }
+
+    .users-table .table th:nth-child(4){
+        display: none;
+    }
+
+    .users-table .table td:nth-child(4){
+        display: none;
+    }
+
+    .modal-footer{
+        flex-wrap: nowrap;
+    }
+
+    /* Component View */
+    .view-user{
+        margin: 0;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .view-user-card .card-header{
+        padding: 10px 0;
+    }
+
+    /* Component Form */
+    form{
+        padding-left: 0;
+    }
+
+    .form-group{
+        width: 100%;
+    }
+
+    /* Component Create */
+    .create-user{
+        margin: 0;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .create-user-card .card-header{
+        padding: 10px 0;
+    }
+
+    /* Component Edit */
+    .edit-user{
+        margin: 0;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .edit-user-card .card-header{
+        padding: 10px 0;
     }
 }

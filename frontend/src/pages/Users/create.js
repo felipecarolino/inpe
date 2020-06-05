@@ -11,7 +11,7 @@ export default function Create() {
         <div className="create-user">
             <Card className="create-user-card">
                 <Card.Header>
-                    <Link to="/users/users" className="nav-link">
+                    <Link to="/user-management/users" className="nav-link">
                         <img src={IconBack} alt="Back Icon" className="iconBack" />
                     </Link>
                     <h5>Create User</h5>

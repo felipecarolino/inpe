@@ -25,7 +25,7 @@ export default function Roles() {
     useEffect(() => {
         const GetRoles = async () => {
             const result = await api.get('roles');
-            setRoles(result.data);
+            setRoles(result.data.data);
         };
         GetRoles();
     }, []);
@@ -77,7 +77,7 @@ export default function Roles() {
             <Card className="roles-card">
                 <Card.Header>
                     <h5>Roles List</h5>
-                    <Link to="/users/roles/create" className="nav-link">
+                    <Link to="/user-management/roles/create" className="nav-link">
                         <img src={IconAdd} alt="Add Icon" className="iconAdd" />
                     </Link>
                 </Card.Header>
@@ -100,10 +100,10 @@ export default function Roles() {
                                             <td>{item.name}</td>
                                             <td>{item.description}</td>
                                             <td>
-                                                <Link to={{ pathname: `/users/roles/view/${item.id}` }} className="nav-link">
+                                                <Link to={{ pathname: `/user-management/roles/view/${item.id}` }} className="nav-link">
                                                     <img src={IconView} alt="View Icon" className="iconView" />
                                                 </Link>
-                                                <Link to={{ pathname: `/users/roles/edit/${item.id}` }} className="nav-link">
+                                                <Link to={{ pathname: `/user-management/roles/edit/${item.id}` }} className="nav-link">
                                                     <img src={IconEdit} alt="Edit Icon" className="iconEdit" />
                                                 </Link>
                                                 <img
