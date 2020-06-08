@@ -17,7 +17,8 @@ import './style.css';
 export default function Roles() {
 
     const [roles, setRoles] = useState([]);
-    const [modalShow, setModalShow] = useState(false);
+    const [deleteModalShow, setDeleteModalShow] = useState(false);
+    const [errorModalShow, setErrorModalShow] = useState(false);
     const [id, setId] = useState();
     const [errorsList, setErrorsList] = useState([]);
     const [classErrors, setClassErros] = useState("hidden")
@@ -33,17 +34,45 @@ export default function Roles() {
     async function deleteRole() {
         try {
             await api.delete('roles/' + id);
-            setModalShow(false);
+            setDeleteModalShow(false);
             setRoles(roles.filter(role => role.id !== id))
         } catch (error) {
             setErrorsList([
                 {
                     "id": 1, "message": "Error to delete role"
-                }
+                },
+                {
+                    "id": 2, "message": error.response.data.message
+                },
             ]);
-
             setClassErros("block");
+            setDeleteModalShow(false);
+            setErrorModalShow(true);
         }
+    }
+
+    function ErrorModal(props) {
+        return (
+            <Modal
+                {...props}
+                centered
+                animation={false}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Alert</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                <div className={"alert alert-danger " + classErrors} >
+                        {[...errorsList].map((item) => (
+                            <span key={item.id}>{item.message} <br /></span>
+                        ))}
+                    </div>
+            </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={props.onHide}>Confirm</Button>
+                </Modal.Footer>
+            </Modal>
+        );
     }
 
     function DeleteModal(props) {
@@ -60,11 +89,6 @@ export default function Roles() {
                     Do you really want to delete this role? This process cannot be undone.
             </Modal.Body>
                 <Modal.Footer>
-                    <div className={"alert alert-danger " + classErrors} >
-                        {[...errorsList].map((item) => (
-                            <span key={item.id}>{item.message} <br /></span>
-                        ))}
-                    </div>
                     <Button variant="danger" onClick={props.onHide}>Cancel</Button>
                     <Button variant="primary" onClick={deleteRole}>Confirm</Button>
                 </Modal.Footer>
@@ -111,7 +135,7 @@ export default function Roles() {
                                                     src={IconDelete} alt="Delete Icon"
                                                     onClick={() => {
                                                         setId(item.id);
-                                                        setModalShow(true);
+                                                        setDeleteModalShow(true);
                                                     }}
                                                 />
                                             </td>
@@ -123,9 +147,17 @@ export default function Roles() {
                 </Card.Body>
             </Card>
             <DeleteModal
-                show={modalShow}
+                show={deleteModalShow}
                 onHide={() => {
-                    setModalShow(false)
+                    setDeleteModalShow(false)
+                    setErrorsList([])
+                    setClassErros("hidden")
+                }}
+            />
+            <ErrorModal
+                show={errorModalShow}
+                onHide={() => {
+                    setErrorModalShow(false)
                     setErrorsList([])
                     setClassErros("hidden")
                 }}
