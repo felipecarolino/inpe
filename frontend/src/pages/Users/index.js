@@ -12,29 +12,39 @@ import IconEdit from './../../assets/img/edit.svg';
 import IconDelete from './../../assets/img/trash.svg';
 import IconAdd from './../../assets/img/add.svg';
 
+import Pagination from "react-js-pagination";
+
 import './style.css';
 
 export default function UsersManagement() {
 
-    const [users, setusers] = useState([]);
+    const [users, setUsers] = useState([]);
     const [modalShow, setModalShow] = useState(false);
     const [id, setId] = useState();
     const [errorsList, setErrorsList] = useState([]);
     const [classErrors, setClassErros] = useState("hidden")
 
+    const [totalItems, setTotalItems] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPageItems, setTotalPageItems] = useState(1);
+
+    async function GetUsers(page) {
+        const result = await api.get('users?page=' + page);
+        setUsers(result.data.data);
+        setTotalItems(result.data.total);
+        setCurrentPage(page);
+        setTotalPageItems(result.data.per_page);
+    };
+
     useEffect(() => {
-        const Getusers = async () => {
-            const result = await api.get('users');
-            setusers(result.data.data);
-        };
-        Getusers();
-    }, []);
+        GetUsers(currentPage);
+    }, [currentPage]);
 
     async function deleteUser() {
         try {
             await api.delete('users/' + id);
             setModalShow(false);
-            setusers(users.filter(user => user.id !== id))
+            setUsers(users.filter(user => user.id !== id))
         } catch (error) {
             setErrorsList([
                 {
@@ -126,6 +136,17 @@ export default function UsersManagement() {
                     </div>
                 </Card.Body>
             </Card>
+
+            <div className="users-pagination">
+                <Pagination
+                    hideDisabled
+                    activePage={currentPage}
+                    itemsCountPerPage={totalPageItems}
+                    totalItemsCount={totalItems}
+                    onChange={GetUsers}
+                />
+            </div>
+
             <DeleteModal
                 show={modalShow}
                 onHide={() => {

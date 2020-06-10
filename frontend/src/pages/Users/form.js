@@ -55,18 +55,22 @@ export default function FormUsers(props) {
                 {
                     "id": 9, "message": "Error to create new user"
                 },
+                error.response.data.errors.username ? 
                 {
                     "id": 10, "message": error.response.data.errors.username
-                },
+                } :
+                error.response.data.errors.password ?
                 {
                     "id": 11, "message": error.response.data.errors.password
-                },
+                } :
+                error.response.data.errors.email ?
                 {
                     "id": 12, "message": error.response.data.errors.email
-                },
+                } :
+                error.response.data.errors.role_id ?
                 {
                     "id": 13, "message": error.response.data.errors.role_id
-                }
+                } : {}
             ]);
             setClassErros("block");
         }

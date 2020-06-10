@@ -12,6 +12,8 @@ import IconEdit from './../../assets/img/edit.svg';
 import IconDelete from './../../assets/img/trash.svg';
 import IconAdd from './../../assets/img/add.svg';
 
+import Pagination from "react-js-pagination";
+
 import './style.css';
 
 export default function Roles() {
@@ -23,13 +25,21 @@ export default function Roles() {
     const [errorsList, setErrorsList] = useState([]);
     const [classErrors, setClassErros] = useState("hidden")
 
+    const [totalItems, setTotalItems] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPageItems, setTotalPageItems] = useState(1);
+
+    async function GetRoles(page) {
+        const result = await api.get('roles?page=' + page);
+        setRoles(result.data.data);
+        setTotalItems(result.data.total);
+        setCurrentPage(page);
+        setTotalPageItems(result.data.per_page);
+    };
+
     useEffect(() => {
-        const GetRoles = async () => {
-            const result = await api.get('roles');
-            setRoles(result.data.data);
-        };
-        GetRoles();
-    }, []);
+        GetRoles(currentPage);
+    }, [currentPage]);
 
     async function deleteRole() {
         try {
@@ -62,12 +72,12 @@ export default function Roles() {
                     <Modal.Title>Alert</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                <div className={"alert alert-danger " + classErrors} >
+                    <div className={"alert alert-danger " + classErrors} >
                         {[...errorsList].map((item) => (
                             <span key={item.id}>{item.message} <br /></span>
                         ))}
                     </div>
-            </Modal.Body>
+                </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={props.onHide}>Confirm</Button>
                 </Modal.Footer>
@@ -146,6 +156,17 @@ export default function Roles() {
                     </div>
                 </Card.Body>
             </Card>
+
+            <div className="roles-pagination">
+                <Pagination
+                    hideDisabled
+                    activePage={currentPage}
+                    itemsCountPerPage={totalPageItems}
+                    totalItemsCount={totalItems}
+                    onChange={GetRoles}
+                />
+            </div>
+
             <DeleteModal
                 show={deleteModalShow}
                 onHide={() => {
