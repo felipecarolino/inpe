@@ -12,7 +12,8 @@ import './style.css';
 export default function View(props) {
 
     const [user, setuser] = useState([]);
-
+    const [role, setRole] = useState('');
+    
     useEffect(() => {
         const Getuser = async () => {
             const result = await api.get('users/' + props.match.params.id);
@@ -20,6 +21,15 @@ export default function View(props) {
         };
         Getuser();
     }, [props.match.params.id]);
+
+    const GetRole = async () => {
+        const result = await api.get('roles/' + user.role_id);
+        setRole(result.data.data.name);
+    };
+
+    if(user.role_id) {
+        GetRole();
+    }
 
     return (
         <div className="view-user">
@@ -51,8 +61,8 @@ export default function View(props) {
                                     <td>{user.email}</td>
                                 </tr>
                                 <tr>
-                                    <th className="w-25">Role ID</th>
-                                    <td>{user.role_id}</td>
+                                    <th className="w-25">Role</th>
+                                    <td>{role}</td>
                                 </tr>
                             </tbody>
                         </Table>
