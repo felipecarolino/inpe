@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-import Sidebar from '../Sidebar/index';
+import Sidebar from './sidebar';
 import { Route, Switch } from 'react-router-dom';
 
 import Roles from '../Roles/index';

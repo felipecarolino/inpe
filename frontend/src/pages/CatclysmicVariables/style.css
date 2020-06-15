@@ -1,3 +1,71 @@
-h1 {
+.content{
     margin: 0 auto;
+    padding: 50px 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.sidebar{
+    display: flex;
+    max-width: 200px;
+    justify-content: flex-start;
+    flex: 1;
+}
+
+.nav{
+    display: flex;
+    flex: 1;
+}
+
+.nav-link.disabled{
+    font-weight: bold;
+    color: black;
+    background-color: rgba(0,0,0,.03);
+}
+
+.nav-pills .nav-link.active{
+    color: black;
+    background: #E6E6FA;
+    font-weight: bold;
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: black;
+}
+
+@media (min-width: 576px) and (max-width: 768px){
+    .content{
+        padding: 0 10px;
+        margin: 30px auto;
+        max-width: 100%;
+    }
+}
+
+@media only screen and (max-width: 576px){
+    .content{
+        margin: 10px auto;
+        padding: 0;
+        flex-direction: column;
+    }
+
+    .sidebar{
+        margin-bottom: 10px;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .nav{
+        justify-content: center;
+    }
+
+    .nav-link.disabled{
+        display: none;
+    }
 }
