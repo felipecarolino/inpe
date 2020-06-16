@@ -38,9 +38,14 @@ export default function FormVariables(props) {
         } catch (error) {
             setErrorsList([
                 {
-                    "id": 1, "message": "Error to create new variable"
-                }
+                    "id": 4, "message": "Error to create new variable"
+                },
+                error.response.data.errors.Name_RK ? 
+                {
+                    "id": 5, "message": error.response.data.errors.Name_RK
+                } : {}
             ]);
+            setClassErros("block");
         }
     }
 
@@ -53,7 +58,7 @@ export default function FormVariables(props) {
             setErrorsList([
                 ...errorsList,
                 {
-                    "id": 1, "message": "Error to edit variable"
+                    "id": 6, "message": "Error to edit variable"
                 }
             ]);
         }

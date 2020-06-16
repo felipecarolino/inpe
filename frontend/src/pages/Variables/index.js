@@ -120,6 +120,7 @@ export default function Variables() {
                         <Table striped bordered hover>
                             <thead>
                                 <tr>
+                                    <th>ID</th>
                                     <th>Name</th>
                                     <th>RA</th>
                                     <th>DEC</th>
@@ -130,6 +131,7 @@ export default function Variables() {
                                 {
                                     variables.map((item, idx) => {
                                         return <tr key={item.id}>
+                                            <td>{item.id}</td>
                                             <td>{item.Name_RK}</td>
                                             <td>{item.RAJ2000_RK}</td>
                                             <td>{item.DEJ2000_RK}</td>
