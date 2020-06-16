@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
+import InputMask from 'react-input-mask';
 
 import api from '../../services/api';
 
@@ -40,10 +41,10 @@ export default function FormVariables(props) {
                 {
                     "id": 4, "message": "Error to create new variable"
                 },
-                error.response.data.errors.Name_RK ? 
-                {
-                    "id": 5, "message": error.response.data.errors.Name_RK
-                } : {}
+                error.response.data.errors.Name_RK ?
+                    {
+                        "id": 5, "message": error.response.data.errors.Name_RK
+                    } : {}
             ]);
             setClassErros("block");
         }
@@ -139,23 +140,21 @@ export default function FormVariables(props) {
                 <Form.Row>
                     <Form.Group controlId="variableRa">
                         <Form.Label>RA</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="hh mm ss.ss"
+                        <Input
+                            mask="99 99 99.99"
                             value={RAJ2000_RK}
                             onChange={(e) => setRa(e.target.value)}
-                        />
+                            placeholder="hh mm ss.ss" />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
                     <Form.Group controlId="variableDec">
                         <Form.Label>DEC</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="+/-dd mm ss.ss"
+                        <Input
+                            mask="99 99 99.99"
                             value={DEJ2000_RK}
                             onChange={(e) => setDec(e.target.value)}
-                        />
+                            placeholder="+/-dd mm ss.ss" />
                     </Form.Group>
                 </Form.Row>
                 <Button type="submit">Save</Button>
@@ -163,3 +162,14 @@ export default function FormVariables(props) {
         </>
     );
 }
+
+const Input = (props) => (
+    <InputMask
+        mask={props.mask}
+        maskChar={null}
+        value={props.value}
+        onChange={props.onChange}
+        placeholder={props.placeholder} >
+            {(inputProps) => <Form.Control {...inputProps} type="text" />}
+    </InputMask>
+);
