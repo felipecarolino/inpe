@@ -8,6 +8,7 @@ import Variables from '../Variables/index';
 import ViewVariables from '../Variables/view';
 import CreateVariables from '../Variables/create';
 import EditVariables from '../Variables/edit';
+import SearchVariable from '../SearchVariable/index';
 
 export default function CataclysmicVariables() {
     return (
@@ -18,6 +19,7 @@ export default function CataclysmicVariables() {
                 <Route path="/cataclysmic-variables/variables/view/:id" component={ViewVariables} />
                 <Route path="/cataclysmic-variables/variables/create" component={CreateVariables} />
                 <Route path="/cataclysmic-variables/variables/edit/:id" component={EditVariables} />
+                <Route path="/cataclysmic-variables/search/:type" component={SearchVariable} />
             </Switch>
         </div>
     )

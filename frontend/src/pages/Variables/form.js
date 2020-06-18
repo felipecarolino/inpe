@@ -151,7 +151,13 @@ export default function FormVariables(props) {
                     <Form.Group controlId="variableDec">
                         <Form.Label>DEC</Form.Label>
                         <Input
-                            mask="99 99 99.99"
+                            formatChars={
+                                {
+                                    "9": "[0-9]",
+                                    "?": "[+,-]"
+                                }
+                            }
+                            mask="?99 99 99.99"
                             value={DEJ2000_RK}
                             onChange={(e) => setDec(e.target.value)}
                             placeholder="+/-dd mm ss.ss" />
@@ -165,11 +171,12 @@ export default function FormVariables(props) {
 
 const Input = (props) => (
     <InputMask
+        formatChars={props.formatChars}
         mask={props.mask}
         maskChar={null}
         value={props.value}
         onChange={props.onChange}
         placeholder={props.placeholder} >
-            {(inputProps) => <Form.Control {...inputProps} type="text" />}
+        {(inputProps) => <Form.Control {...inputProps} type="text" />}
     </InputMask>
 );

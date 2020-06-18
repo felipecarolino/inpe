@@ -40,6 +40,11 @@ a:hover {
     color: black;
 }
 
+.nav-pills .show>.nav-link{
+    color: black;
+    background-color: transparent;
+}
+
 @media (min-width: 576px) and (max-width: 768px){
     .content{
         padding: 0 10px;

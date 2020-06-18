@@ -1,41 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
-import api from '../../services/api';
-
+import FormSearch from './form';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
-
-import IconBack from './../../assets/img/arrowLeft.svg';
-
 import './style.css';
 
-export default function View(props) {
+export default function SearchVariable(props) {
 
     const [variable, setVariable] = useState([]);
-    const [name, setName] = useState('');
+    const [showTable, setShowTable] = useState(false);
 
-    useEffect(() => {
-        const GetVariable = async () => {
-            const result = await api.get('variables/' + props.match.params.id);
-            setVariable(result.data.data);
-            setName(result.data.data.Name_RK.toLowerCase().replace(/ /g, ''));
-            console.log(result.data)
-        };
-        GetVariable();
-
-    }, [props.match.params.id]);
+    useEffect( () => {
+        if (variable.id !== undefined) {
+            setShowTable(true);
+        }
+    
+    }, [variable])
 
     return (
-        <div className="view-variable">
-            <Card className="view-variable-card">
+
+        <div className="search-variable">
+            <FormSearch type={props.match.params.type} update={(variable) => setVariable(variable)} />
+
+            {showTable ? <Card className="search-variable-card">
                 <Card.Header>
-                    <Link to="/cataclysmic-variables/variables" className="nav-link">
-                        <img src={IconBack} alt="Back Icon" className="iconBack" />
-                    </Link>
-                    <h5>View Cataclysmic Variable</h5>
+                    <h5>Search Cataclysmic Variable</h5>
                 </Card.Header>
-                <Card.Body className="view-variable-card-body">
-                    <div className="view-variable-table">
+                <Card.Body className="search-variable-card-body">
+                    <div className="search-variable-table">
                         <Table striped bordered hover>
                             <tbody>
                                 <tr >
@@ -57,7 +48,7 @@ export default function View(props) {
                                 <tr>
                                     <th className="w-25">SIMBAD</th>
                                     <td>
-                                        <a href={`http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${name}`}
+                                        <a href={`http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${variable.Name_RK}`}
                                             target="_blank"
                                             rel="noopener noreferrer">
                                             View object in SIMBAD
@@ -67,7 +58,7 @@ export default function View(props) {
                                 <tr>
                                     <th className="w-25">ADS</th>
                                     <td>
-                                        <a href={`https://ui.adsabs.harvard.edu/search/q=object:${name}`}
+                                        <a href={`https://ui.adsabs.harvard.edu/search/q=object:${variable.Name_RK}`}
                                             target="_blank"
                                             rel="noopener noreferrer">
                                             View object in ADS
@@ -78,7 +69,7 @@ export default function View(props) {
                         </Table>
                     </div>
                 </Card.Body>
-            </Card>
+            </Card> : null}
         </div>
     )
-}
+}   

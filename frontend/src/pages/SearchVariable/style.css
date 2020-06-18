@@ -1,0 +1,13 @@
+.search-variable {
+    display: flex;
+    max-width: 1000px;
+    margin-left: 30px;
+    flex: 1 1;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+
+.form-inline {
+    padding-left: 0;
+    margin-bottom: 15px;
+}
