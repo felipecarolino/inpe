@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import FormControl from 'react-bootstrap/FormControl'
 import './style.css';
+import InputMask from 'react-input-mask';
 
 import api from '../../services/api';
 
@@ -13,7 +14,7 @@ export default function FormSearch(props) {
     const [name, setName] = useState("");
     const [ra, setRa] = useState("");
     const [dec, setDec] = useState("");
-    const [arcosec, setArcosec] = useState();
+    const [arcosec, setArcosec] = useState("");
 
 
     async function searchName(data) {
@@ -30,7 +31,6 @@ export default function FormSearch(props) {
                 ]);
                 setClassErros("block");
             }
-            console.log(JSON.parse(result.data.data).data[0]);
         } catch (error) {
             setErrorsList([
                 {
@@ -55,7 +55,6 @@ export default function FormSearch(props) {
                 ]);
                 setClassErros("block");
             }
-            console.log(JSON.parse(result.data.data).data[0]);
         } catch (error) {
             setErrorsList([
                 {
@@ -149,34 +148,38 @@ export default function FormSearch(props) {
 
                     :
 
-                    <Form onSubmit={handleSave}>
+                    <Form onSubmit={handleSave} className="form-coordinate">
                         <Form.Row>
                             <Form.Group controlId="variableRa">
                                 <Form.Label>RA</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Enter variable RA"
+                                <Input
+                                    mask="99 99 99.99"
                                     value={ra}
                                     onChange={(e) => setRa(e.target.value)}
-                                />
+                                    placeholder="hh mm ss.ss" />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
                             <Form.Group controlId="variableDec">
                                 <Form.Label>DEC</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Enter variable DEC"
+                                <Input
+                                    formatChars={
+                                        {
+                                            "9": "[0-9]",
+                                            "?": "[+,-]"
+                                        }
+                                    }
+                                    mask="?99 99 99.99"
                                     value={dec}
                                     onChange={(e) => setDec(e.target.value)}
-                                />
+                                    placeholder="+/-dd mm ss.ss" />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
                             <Form.Group controlId="variableArcosec">
                                 <Form.Label>Arcosec</Form.Label>
                                 <Form.Control
-                                    type="number"
+                                    type="text"
                                     placeholder="Enter variable Arcosec"
                                     value={arcosec}
                                     onChange={(e) => setArcosec(e.target.value)}
@@ -190,3 +193,15 @@ export default function FormSearch(props) {
         </>
     );
 }
+
+const Input = (props) => (
+    <InputMask
+        formatChars={props.formatChars}
+        mask={props.mask}
+        maskChar={null}
+        value={props.value}
+        onChange={props.onChange}
+        placeholder={props.placeholder} >
+        {(inputProps) => <Form.Control {...inputProps} type="text" />}
+    </InputMask>
+);

@@ -7,7 +7,42 @@
     flex-direction: column;
 }
 
-.form-inline {
+.form-name {
     padding-left: 0;
     margin-bottom: 15px;
+}
+
+.form-coordinate {
+    padding-left: 0;
+    margin-bottom: 15px;
+}
+
+@media only screen and (max-width: 576px){
+
+    .search-variable{
+        margin-left: 0;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .form-name {
+        flex-direction: column;
+        justify-content: center;
+        flex-flow: column;
+        align-items: normal;
+    }
+
+    .form-coordinate {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .form-inline .form-control{
+        margin-bottom: 5px;
+    }
+
+    .search-variable-card{
+        border: none;
+    }
 }
