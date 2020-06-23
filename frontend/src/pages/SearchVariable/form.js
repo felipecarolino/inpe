@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import FormControl from 'react-bootstrap/FormControl'
 import './style.css';
 import InputMask from 'react-input-mask';
+import Navbar from 'react-bootstrap/Navbar';
 
 import api from '../../services/api';
 
@@ -16,12 +16,32 @@ export default function FormSearch(props) {
     const [dec, setDec] = useState("");
     const [arcosec, setArcosec] = useState("");
 
+    useEffect(() => {
+        setErrorsList([]);
+        setClassErros("hidden");
+    }, [props.type])
+
+    useEffect(() => {
+        if (name && props.type === "name") {
+            searchName({name})
+        }
+
+        if (ra && dec && arcosec && props.type === "coordinates") {
+            const data = {
+                ra,
+                dec,
+                arcosec
+            };
+            searchCoordinates(data);
+        }
+    }, [props.currentPage])
 
     async function searchName(data) {
         try {
-            const result = await api.post('variables/searchByName', data);
+            const result = await api.post('variables/searchByName?page=' + props.currentPage, data);
             if (JSON.parse(result.data.data).data[0] !== undefined) {
-                props.update(JSON.parse(result.data.data).data[0])
+                props.update(JSON.parse(result.data.data).data)
+                props.pagination(JSON.parse(result.data.data).total, props.currentPage, JSON.parse(result.data.data).per_page);
             }
             else {
                 setErrorsList([
@@ -30,6 +50,7 @@ export default function FormSearch(props) {
                     }
                 ]);
                 setClassErros("block");
+                props.showTable(false);
             }
         } catch (error) {
             setErrorsList([
@@ -41,11 +62,12 @@ export default function FormSearch(props) {
         }
     }
 
-    async function searchCoordinate(data) {
+    async function searchCoordinates(data) {
         try {
-            const result = await api.post('variables/searchByCoord', data);
+            const result = await api.post('variables/searchByCoord?page=' + props.currentPage, data);
             if (JSON.parse(result.data.data).data[0] !== undefined) {
-                props.update(JSON.parse(result.data.data).data[0])
+                props.update(JSON.parse(result.data.data).data)
+                props.pagination(JSON.parse(result.data.data).total, props.currentPage, JSON.parse(result.data.data).per_page);
             }
             else {
                 setErrorsList([
@@ -54,6 +76,7 @@ export default function FormSearch(props) {
                     }
                 ]);
                 setClassErros("block");
+                props.showTable(false);
             }
         } catch (error) {
             setErrorsList([
@@ -122,72 +145,87 @@ export default function FormSearch(props) {
                     dec,
                     arcosec
                 };
-                searchCoordinate(data);
+                searchCoordinates(data);
             }
+        }
+
+        else {
+            props.showTable(false);
         }
     }
 
     return (
         <>
-            <div className={"alert alert-danger " + classErrors} >
-                {[...errorsList].map((item) => (
-                    <span key={item.id}>{item.message} <br /></span>
-                ))}
-            </div>
 
             <div className="search-form">
-                {props.type === "name" ?
 
-                    <Form inline onSubmit={handleSave} className="form-name">
-                        <FormControl type="text" placeholder="Enter variable name" className=" mr-sm-2"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        />
-                        <Button type="submit">Search</Button>
-                    </Form>
+                <Navbar bg="light" className="title">
+                    <Navbar.Brand>Search results by {props.type}</Navbar.Brand>
+                </Navbar>
+
+                <div className={"alert alert-danger " + classErrors} >
+                    {[...errorsList].map((item) => (
+                        <span key={item.id}>{item.message} <br /></span>
+                    ))}
+                </div>
+
+                {props.type === "name" ?
+                        <Form onSubmit={handleSave} className="form-name">
+                            <Form.Row>
+                                <Form.Group controlId="variableName">
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Enter variable name"
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                    />
+                                </Form.Group>
+                            </Form.Row>
+                            <Button type="submit">Search</Button>
+                        </Form>
 
                     :
 
-                    <Form onSubmit={handleSave} className="form-coordinate">
-                        <Form.Row>
-                            <Form.Group controlId="variableRa">
-                                <Form.Label>RA</Form.Label>
-                                <Input
-                                    mask="99 99 99.99"
-                                    value={ra}
-                                    onChange={(e) => setRa(e.target.value)}
-                                    placeholder="hh mm ss.ss" />
-                            </Form.Group>
-                        </Form.Row>
-                        <Form.Row>
-                            <Form.Group controlId="variableDec">
-                                <Form.Label>DEC</Form.Label>
-                                <Input
-                                    formatChars={
-                                        {
-                                            "9": "[0-9]",
-                                            "?": "[+,-]"
+                        <Form onSubmit={handleSave} className="form-coordinates">
+                            <Form.Row>
+                                <Form.Group controlId="variableRa">
+                                    <Form.Label>RA</Form.Label>
+                                    <Input
+                                        mask="99 99 99.99"
+                                        value={ra}
+                                        onChange={(e) => setRa(e.target.value)}
+                                        placeholder="hh mm ss.ss" />
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group controlId="variableDec">
+                                    <Form.Label>DEC</Form.Label>
+                                    <Input
+                                        formatChars={
+                                            {
+                                                "9": "[0-9]",
+                                                "?": "[+,-]"
+                                            }
                                         }
-                                    }
-                                    mask="?99 99 99.99"
-                                    value={dec}
-                                    onChange={(e) => setDec(e.target.value)}
-                                    placeholder="+/-dd mm ss.ss" />
-                            </Form.Group>
-                        </Form.Row>
-                        <Form.Row>
-                            <Form.Group controlId="variableArcosec">
-                                <Form.Label>Arcosec</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Enter variable Arcosec"
-                                    value={arcosec}
-                                    onChange={(e) => setArcosec(e.target.value)}
-                                />
-                            </Form.Group>
-                        </Form.Row>
-                        <Button type="submit">Search</Button>
-                    </Form>
+                                        mask="?99 99 99.99"
+                                        value={dec}
+                                        onChange={(e) => setDec(e.target.value)}
+                                        placeholder="+/-dd mm ss.ss" />
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group controlId="variableArcosec">
+                                    <Form.Label>Arcosec</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Enter variable Arcosec"
+                                        value={arcosec}
+                                        onChange={(e) => setArcosec(e.target.value)}
+                                    />
+                                </Form.Group>
+                            </Form.Row>
+                            <Button type="submit">Search</Button>
+                        </Form>
                 }
             </div>
         </>

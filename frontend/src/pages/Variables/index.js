@@ -165,7 +165,7 @@ export default function Variables() {
                     activePage={currentPage}
                     itemsCountPerPage={totalPageItems}
                     totalItemsCount={totalItems}
-                    onChange={GetVariables}
+                    onChange={(GetVariables)}
                 />
             </div>
 

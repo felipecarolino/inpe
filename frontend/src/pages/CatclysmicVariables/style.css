@@ -45,6 +45,17 @@ a:hover {
     background-color: transparent;
 }
 
+.dropdown-toggle {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dropdown-menu.show {
+    width: 100%;
+}
+
 @media (min-width: 576px) and (max-width: 768px){
     .content{
         padding: 0 10px;
