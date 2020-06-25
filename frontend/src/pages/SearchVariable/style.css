@@ -43,10 +43,9 @@ tbody {
     }
 
     .form-name {
+        display: flex;
         flex-direction: column;
         justify-content: center;
-        flex-flow: column;
-        align-items: normal;
     }
 
     .form-coordinates {

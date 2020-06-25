@@ -12,6 +12,7 @@ import Users from '../Users/index';
 import ViewUsers from '../Users/view';
 import CreateUsers from '../Users/create';
 import EditUsers from '../Users/edit';
+import UserPassword from '../UserPassword/index';
 
 export default function UserManagement() {
     return (
@@ -26,6 +27,7 @@ export default function UserManagement() {
                 <Route path="/user-management/users/view/:id" component={ViewUsers} />
                 <Route path="/user-management/users/create" component={CreateUsers} />
                 <Route path="/user-management/users/edit/:id" component={EditUsers} />
+                <Route path="/user-management/user-password" component={UserPassword} />
             </Switch>
         </div>
     )

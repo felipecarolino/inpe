@@ -14,7 +14,7 @@ export default function FormSearch(props) {
     const [name, setName] = useState("");
     const [ra, setRa] = useState("");
     const [dec, setDec] = useState("");
-    const [arcosec, setArcosec] = useState("");
+    const [arcosec, setArcosec] = useState(5);
 
     useEffect(() => {
         setErrorsList([]);
@@ -34,6 +34,7 @@ export default function FormSearch(props) {
             };
             searchCoordinates(data);
         }
+        // eslint-disable-next-line
     }, [props.currentPage])
 
     async function searchName(data) {
@@ -217,8 +218,9 @@ export default function FormSearch(props) {
                                 <Form.Group controlId="variableArcosec">
                                     <Form.Label>Arcosec</Form.Label>
                                     <Form.Control
-                                        type="text"
+                                        type="number"
                                         placeholder="Enter variable Arcosec"
+                                        min="5"
                                         value={arcosec}
                                         onChange={(e) => setArcosec(e.target.value)}
                                     />
