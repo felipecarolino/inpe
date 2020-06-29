@@ -13,11 +13,16 @@ export default function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    function refreshPage() {
+        window.location.reload(false);
+      }
+
     async function signIn(data) {
         try {
             const result = await api.post('user/login', data);
-            console.log(result.data.data.auth_token);
-            login(result.data.data.auth_token);
+            login(result.data.data.auth_token, result.data.data.email, result.data.data.name);
+            refreshPage();
+
         } catch (error) {
             console.log(error.response.data.message)
             setErrorsList([

@@ -26,7 +26,7 @@ export default function Routes() {
     return (
         <div className="routes">
             <Switch>
-                <Route path="/" exact component={Login}/>
+                <Route path="/restrict-area" exact component={Login}/>
                 <PrivateRoute path="/user-management" component={UserManagement}/>
                 <Route path='/cataclysmic-variables' component={CataclysmicVariables}/>
                 <Route path='/submissions' component={Submissions}/>

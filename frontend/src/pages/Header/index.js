@@ -7,6 +7,8 @@ import usaThumbnail from './../../assets/img/usa_thumbnail.png';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
+import { isAuthenticated } from "./../../services/auth";
+
 export default function Header() {
 
     return (
@@ -29,10 +31,11 @@ export default function Header() {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">
-                            <Link to="/user-management" className="nav-link">User Management</Link>
+                            {isAuthenticated() ? <Link to="/user-management" className="nav-link">User Management</Link> : null}
                             <Link to="/cataclysmic-variables" className="nav-link">Cataclysmic Variables</Link>
                             <Link to="/submissions" className="nav-link">Submissions</Link>
                             <Link to="/documentation" className="nav-link">Documentation</Link>
+                            <Link to="/restrict-area" className="nav-link">Restrict Area</Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
