@@ -10,11 +10,13 @@ import './style.css';
 export default function Login() {
 
     return (
-        <Card className="login-card">
-            <Card.Header as="h5">Restrict Area</Card.Header>
-            <Card.Body>
-                {isAuthenticated() ? <View /> : <Form />}
-            </Card.Body>
-        </Card>
+        <div className="view-login">
+            <Card className="login-card">
+                <Card.Header as="h5">Restrict Area</Card.Header>
+                <Card.Body>
+                    {isAuthenticated() ? <View /> : <Form />}
+                </Card.Body>
+            </Card>
+        </div>
     )
 }

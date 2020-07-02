@@ -60,6 +60,15 @@
     justify-content: center;
 }
 
+.user{
+    padding: 0;
+}
+
+.iconAccount{
+    height: 40px;
+    width: 40px;
+}
+
 .navbar-light .navbar-nav .nav-link{
     color: #f3f5fa;
 }

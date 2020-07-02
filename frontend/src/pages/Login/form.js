@@ -15,13 +15,19 @@ export default function LoginForm() {
 
     function refreshPage() {
         window.location.reload(false);
-      }
+    }
+
+    const getUser = async (id) => {
+        const result = await api.get('users/' + id);
+        localStorage.setItem("user", result.data.data.username);
+        refreshPage();
+    };
 
     async function signIn(data) {
         try {
             const result = await api.post('user/login', data);
-            login(result.data.data.auth_token, result.data.data.email, result.data.data.name);
-            refreshPage();
+            login(result.data.data.auth_token, result.data.data.id, result.data.data.email, result.data.data.name);
+            getUser(result.data.data.id);
 
         } catch (error) {
             console.log(error.response.data.message)
@@ -48,7 +54,7 @@ export default function LoginForm() {
             errors.push({ "id": "2", "message": "Password cannot be empty" });
             validade = false
         }
-        
+
         if (errors.length > 0) {
             setClassErros("block");
         }
@@ -102,7 +108,7 @@ export default function LoginForm() {
                         />
                     </Form.Group>
                 </Form.Row>
-                <Button type="submit">Save</Button>
+                <Button type="submit">Login</Button>
             </Form>
         </>
     );

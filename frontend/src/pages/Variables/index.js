@@ -14,6 +14,8 @@ import IconAdd from './../../assets/img/add.svg';
 
 import Pagination from "react-js-pagination";
 
+import { isAuthenticated } from "./../../services/auth";
+
 import './style.css';
 
 export default function Variables() {
@@ -139,6 +141,8 @@ export default function Variables() {
                                                 <Link to={{ pathname: `/cataclysmic-variables/variables/view/${item.id}` }} className="nav-link">
                                                     <img src={IconView} alt="View Icon" className="iconView" />
                                                 </Link>
+                                                {isAuthenticated() ?
+                                                <>
                                                 <Link to={{ pathname: `/cataclysmic-variables/variables/edit/${item.id}` }} className="nav-link">
                                                     <img src={IconEdit} alt="Edit Icon" className="iconEdit" />
                                                 </Link>
@@ -150,6 +154,8 @@ export default function Variables() {
                                                         setDeleteModalShow(true);
                                                     }}
                                                 />
+                                                </>
+                                                : null}
                                             </td>
                                         </tr>
                                     })}

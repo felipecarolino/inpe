@@ -17,7 +17,7 @@ export default function Routes() {
             isAuthenticated() ? (
               <Component {...props} />
             ) : (
-              <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+              <Redirect to={{ pathname: "/restrict-area", state: { from: props.location } }} />
             )
           }
         />

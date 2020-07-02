@@ -1,10 +1,26 @@
+.view-login {
+    display: flex;
+    max-width: 1000px;
+    flex: 1;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
 .login-card {
     margin: 15px auto;
     width: 50%;
+    display: flex;
 }
 
-.card-header{
+.login-card .card-header{
     text-align: center;
+}
+
+.login-view-user{
+    display: flex;
+    max-width: 1000px;
+    flex: 1;
+    box-sizing: border-box;
 }
 
 
@@ -12,5 +28,15 @@
 @media only screen and (max-width: 576px){
     .login-card {
         width: 90%;
+    }
+
+    .login-view-user{
+        margin: 0;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .login-view-user-card .card-header{
+        padding: 10px 0;
     }
 }
