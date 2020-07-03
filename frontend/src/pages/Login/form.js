@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { login } from "../../services/auth";
+import { useHistory } from "react-router-dom";
 
 import api from '../../services/api';
 
@@ -8,6 +9,7 @@ import './style.css';
 
 export default function LoginForm() {
 
+    const history = useHistory();
     const [errorsList, setErrorsList] = useState([]);
     const [classErrors, setClassErros] = useState("hidden");
     const [email, setEmail] = useState('');
@@ -28,6 +30,7 @@ export default function LoginForm() {
             const result = await api.post('user/login', data);
             login(result.data.data.auth_token, result.data.data.id, result.data.data.email, result.data.data.name);
             getUser(result.data.data.id);
+            history.push('/cataclysmic-variables/variables');
 
         } catch (error) {
             console.log(error.response.data.message)
@@ -87,7 +90,7 @@ export default function LoginForm() {
 
             <Form onSubmit={handleSave}>
                 <Form.Row>
-                    <Form.Group controlId="email">
+                    <Form.Group className="form-login" controlId="email">
                         <Form.Label>Email adress</Form.Label>
                         <Form.Control
                             type="email"
@@ -98,7 +101,7 @@ export default function LoginForm() {
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
-                    <Form.Group controlId="password">
+                    <Form.Group className="form-login" controlId="password">
                         <Form.Label>Password</Form.Label>
                         <Form.Control
                             type="password"

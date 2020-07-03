@@ -113,9 +113,11 @@ export default function Variables() {
             <Card className="variables-card">
                 <Card.Header>
                     <h5>Cataclysmic Variables List</h5>
+                    {isAuthenticated()
+                        ?
                     <Link to="/cataclysmic-variables/variables/create" className="nav-link">
                         <img src={IconAdd} alt="Add Icon" className="iconAdd" />
-                    </Link>
+                    </Link> : null}
                 </Card.Header>
                 <Card.Body className="variables-card-body">
                     <div className="variables-table">

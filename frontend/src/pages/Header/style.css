@@ -153,4 +153,9 @@
     .navbar-nav{
         text-align: left;
     }
+
+    .iconAccount{
+        height: 25px;
+        width: 25px;
+    }
 }

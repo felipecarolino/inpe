@@ -11,7 +11,16 @@ import Nav from 'react-bootstrap/Nav';
 import { isAuthenticated } from "./../../services/auth";
 import { logout } from "../../services/auth";
 
+import { useHistory } from "react-router-dom";
+
 export default function Header() {
+
+    const history = useHistory();
+
+    const Logout = () => {
+        history.push('/cataclysmic-variables/variables');
+        logout();
+    }
     
     return (
         <div className="header">
@@ -41,7 +50,7 @@ export default function Header() {
                     <Nav>
                     {isAuthenticated() ?
                         <>
-                        <Link to="/restrict-area" className="nav-link" onClick={logout} >{localStorage.getItem("user")} (Logout)</Link>
+                        <Link to="/cataclysmic-variables/variables" className="nav-link" onClick={Logout} >{localStorage.getItem("user")} (Logout)</Link>
                         <Link to="/restrict-area" className="user nav-link"><img src={IconAccount} alt="Account Icon" className="iconAccount" /></Link>
                         </>
                             :

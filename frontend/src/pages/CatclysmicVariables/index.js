@@ -31,6 +31,7 @@ export default function CataclysmicVariables() {
         <div className="content">
             <Sidebar />
             <Switch>
+                <Route exact path="/cataclysmic-variables"> <Redirect to="/cataclysmic-variables/variables" /> </Route>
                 <Route path="/cataclysmic-variables/variables" exact component={Variables} />
                 <Route path="/cataclysmic-variables/variables/view/:id" component={ViewVariables} />
                 <PrivateRoute path="/cataclysmic-variables/variables/create" component={CreateVariables} />
