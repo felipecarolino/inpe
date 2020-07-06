@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import logo from './../../assets/img/logo.png';
 import brazilThumbnail from './../../assets/img/brazil_thumbnail.png';
 import usaThumbnail from './../../assets/img/usa_thumbnail.png';
-import IconAccount from './../../assets/img/account.svg';
+import IconAccount from './../../assets/img/user.png';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 

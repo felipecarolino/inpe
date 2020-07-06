@@ -30,3 +30,7 @@ html, body {
 .w-25{
     width:25%;
 }
+
+.navbar-nav{
+    align-items: center;
+}
