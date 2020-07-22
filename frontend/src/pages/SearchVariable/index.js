@@ -62,20 +62,20 @@ export default function SearchVariable(props) {
                                                     </tr>
                                                     <tr >
                                                         <th className="w-25">Name</th>
-                                                        <td>{item.Name_RK}</td>
+                                                        <td>{item.name}</td>
                                                     </tr>
                                                     <tr>
                                                         <th className="w-25">RA</th>
-                                                        <td>{item.RAJ2000_RK}</td>
+                                                        <td>{item.ra}</td>
                                                     </tr>
                                                     <tr>
                                                         <th className="w-25">DEC</th>
-                                                        <td>{item.DEJ2000_RK}</td>
+                                                        <td>{item.dec}</td>
                                                     </tr>
                                                     <tr>
                                                         <th className="w-25">SIMBAD</th>
                                                         <td>
-                                                            <a href={`http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${item.Name_RK.toLowerCase().replace(/ /g, '')}`}
+                                                            <a href={`http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${item.name.toLowerCase().replace(/ /g, '')}`}
                                                                 target="_blank"
                                                                 rel="noopener noreferrer">
                                                                 View object in SIMBAD
@@ -85,7 +85,7 @@ export default function SearchVariable(props) {
                                                     <tr>
                                                         <th className="w-25">ADS</th>
                                                         <td>
-                                                            <a href={`https://ui.adsabs.harvard.edu/search/q=object:${item.Name_RK.toLowerCase().replace(/ /g, '')}`}
+                                                            <a href={`https://ui.adsabs.harvard.edu/search/q=object:${item.name.toLowerCase().replace(/ /g, '')}`}
                                                                 target="_blank"
                                                                 rel="noopener noreferrer">
                                                                 View object in ADS

@@ -18,7 +18,7 @@ export default function View(props) {
         const GetVariable = async () => {
             const result = await api.get('variables/' + props.match.params.id);
             setVariable(result.data.data);
-            setName(result.data.data.Name_RK.toLowerCase().replace(/ /g, ''));
+            setName(result.data.data.name);
             console.log(result.data)
         };
         GetVariable();
@@ -44,15 +44,19 @@ export default function View(props) {
                                 </tr>
                                 <tr >
                                     <th className="w-25">Name</th>
-                                    <td>{variable.Name_RK}</td>
+                                    <td>{variable.name}</td>
                                 </tr>
                                 <tr>
                                     <th className="w-25">RA</th>
-                                    <td>{variable.RAJ2000_RK}</td>
+                                    <td>{variable.ra}</td>
                                 </tr>
                                 <tr>
                                     <th className="w-25">DEC</th>
-                                    <td>{variable.DEJ2000_RK}</td>
+                                    <td>{variable.dec}</td>
+                                </tr>
+                                <tr>
+                                    <th className="w-25">Orb_Per</th>
+                                    <td>{variable.per}</td>
                                 </tr>
                                 <tr>
                                     <th className="w-25">SIMBAD</th>

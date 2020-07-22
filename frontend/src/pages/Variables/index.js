@@ -124,10 +124,10 @@ export default function Variables() {
                         <Table striped bordered hover>
                             <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Name</th>
                                     <th>RA</th>
                                     <th>DEC</th>
+                                    <th>Orb_Per</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -135,10 +135,10 @@ export default function Variables() {
                                 {
                                     variables.map((item, idx) => {
                                         return <tr key={item.id}>
-                                            <td>{item.id}</td>
-                                            <td>{item.Name_RK}</td>
-                                            <td>{item.RAJ2000_RK}</td>
-                                            <td>{item.DEJ2000_RK}</td>
+                                            <td>{item.name}</td>
+                                            <td>{item.ra}</td>
+                                            <td>{item.dec}</td>
+                                            <td>{item.per}</td>
                                             <td>
                                                 <Link to={{ pathname: `/cataclysmic-variables/variables/view/${item.id}` }} className="nav-link">
                                                     <img src={IconView} alt="View Icon" className="iconView" />

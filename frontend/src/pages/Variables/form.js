@@ -12,9 +12,10 @@ export default function FormVariables(props) {
     const history = useHistory();
     const [errorsList, setErrorsList] = useState([]);
     const [classErrors, setClassErros] = useState("hidden")
-    const [Name_RK, setName] = useState('');
-    const [RAJ2000_RK, setRa] = useState('');
-    const [DEJ2000_RK, setDec] = useState('');
+    const [name, setName] = useState('');
+    const [ra, setRa] = useState('');
+    const [dec, setDec] = useState('');
+    const [per, setPer] = useState('');
     const [id, setId] = useState(props.id);
 
     useEffect(() => {
@@ -22,9 +23,10 @@ export default function FormVariables(props) {
         if (props.id) {
             const GetVariable = async () => {
                 const result = await api.get('variables/' + props.id);
-                setName(result.data.data.Name_RK);
-                setRa(result.data.data.RAJ2000_RK);
-                setDec(result.data.data.DEJ2000_RK);
+                setName(result.data.data.name);
+                setRa(result.data.data.ra);
+                setDec(result.data.data.dec);
+                setPer(result.data.data.per);
                 setId(props.id);
             };
             GetVariable();
@@ -37,13 +39,14 @@ export default function FormVariables(props) {
             await api.post('variables', data);
             history.push('/cataclysmic-variables/variables');
         } catch (error) {
+            console.log(error.response);
             setErrorsList([
                 {
-                    "id": 4, "message": "Error to create new variable"
+                    "id": 5, "message": "Error to create new variable"
                 },
-                error.response.data.errors.Name_RK ?
+                error.response.data.errors.name ?
                     {
-                        "id": 5, "message": error.response.data.errors.Name_RK
+                        "id": 6, "message": error.response.data.errors.name
                     } : {}
             ]);
             setClassErros("block");
@@ -59,7 +62,7 @@ export default function FormVariables(props) {
             setErrorsList([
                 ...errorsList,
                 {
-                    "id": 6, "message": "Error to edit variable"
+                    "id": 7, "message": "Error to edit variable"
                 }
             ]);
         }
@@ -71,18 +74,23 @@ export default function FormVariables(props) {
         let validade = true;
         e.preventDefault();
 
-        if (Name_RK === "") {
+        if (name === "") {
             errors.push({ "id": "1", "message": "Name cannot be empty" });
             validade = false
         };
 
-        if (RAJ2000_RK === "") {
+        if (ra === "") {
             errors.push({ "id": "2", "message": "RA cannot be empty" });
             validade = false
         }
 
-        if (DEJ2000_RK === "") {
+        if (dec === "") {
             errors.push({ "id": "3", "message": "DEC cannot be empty" });
+            validade = false
+        }
+
+        if (per === "") {
+            errors.push({ "id": "4", "message": "Orb_Per cannot be empty" });
             validade = false
         }
 
@@ -102,9 +110,10 @@ export default function FormVariables(props) {
 
         if (formValidation(e)) {
             const data = {
-                Name_RK,
-                RAJ2000_RK,
-                DEJ2000_RK
+                name,
+                ra,
+                dec,
+                per
             };
 
             if (id) {
@@ -132,7 +141,7 @@ export default function FormVariables(props) {
                         <Form.Control
                             type="text"
                             placeholder="Enter name"
-                            value={Name_RK}
+                            value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
                     </Form.Group>
@@ -141,10 +150,10 @@ export default function FormVariables(props) {
                     <Form.Group controlId="variableRa">
                         <Form.Label>RA</Form.Label>
                         <Input
-                            mask="99 99 99.99"
-                            value={RAJ2000_RK}
+                            mask="99 99 99.9999999999"
+                            value={ra}
                             onChange={(e) => setRa(e.target.value)}
-                            placeholder="hh mm ss.ss" />
+                            placeholder="hh mm ss.ssssssssss" />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
@@ -157,10 +166,25 @@ export default function FormVariables(props) {
                                     "?": "[+,-]"
                                 }
                             }
-                            mask="?99 99 99.99"
-                            value={DEJ2000_RK}
+                            mask="?99 99 99.999999999"
+                            value={dec}
                             onChange={(e) => setDec(e.target.value)}
-                            placeholder="+/-dd mm ss.ss" />
+                            placeholder="+/-dd mm ss.sssssssss" />
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group controlId="variablePer">
+                        <Form.Label>Orb_Per</Form.Label>
+                        <Input
+                            formatChars={
+                                {
+                                    "9": "[0-9]"
+                                }
+                            }
+                            mask="9.999999"
+                            value={per}
+                            onChange={(e) => setPer(e.target.value)}
+                            placeholder="0.000000" />
                     </Form.Group>
                 </Form.Row>
                 <Button type="submit">Save</Button>
