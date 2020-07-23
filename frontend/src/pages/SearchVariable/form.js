@@ -14,6 +14,7 @@ export default function FormSearch(props) {
     const [name, setName] = useState("");
     const [ra, setRa] = useState("");
     const [dec, setDec] = useState("");
+    const [per, setPer] = useState("");
     const [arcosec, setArcosec] = useState(5);
 
     useEffect(() => {
@@ -144,6 +145,7 @@ export default function FormSearch(props) {
                 const data = {
                     ra,
                     dec,
+                    per,
                     arcosec
                 };
                 searchCoordinates(data);
@@ -212,6 +214,21 @@ export default function FormSearch(props) {
                                         value={dec}
                                         onChange={(e) => setDec(e.target.value)}
                                         placeholder="+/-dd mm ss.ss" />
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group controlId="variableDec">
+                                    <Form.Label>Orb_Per</Form.Label>
+                                    <Input
+                                        formatChars={
+                                            {
+                                                "9": "[0-9]"
+                                            }
+                                        }
+                                        mask="9.999999"
+                                        value={per}
+                                        onChange={(e) => setPer(e.target.value)}
+                                        placeholder="0.000000" />
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>

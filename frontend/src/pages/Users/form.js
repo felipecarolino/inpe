@@ -4,6 +4,8 @@ import { Form, Button } from 'react-bootstrap';
 
 import api from '../../services/api';
 
+import { logout } from "../../services/auth";
+
 import './style.css';
 
 export default function FormUsers(props) {
@@ -21,6 +23,11 @@ export default function FormUsers(props) {
     const [showPassword, setShowPassword] = useState("block");
 
     const [id, setId] = useState(props.id);
+
+    const Logout = () => {
+        history.push('/restrict-area');
+        logout();
+    }
 
     useEffect(() => {
 
@@ -51,26 +58,29 @@ export default function FormUsers(props) {
             await api.post('users', data);
             history.push('/user-management/users');
         } catch (error) {
+            if (error.response.data.message === "Token has expired") {
+                Logout();
+            }
             setErrorsList([
                 {
                     "id": 9, "message": "Error to create new user"
                 },
-                error.response.data.errors.username ? 
-                {
-                    "id": 10, "message": error.response.data.errors.username
-                } :
-                error.response.data.errors.password ?
-                {
-                    "id": 11, "message": error.response.data.errors.password
-                } :
-                error.response.data.errors.email ?
-                {
-                    "id": 12, "message": error.response.data.errors.email
-                } :
-                error.response.data.errors.role_id ?
-                {
-                    "id": 13, "message": error.response.data.errors.role_id
-                } : {}
+                error.response.data.errors.username ?
+                    {
+                        "id": 10, "message": error.response.data.errors.username
+                    } :
+                    error.response.data.errors.password ?
+                        {
+                            "id": 11, "message": error.response.data.errors.password
+                        } :
+                        error.response.data.errors.email ?
+                            {
+                                "id": 12, "message": error.response.data.errors.email
+                            } :
+                            error.response.data.errors.role_id ?
+                                {
+                                    "id": 13, "message": error.response.data.errors.role_id
+                                } : {}
             ]);
             setClassErros("block");
         }
@@ -81,6 +91,9 @@ export default function FormUsers(props) {
             await api.put('users/' + props.id, data);
             history.push('/user-management/users');
         } catch (error) {
+            if (error.response.data.message === "Token has expired") {
+                Logout();
+            }
             setErrorsList([
                 {
                     "id": 6, "message": "Error to edit user",
@@ -92,7 +105,7 @@ export default function FormUsers(props) {
                     "id": 8, "message": error.response.data.errors.email
                 }
             ]);
-                setClassErros("block");
+            setClassErros("block");
         }
     }
 
@@ -121,7 +134,7 @@ export default function FormUsers(props) {
             validade = false
         }
 
-        if (!id){
+        if (!id) {
             if (password === "") {
                 errors.push({ "id": "5", "message": "Password cannot be empty" });
                 validade = false

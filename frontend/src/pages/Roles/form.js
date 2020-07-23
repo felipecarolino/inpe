@@ -4,6 +4,8 @@ import { Form, Button } from 'react-bootstrap';
 
 import api from '../../services/api';
 
+import { logout } from "../../services/auth";
+
 import './style.css';
 
 export default function FormRoles(props) {
@@ -13,8 +15,13 @@ export default function FormRoles(props) {
     const [classErrors, setClassErros] = useState("hidden")
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-  
+
     const [id, setId] = useState(props.id);
+
+    const Logout = () => {
+        history.push('/restrict-area');
+        logout();
+    }
 
     useEffect(() => {
 
@@ -35,6 +42,9 @@ export default function FormRoles(props) {
             await api.post('roles', data);
             history.push('/user-management/roles');
         } catch (error) {
+            if (error.response.data.message === "Token has expired") {
+                Logout();
+            }
             setErrorsList([
                 {
                     "id": 1, "message": "Error to create new role"
@@ -49,6 +59,9 @@ export default function FormRoles(props) {
             await api.put('roles/' + props.id, data);
             history.push('/user-management/roles');
         } catch (error) {
+            if (error.response.data.message === "Token has expired") {
+                Logout();
+            }
             setErrorsList([
                 ...errorsList,
                 {

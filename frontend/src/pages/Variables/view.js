@@ -19,7 +19,6 @@ export default function View(props) {
             const result = await api.get('variables/' + props.match.params.id);
             setVariable(result.data.data);
             setName(result.data.data.name);
-            console.log(result.data)
         };
         GetVariable();
 

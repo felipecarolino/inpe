@@ -73,9 +73,13 @@ export default function SearchVariable(props) {
                                                         <td>{item.dec}</td>
                                                     </tr>
                                                     <tr>
+                                                        <th className="w-25">Orb_Per</th>
+                                                        <td>{item.per}</td>
+                                                    </tr>
+                                                    <tr>
                                                         <th className="w-25">SIMBAD</th>
                                                         <td>
-                                                            <a href={`http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${item.name.toLowerCase().replace(/ /g, '')}`}
+                                                            <a href={`http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${item.name}`}
                                                                 target="_blank"
                                                                 rel="noopener noreferrer">
                                                                 View object in SIMBAD
@@ -85,7 +89,7 @@ export default function SearchVariable(props) {
                                                     <tr>
                                                         <th className="w-25">ADS</th>
                                                         <td>
-                                                            <a href={`https://ui.adsabs.harvard.edu/search/q=object:${item.name.toLowerCase().replace(/ /g, '')}`}
+                                                            <a href={`https://ui.adsabs.harvard.edu/search/q=object:${item.name}`}
                                                                 target="_blank"
                                                                 rel="noopener noreferrer">
                                                                 View object in ADS

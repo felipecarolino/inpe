@@ -33,7 +33,6 @@ export default function LoginForm() {
             history.push('/cataclysmic-variables/variables');
 
         } catch (error) {
-            console.log(error.response.data.message)
             setErrorsList([
                 {
                     "id": 4, "message": "Error to login",

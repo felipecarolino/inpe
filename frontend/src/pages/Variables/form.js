@@ -5,6 +5,8 @@ import InputMask from 'react-input-mask';
 
 import api from '../../services/api';
 
+import { logout } from "../../services/auth";
+
 import './style.css';
 
 export default function FormVariables(props) {
@@ -17,6 +19,11 @@ export default function FormVariables(props) {
     const [dec, setDec] = useState('');
     const [per, setPer] = useState('');
     const [id, setId] = useState(props.id);
+
+    const Logout = () => {
+        history.push('/restrict-area');
+        logout();
+    }
 
     useEffect(() => {
 
@@ -34,12 +41,13 @@ export default function FormVariables(props) {
     }, [props.id]);
 
     async function create(data) {
-
         try {
             await api.post('variables', data);
             history.push('/cataclysmic-variables/variables');
         } catch (error) {
-            console.log(error.response);
+            if (error.response.data.message === "Token has expired") {
+                Logout();
+            }
             setErrorsList([
                 {
                     "id": 5, "message": "Error to create new variable"
@@ -54,11 +62,13 @@ export default function FormVariables(props) {
     }
 
     async function edit(data) {
-
         try {
             await api.put('variables/' + props.id, data);
             history.push('/cataclysmic-variables/variables');
         } catch (error) {
+            if (error.response.data.message === "Token has expired") {
+                Logout();
+            }
             setErrorsList([
                 ...errorsList,
                 {
@@ -86,11 +96,6 @@ export default function FormVariables(props) {
 
         if (dec === "") {
             errors.push({ "id": "3", "message": "DEC cannot be empty" });
-            validade = false
-        }
-
-        if (per === "") {
-            errors.push({ "id": "4", "message": "Orb_Per cannot be empty" });
             validade = false
         }
 

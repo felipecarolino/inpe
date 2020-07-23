@@ -25,7 +25,6 @@ export default function FormResetPassword() {
             setNewPassword('');
             setConfirmPassword('');
         } catch (error) {
-            console.log(error.response.data.message)
             setErrorsList([
                 {
                     "id": 4, "message": "Error to reset password",
