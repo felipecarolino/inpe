@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import api from '../../services/api';
 
 import Card from 'react-bootstrap/Card';
@@ -14,10 +15,13 @@ import IconAdd from './../../assets/img/add.svg';
 
 import Pagination from "react-js-pagination";
 
+import { logout } from "../../services/auth";
+
 import './style.css';
 
 export default function UsersManagement() {
 
+    const history = useHistory();
     const [users, setUsers] = useState([]);
     const [modalShow, setModalShow] = useState(false);
     const [id, setId] = useState();
@@ -27,6 +31,11 @@ export default function UsersManagement() {
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPageItems, setTotalPageItems] = useState(1);
+
+    const Logout = () => {
+        history.push('/restrict-area');
+        logout();
+    }
 
     async function GetUsers(page) {
         const result = await api.get('users?page=' + page);
@@ -46,6 +55,9 @@ export default function UsersManagement() {
             setModalShow(false);
             setUsers(users.filter(user => user.id !== id))
         } catch (error) {
+            if (error.response.data.message === "Token has expired") {
+                Logout();
+            }
             setErrorsList([
                 {
                     "id": 1, "message": "Error to delete user"

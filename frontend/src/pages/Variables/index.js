@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import api from '../../services/api';
 
 import Card from 'react-bootstrap/Card';
@@ -15,11 +16,13 @@ import IconAdd from './../../assets/img/add.svg';
 import Pagination from "react-js-pagination";
 
 import { isAuthenticated } from "./../../services/auth";
+import { logout } from "../../services/auth";
 
 import './style.css';
 
 export default function Variables() {
 
+    const history = useHistory();
     const [variables, setVariables] = useState([]);
     const [deleteModalShow, setDeleteModalShow] = useState(false);
     const [errorModalShow, setErrorModalShow] = useState(false);
@@ -30,6 +33,11 @@ export default function Variables() {
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPageItems, setTotalPageItems] = useState(1);
+
+    const Logout = () => {
+        history.push('/restrict-area');
+        logout();
+    }
 
     async function GetVariables(page) {
         const result = await api.get('variables?page=' + page);
@@ -49,6 +57,9 @@ export default function Variables() {
             setDeleteModalShow(false);
             setVariables(variables.filter(variable => variable.id !== id))
         } catch (error) {
+            if (error.response.data.message === "Token has expired") {
+                Logout();
+            }
             setErrorsList([
                 {
                     "id": 1, "message": "Error to delete variable"
@@ -115,9 +126,9 @@ export default function Variables() {
                     <h5>Cataclysmic Variables List</h5>
                     {isAuthenticated()
                         ?
-                    <Link to="/cataclysmic-variables/variables/create" className="nav-link">
-                        <img src={IconAdd} alt="Add Icon" className="iconAdd" />
-                    </Link> : null}
+                        <Link to="/cataclysmic-variables/variables/create" className="nav-link">
+                            <img src={IconAdd} alt="Add Icon" className="iconAdd" />
+                        </Link> : null}
                 </Card.Header>
                 <Card.Body className="variables-card-body">
                     <div className="variables-table">
@@ -144,20 +155,20 @@ export default function Variables() {
                                                     <img src={IconView} alt="View Icon" className="iconView" />
                                                 </Link>
                                                 {isAuthenticated() ?
-                                                <>
-                                                <Link to={{ pathname: `/cataclysmic-variables/variables/edit/${item.id}` }} className="nav-link">
-                                                    <img src={IconEdit} alt="Edit Icon" className="iconEdit" />
-                                                </Link>
-                                                <img
-                                                    className="iconDelete"
-                                                    src={IconDelete} alt="Delete Icon"
-                                                    onClick={() => {
-                                                        setId(item.id);
-                                                        setDeleteModalShow(true);
-                                                    }}
-                                                />
-                                                </>
-                                                : null}
+                                                    <>
+                                                        <Link to={{ pathname: `/cataclysmic-variables/variables/edit/${item.id}` }} className="nav-link">
+                                                            <img src={IconEdit} alt="Edit Icon" className="iconEdit" />
+                                                        </Link>
+                                                        <img
+                                                            className="iconDelete"
+                                                            src={IconDelete} alt="Delete Icon"
+                                                            onClick={() => {
+                                                                setId(item.id);
+                                                                setDeleteModalShow(true);
+                                                            }}
+                                                        />
+                                                    </>
+                                                    : null}
                                             </td>
                                         </tr>
                                     })}

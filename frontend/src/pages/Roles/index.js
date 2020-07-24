@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import api from '../../services/api';
 
 import Card from 'react-bootstrap/Card';
@@ -14,10 +15,13 @@ import IconAdd from './../../assets/img/add.svg';
 
 import Pagination from "react-js-pagination";
 
+import { logout } from "../../services/auth";
+
 import './style.css';
 
 export default function Roles() {
 
+    const history = useHistory();
     const [roles, setRoles] = useState([]);
     const [deleteModalShow, setDeleteModalShow] = useState(false);
     const [errorModalShow, setErrorModalShow] = useState(false);
@@ -28,6 +32,11 @@ export default function Roles() {
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPageItems, setTotalPageItems] = useState(1);
+
+    const Logout = () => {
+        history.push('/restrict-area');
+        logout();
+    }
 
     async function GetRoles(page) {
         const result = await api.get('roles?page=' + page);
@@ -47,6 +56,9 @@ export default function Roles() {
             setDeleteModalShow(false);
             setRoles(roles.filter(role => role.id !== id))
         } catch (error) {
+            if (error.response.data.message === "Token has expired") {
+                Logout();
+            }
             setErrorsList([
                 {
                     "id": 1, "message": "Error to delete role"
