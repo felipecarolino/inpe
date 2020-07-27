@@ -21,15 +21,16 @@ class StoreVariablesRequest extends FormRequest
      *
      * @return array
      */
+	
     public function rules()
     {
     	
     	
     	
         return [
-            'Name_RK' => 'required|unique:variables,Name_RK,'.$this->id,
-        	'RAJ2000_RK' => 'required',
-        	'DEJ2000_RK' => 'required',
+        	'name' => "required|unique:variables,name,$this->route('variables'),id,deleted_at,NULL",
+           	'ra' => 'required',
+        	'dec' => 'required',
         ];
     }
     
@@ -42,9 +43,9 @@ class StoreVariablesRequest extends FormRequest
     public function messages()
     {
     	return [
-    			'Name_RK.required' => 'Name field is required',
-    			'RAJ2000_RK.required' => 'RA field is required',
-    			'DEJ2000_RK.required' => 'RA field is required',
+    			'name.required' => 'Name field is required',
+    			'ra.required' => 'RA field is required',
+    			'dec.required' => 'RA field is required',
     	];
     }
     /**

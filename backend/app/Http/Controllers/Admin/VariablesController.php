@@ -23,9 +23,13 @@ class VariablesController extends ApiController
 
     	$count = 5;
     	
+    	if (! isset($_GET['page'])){
+    		$variables = Variables::orderBy('ra', 'DESC')->get()->toJson(JSON_PRETTY_PRINT);
+    		return response($variables, 200);
+    	}
     	$pageNumber = isset($_GET['page'])?$_GET['page']:1;
     	
-        $variables = Variables::paginate($count, ['*'], 'page', $pageNumber)->toJson(JSON_PRETTY_PRINT);
+        $variables = Variables::orderBy('ra', 'DESC')->paginate($count, ['*'], 'page', $pageNumber)->toJson(JSON_PRETTY_PRINT);
     	return response($variables, 200);
     }
 
@@ -59,6 +63,8 @@ class VariablesController extends ApiController
     public function leCoord($raBD, $decBD, $star, $segArco) {
     
     	
+    	try{
+    	
     	$sepRAUser = array();
     	$sepDECUser = array();
     
@@ -69,9 +75,10 @@ class VariablesController extends ApiController
     	$sepRAUser = explode(" ",$raBD);
     	$sepDECUser = explode(" ",$decBD);
     
-    	$sepRABD = explode(" ", $star->RAJ2000_RK);
-    	$sepDECBD = explode(" ",$star->DEJ2000_RK );
+    	$sepRABD = explode(" ", $star->ra);
+    	$sepDECBD = explode(" ",$star->dec );
     
+    	
     	//realizando o cálculo diferencial para RA
     	$difRA = abs(15 * (3600 * (int)($sepRAUser[0])
     			+ 60 * (int)($sepRAUser[1]) + (double)($sepRAUser[2]))
@@ -84,11 +91,20 @@ class VariablesController extends ApiController
     			- (3600 * (int)($sepDECBD[0])
     					+ 60 * (int)($sepDECBD[1]) + (double)($sepDECBD[2])));
     
-    	//armazenando o valor final da conta
-    	$difSec = sqrt(pow($difRA, 2) + pow($difDEC, 2));
     
     	
+    	//armazenando o valor final da conta
+    	$difSec = sqrt(pow($difRA, 2) + pow($difDEC, 2));
     	return ($difSec < $segArco);
+    	
+    	}
+    	catch(\Exception $e){
+    		$result['status'] = false;
+    		$result['message'] = 'Operation failed due to '. $e->getMessage();
+    	}
+    
+    	
+    	
     }
     
     public function searchByCoord(Request $request){
@@ -116,11 +132,15 @@ class VariablesController extends ApiController
 	    		
 	    		foreach($variables as $v){
 	    			
-	    		 if (strlen($v->RAJ2000_RK)>0 && strlen($v->DEJ2000_RK)){
+	    		 if (strlen($v->ra)>0 && strlen($v->dec)){
+	    		 	
 	    			if ($this->leCoord($ra, $dec, $v, $segArco)){
+	    				
 	    				
 	    					    				
 	    				$found[] = $v->id;
+	    				
+	    				
 	    			}
 	    		 }
 	    		}
@@ -164,7 +184,7 @@ class VariablesController extends ApiController
     
     		$variables = array();
     		if ($name)
-    			$variables = Variables::where('Name_RK','like','%'.$name.'%')->paginate($count, ['*'], 'page', $pageNumber)->toJson(JSON_PRETTY_PRINT);
+    			$variables = Variables::where('name','like','%'.$name.'%')->paginate($count, ['*'], 'page', $pageNumber)->toJson(JSON_PRETTY_PRINT);
     		
     		$result['data'] = $variables;
     		$result['status'] = true;
