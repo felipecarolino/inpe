@@ -10,6 +10,21 @@
 .search-variable-card {
     border: none;
 }
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.card-header h5{
+    margin: 0;
+}
+
+.card-header .nav-link{
+    padding: 0;
+}
+
 .search-variable-card-body {
     padding: 0;
 }

@@ -42,7 +42,7 @@ export default function FormRoles(props) {
             await api.post('roles', data);
             history.push('/user-management/roles');
         } catch (error) {
-            if (error.response.data.message === "Token has expired") {
+            if (error.response.data.message === "Token has expired" || error.response.data.message === "Token not provided") {
                 Logout();
             }
             setErrorsList([
@@ -59,7 +59,7 @@ export default function FormRoles(props) {
             await api.put('roles/' + props.id, data);
             history.push('/user-management/roles');
         } catch (error) {
-            if (error.response.data.message === "Token has expired") {
+            if (error.response.data.message === "Token has expired" || error.response.data.message === "Token not provided") {
                 Logout();
             }
             setErrorsList([

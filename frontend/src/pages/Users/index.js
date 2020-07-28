@@ -108,7 +108,6 @@ export default function UsersManagement() {
                         <Table striped bordered hover>
                             <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Name</th>
                                     <th>Username</th>
                                     <th>Email</th>
@@ -120,7 +119,6 @@ export default function UsersManagement() {
                                 {
                                     users.map((item, idx) => {
                                         return <tr key={item.id}>
-                                            <td>{item.id}</td>
                                             <td>{item.name}</td>
                                             <td>{item.username}</td>
                                             <td>{item.email}</td>

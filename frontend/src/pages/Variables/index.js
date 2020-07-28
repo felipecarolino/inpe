@@ -12,6 +12,7 @@ import IconView from './../../assets/img/eye.svg';
 import IconEdit from './../../assets/img/edit.svg';
 import IconDelete from './../../assets/img/trash.svg';
 import IconAdd from './../../assets/img/add.svg';
+import IconDownload from './../../assets/img/download.svg';
 
 import Pagination from "react-js-pagination";
 
@@ -119,16 +120,93 @@ export default function Variables() {
         );
     }
 
+    function convertToCSV(objArray) {
+        var array = typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
+        var str = '';
+
+        for (var i = 0; i < array.length; i++) {
+            var line = '';
+            for (var index in array[i]) {
+                if (line !== '') line += ','
+
+                line += array[i][index];
+            }
+
+            str += line + '\r\n';
+        }
+
+        return str;
+    }
+
+    function exportCSVFile(headers, items, fileTitle) {
+        if (headers) {
+            items.unshift(headers);
+        }
+
+        // Convert Object to JSON
+        var jsonObject = JSON.stringify(items);
+
+        var csv = convertToCSV(jsonObject);
+
+        var exportedFilenmae = fileTitle + '.csv' || 'export.csv';
+
+        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        if (navigator.msSaveBlob) { // IE 10+
+            navigator.msSaveBlob(blob, exportedFilenmae);
+        } else {
+            var link = document.createElement("a");
+            if (link.download !== undefined) { // feature detection
+                // Browsers that support HTML5 download attribute
+                var url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", exportedFilenmae);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+    }
+
+    var headers = {
+        name: 'Name', // remove commas to avoid errors
+        ra: "RA",
+        dec: "DEC",
+        per: "Orb_per",
+        simbad: "SIMBAD",
+        ads: "ADS"
+    };
+
+    var itemsFormatted = [];
+
+    variables.forEach((item) => {
+        itemsFormatted.push({
+            name: item.name.replace(/,/g, ''), // remove commas to avoid errors,
+            ra: item.ra,
+            dec: item.dec,
+            per: item.per,
+            simbad: `http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${item.name}`,
+            ads: `https://ui.adsabs.harvard.edu/search/q=object:${item.name}`
+        });
+    });
+
     return (
         <div className="variables">
             <Card className="variables-card">
                 <Card.Header>
                     <h5>Cataclysmic Variables List</h5>
-                    {isAuthenticated()
-                        ?
-                        <Link to="/cataclysmic-variables/variables/create" className="nav-link">
-                            <img src={IconAdd} alt="Add Icon" className="iconAdd" />
-                        </Link> : null}
+                    <div className="header-icons">
+                        {isAuthenticated()
+                            ?
+                            <Link to="/cataclysmic-variables/variables/create" className="nav-link">
+                                <img src={IconAdd} alt="Add Icon" className="iconAdd" />
+                            </Link> : null}
+
+                            <Link to="#" className="nav-link">
+                                <img width="24px" src={IconDownload} onClick={() => exportCSVFile(headers, itemsFormatted, 'Variables')} alt="Download Icon" className="iconDownload" />
+                            </Link>
+
+                    </div>
                 </Card.Header>
                 <Card.Body className="variables-card-body">
                     <div className="variables-table">

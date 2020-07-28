@@ -58,7 +58,7 @@ export default function FormUsers(props) {
             await api.post('users', data);
             history.push('/user-management/users');
         } catch (error) {
-            if (error.response.data.message === "Token has expired") {
+            if (error.response.data.message === "Token has expired" || error.response.data.message === "Token not provided") {
                 Logout();
             }
             setErrorsList([
@@ -91,7 +91,7 @@ export default function FormUsers(props) {
             await api.put('users/' + props.id, data);
             history.push('/user-management/users');
         } catch (error) {
-            if (error.response.data.message === "Token has expired") {
+            if (error.response.data.message === "Token has expired" || error.response.data.message === "Token not provided") {
                 Logout();
             }
             setErrorsList([

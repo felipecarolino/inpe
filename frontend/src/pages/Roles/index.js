@@ -132,7 +132,6 @@ export default function Roles() {
                         <Table striped bordered hover>
                             <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Name</th>
                                     <th>Description</th>
                                     <th>Actions</th>
@@ -142,7 +141,6 @@ export default function Roles() {
                                 {
                                     roles.map((item, idx) => {
                                         return <tr key={item.id}>
-                                            <td>{item.id}</td>
                                             <td>{item.name}</td>
                                             <td>{item.description}</td>
                                             <td>

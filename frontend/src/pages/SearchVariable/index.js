@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import FormSearch from './form';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import Pagination from "react-js-pagination";
+import IconDownload from './../../assets/img/download.svg';
 import './style.css';
 
 export default function SearchVariable(props) {
 
     const [variable, setVariable] = useState([]);
     const [showTable, setShowTable] = useState(false);
+    const [showHeader, setShowHeader] = useState("hidden")
 
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
@@ -22,11 +25,15 @@ export default function SearchVariable(props) {
 
     useEffect(() => {
         setShowTable(true);
+        if (variable.length > 0){
+            setShowHeader("block");
+        }
     }, [variable])
 
     useEffect(() => {
         setVariable([]);
         setShowTable(false);
+        setShowHeader("hidden");
         setTotalItems(0);
         setCurrentPage(1);
         setTotalPageItems(1);
@@ -35,6 +42,76 @@ export default function SearchVariable(props) {
     function handlePageChange(pageNumber) {
         setCurrentPage(pageNumber);
     }
+
+    function convertToCSV(objArray) {
+        var array = typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
+        var str = '';
+
+        for (var i = 0; i < array.length; i++) {
+            var line = '';
+            for (var index in array[i]) {
+                if (line !== '') line += ','
+
+                line += array[i][index];
+            }
+
+            str += line + '\r\n';
+        }
+
+        return str;
+    }
+
+    function exportCSVFile(headers, items, fileTitle) {
+        if (headers) {
+            items.unshift(headers);
+        }
+
+        // Convert Object to JSON
+        var jsonObject = JSON.stringify(items);
+
+        var csv = convertToCSV(jsonObject);
+
+        var exportedFilenmae = fileTitle + '.csv' || 'export.csv';
+
+        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        if (navigator.msSaveBlob) { // IE 10+
+            navigator.msSaveBlob(blob, exportedFilenmae);
+        } else {
+            var link = document.createElement("a");
+            if (link.download !== undefined) { // feature detection
+                // Browsers that support HTML5 download attribute
+                var url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", exportedFilenmae);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+    }
+
+    var headers = {
+        name: 'Name', // remove commas to avoid errors
+        ra: "RA",
+        dec: "DEC",
+        per: "Orb_per",
+        simbad: "SIMBAD",
+        ads: "ADS"
+    };
+
+    var itemsFormatted = [];
+
+    variable.forEach((item) => {
+        itemsFormatted.push({
+            name: item.name.replace(/,/g, ''), // remove commas to avoid errors,
+            ra: item.ra,
+            dec: item.dec,
+            per: item.per,
+            simbad: `http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${item.name}`,
+            ads: `https://ui.adsabs.harvard.edu/search/q=object:${item.name}`
+        });
+    });
 
     return (
         <div className="search-variable">
@@ -49,6 +126,14 @@ export default function SearchVariable(props) {
             {showTable ?
                 <>
                     <Card className="search-variable-card">
+                        <div className={showHeader}>
+                        <Card.Header>
+                            <h5>Search Results</h5>
+                            <Link to="#" className="nav-link">
+                                <img width="24px" src={IconDownload} onClick={() => exportCSVFile(headers, itemsFormatted, 'Variables')} alt="Download Icon" className="iconDownload" />
+                            </Link>
+                        </Card.Header>
+                        </div>
                         <Card.Body className="search-variable-card-body">
                             <div className="search-variable-table">
                                 {
