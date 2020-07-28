@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 */
 class Variables extends Model
 {
-    protected $fillable = ['Name_RK','RAJ2000_RK','DEJ2000_RK'];
+    protected $fillable = ['name','ra','dec','per'];
     protected $hidden = [];
     
     use SoftDeletes;
