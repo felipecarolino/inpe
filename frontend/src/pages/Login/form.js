@@ -28,9 +28,19 @@ export default function LoginForm() {
     async function signIn(data) {
         try {
             const result = await api.post('user/login', data);
-            login(result.data.data.auth_token, result.data.data.id, result.data.data.email, result.data.data.name);
-            getUser(result.data.data.id);
-            history.push('/cataclysmic-variables/variables');
+            if(result.data.success) {
+                login(result.data.data.auth_token, result.data.data.id, result.data.data.email, result.data.data.name);
+                getUser(result.data.data.id);
+                history.push('/cataclysmic-variables/variables');
+            }
+            else {
+                setErrorsList([
+                    {
+                        "id": 3, "message": result.data.message,
+                    }
+                ]);
+                setClassErros("block");
+            }
 
         } catch (error) {
             setErrorsList([
