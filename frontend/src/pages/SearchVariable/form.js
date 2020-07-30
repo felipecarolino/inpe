@@ -89,6 +89,38 @@ export default function FormSearch(props) {
         }
     }
 
+    async function getAllByName(data) {
+        let itemsFormatted = [];
+        const result = await api.post('variables/searchByName', data);
+        result.data.data.forEach((item) => {
+            itemsFormatted.push({
+                name: item.name.replace(/,/g, ''), // remove commas to avoid errors,
+                ra: item.ra,
+                dec: item.dec,
+                per: item.per,
+                simbad: `http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${item.name}`,
+                ads: `https://ui.adsabs.harvard.edu/search/q=object:${item.name}`
+            });
+        });
+        props.catalog(itemsFormatted);
+    };
+
+    async function getAllByCoord(data) {
+        let itemsFormatted = [];
+        const result = await api.post('variables/searchByCoord', data);
+        result.data.data.forEach((item) => {
+            itemsFormatted.push({
+                name: item.name.replace(/,/g, ''), // remove commas to avoid errors,
+                ra: item.ra,
+                dec: item.dec,
+                per: item.per,
+                simbad: `http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${item.name}`,
+                ads: `https://ui.adsabs.harvard.edu/search/q=object:${item.name}`
+            });
+        });
+        props.catalog(itemsFormatted);
+    };
+
     const formValidation = (e) => {
 
         let errors = [];
@@ -139,6 +171,7 @@ export default function FormSearch(props) {
                     name
                 };
                 searchName(data);
+                getAllByName(data);
             }
             else {
                 const data = {
@@ -147,6 +180,7 @@ export default function FormSearch(props) {
                     arcosec
                 };
                 searchCoordinates(data);
+                getAllByCoord(data);
             }
         }
 

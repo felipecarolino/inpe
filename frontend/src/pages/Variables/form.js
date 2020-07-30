@@ -45,10 +45,6 @@ export default function FormVariables(props) {
             await api.post('variables', data);
             history.push('/cataclysmic-variables/variables');
         } catch (error) {
-            console.log(error.response)
-            if (error.response.data.message === "Token has expired" || error.response.data.message === "Token not provided" ) {
-                Logout();
-            }
             setErrorsList([
                 {
                     "id": 5, "message": "Error to create new variable"
@@ -67,9 +63,6 @@ export default function FormVariables(props) {
             await api.put('variables/' + props.id, data);
             history.push('/cataclysmic-variables/variables');
         } catch (error) {
-            if (error.response.data.message === "Token has expired" || error.response.data.message === "Token not provided") {
-                Logout();
-            }
             setErrorsList([
                 ...errorsList,
                 {

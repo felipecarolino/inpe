@@ -10,6 +10,7 @@ import './style.css';
 export default function SearchVariable(props) {
 
     const [variable, setVariable] = useState([]);
+    const [catalog, setCatalog] = useState([]);
     const [showTable, setShowTable] = useState(false);
     const [showHeader, setShowHeader] = useState("hidden")
 
@@ -61,7 +62,17 @@ export default function SearchVariable(props) {
         return str;
     }
 
-    function exportCSVFile(headers, items, fileTitle) {
+    function exportCSVFile(items, fileTitle) {
+
+        let headers = {
+            name: 'Name', // remove commas to avoid errors
+            ra: "RA",
+            dec: "DEC",
+            per: "Orb_per",
+            simbad: "SIMBAD",
+            ads: "ADS"
+        };
+
         if (headers) {
             items.unshift(headers);
         }
@@ -91,28 +102,6 @@ export default function SearchVariable(props) {
         }
     }
 
-    var headers = {
-        name: 'Name', // remove commas to avoid errors
-        ra: "RA",
-        dec: "DEC",
-        per: "Orb_per",
-        simbad: "SIMBAD",
-        ads: "ADS"
-    };
-
-    var itemsFormatted = [];
-
-    variable.forEach((item) => {
-        itemsFormatted.push({
-            name: item.name.replace(/,/g, ''), // remove commas to avoid errors,
-            ra: item.ra,
-            dec: item.dec,
-            per: item.per,
-            simbad: `http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${item.name}`,
-            ads: `https://ui.adsabs.harvard.edu/search/q=object:${item.name}`
-        });
-    });
-
     return (
         <div className="search-variable">
             <FormSearch
@@ -121,6 +110,7 @@ export default function SearchVariable(props) {
                 showTable={(show) => setShowTable(show)}
                 currentPage={currentPage}
                 pagination={setPage}
+                catalog={(variables) => setCatalog(variables)}
             />
 
             {showTable ?
@@ -130,7 +120,7 @@ export default function SearchVariable(props) {
                         <Card.Header>
                             <h5>Search Results</h5>
                             <Link to="#" className="nav-link">
-                                <img width="24px" src={IconDownload} onClick={() => exportCSVFile(headers, itemsFormatted, 'Variables')} alt="Download Icon" className="iconDownload" />
+                                <img width="24px" src={IconDownload} onClick={() => exportCSVFile(catalog, 'Variables')} alt="Download Icon" className="iconDownload" />
                             </Link>
                         </Card.Header>
                         </div>

@@ -1,4 +1,10 @@
+import api from './api';
+
 export const TOKEN_KEY = "inpe";
+
+function refreshPage() {
+  window.location.reload(false);
+}
 
 export const isAuthenticated = () => localStorage.getItem(TOKEN_KEY) !== null;
 
@@ -11,10 +17,6 @@ export const login = (token, id, email, name) => {
   localStorage.setItem("name", name);
 };
 
-function refreshPage() {
-  window.location.reload(false);
-}
-
 export const logout = () => {
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem("id");
@@ -23,3 +25,15 @@ export const logout = () => {
   localStorage.removeItem("user");
   refreshPage();
 };
+
+export async function validateToken() {
+  const config = { headers: { Authorization: `Bearer ${getToken()}` } }
+  const result = await api.post('checkToken', config);
+  console.log(result.data)
+  if(result.data.message === "Token valid!") {
+    return true;
+  }
+  else {
+    return false;
+  }
+}

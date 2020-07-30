@@ -17,7 +17,7 @@ import IconDownload from './../../assets/img/download.svg';
 import Pagination from "react-js-pagination";
 
 import { isAuthenticated } from "./../../services/auth";
-import { logout } from "../../services/auth";
+import { logout, getToken } from "../../services/auth";
 
 import './style.css';
 
@@ -51,6 +51,22 @@ export default function Variables() {
     useEffect(() => {
         GetVariables(currentPage);
     }, [currentPage]);
+
+    async function getAll() {
+        let itemsFormatted = [];
+        const result = await api.get('variables');
+        result.data.data.forEach((item) => {
+            itemsFormatted.push({
+                name: item.name.replace(/,/g, ''), // remove commas to avoid errors,
+                ra: item.ra,
+                dec: item.dec,
+                per: item.per,
+                simbad: `http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${item.name}`,
+                ads: `https://ui.adsabs.harvard.edu/search/q=object:${item.name}`
+            });
+        });
+        return itemsFormatted;
+    };
 
     async function deleteVariable() {
         try {
@@ -138,7 +154,18 @@ export default function Variables() {
         return str;
     }
 
-    function exportCSVFile(headers, items, fileTitle) {
+    async function exportCSVFile(fileTitle) {
+        let items = await getAll();
+
+        let headers = {
+            name: 'Name', // remove commas to avoid errors
+            ra: "RA",
+            dec: "DEC",
+            per: "Orb_per",
+            simbad: "SIMBAD",
+            ads: "ADS"
+        };
+
         if (headers) {
             items.unshift(headers);
         }
@@ -168,28 +195,6 @@ export default function Variables() {
         }
     }
 
-    var headers = {
-        name: 'Name', // remove commas to avoid errors
-        ra: "RA",
-        dec: "DEC",
-        per: "Orb_per",
-        simbad: "SIMBAD",
-        ads: "ADS"
-    };
-
-    var itemsFormatted = [];
-
-    variables.forEach((item) => {
-        itemsFormatted.push({
-            name: item.name.replace(/,/g, ''), // remove commas to avoid errors,
-            ra: item.ra,
-            dec: item.dec,
-            per: item.per,
-            simbad: `http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${item.name}`,
-            ads: `https://ui.adsabs.harvard.edu/search/q=object:${item.name}`
-        });
-    });
-
     return (
         <div className="variables">
             <Card className="variables-card">
@@ -202,9 +207,9 @@ export default function Variables() {
                                 <img src={IconAdd} alt="Add Icon" className="iconAdd" />
                             </Link> : null}
 
-                            <Link to="#" className="nav-link">
-                                <img width="24px" src={IconDownload} onClick={() => exportCSVFile(headers, itemsFormatted, 'Variables')} alt="Download Icon" className="iconDownload" />
-                            </Link>
+                        <Link to="#" className="nav-link">
+                            <img width="24px" src={IconDownload} onClick={() => exportCSVFile('Variables')} alt="Download Icon" className="iconDownload" />
+                        </Link>
 
                     </div>
                 </Card.Header>
