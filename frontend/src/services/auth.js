@@ -1,5 +1,3 @@
-import api from './api';
-
 export const TOKEN_KEY = "inpe";
 
 function refreshPage() {
@@ -25,15 +23,3 @@ export const logout = () => {
   localStorage.removeItem("user");
   refreshPage();
 };
-
-export async function validateToken() {
-  const config = { headers: { Authorization: `Bearer ${getToken()}` } }
-  const result = await api.post('checkToken', config);
-  console.log(result.data)
-  if(result.data.message === "Token valid!") {
-    return true;
-  }
-  else {
-    return false;
-  }
-}
