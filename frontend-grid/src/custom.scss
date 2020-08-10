@@ -1,0 +1,15 @@
+// change the theme
+$theme-colors: (
+  "primary": #0E4097
+);
+
+html, body {
+  height: 100%;
+}
+
+#root {
+  min-height: 100%;
+}
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
