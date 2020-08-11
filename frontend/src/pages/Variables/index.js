@@ -17,7 +17,7 @@ import IconDownload from './../../assets/img/download.svg';
 import Pagination from "react-js-pagination";
 
 import { isAuthenticated } from "./../../services/auth";
-import { logout, getToken } from "../../services/auth";
+import { logout } from "../../services/auth";
 
 import './style.css';
 

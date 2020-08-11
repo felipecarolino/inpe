@@ -1,0 +1,50 @@
+.public-submissions{
+    display: flex;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.public-submissions-card{
+    margin: 15px auto;
+    width: 50%;
+    display: flex;
+}
+
+.public-submissions-card .card-header{
+    justify-content: space-between;
+}
+
+.public-submissions-card-body{
+    padding: 0;
+    margin-top: 10px;
+}
+
+form {
+    padding-right: 25px;
+    padding-bottom: 20px;
+}
+
+.form-group {
+    width: 100%;
+}
+
+
+@media only screen and (max-width: 576px){
+    form{
+        padding-left: 0;
+    }
+
+    .form-group{
+        width: 100%;
+    }
+
+    .public-submissions{
+        margin: 0;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .public-submissions-card .card-header{
+        padding: 10px 0;
+    }
+}
