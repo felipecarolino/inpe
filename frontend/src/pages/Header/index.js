@@ -45,6 +45,7 @@ export default function Header() {
                     {isAuthenticated() ? <Link to="/user-management" className="nav-link">User Management</Link> : null}
                             <Link to="/cataclysmic-variables" className="nav-link">Cataclysmic Variables</Link>
                             <Link to="/submissions" className="nav-link">Submissions</Link>
+                            {isAuthenticated() ? <Link to="/management-submissions" className="nav-link">Management Submissions</Link> : null}
                             <Link to="/documentation" className="nav-link">Documentation</Link>
                     </Nav>
                     <Nav>
