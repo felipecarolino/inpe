@@ -124,7 +124,7 @@ export default function Variables() {
                 <Card.Header>
                     <h5>Submissions List</h5>
                     <div className="header-icons">
-                        <Link to="/cataclysmic-variables/variables/create" className="nav-link">
+                        <Link to="/management-submissions/submissions/create" className="nav-link">
                             <img src={IconAdd} alt="Add Icon" className="iconAdd" />
                         </Link>
                     </div>
@@ -150,10 +150,10 @@ export default function Variables() {
                                             <td>{item.dec}</td>
                                             <td>{item.per}</td>
                                             <td>
-                                                <Link to={{ pathname: `/cataclysmic-variables/variables/view/${item.id}` }} className="nav-link">
+                                                <Link to={{ pathname: `/management-submissions/submissions/view/${item.id}` }} className="nav-link">
                                                     <img src={IconView} alt="View Icon" className="iconView" />
                                                 </Link>
-                                                <Link to={{ pathname: `/cataclysmic-variables/variables/edit/${item.id}` }} className="nav-link">
+                                                <Link to={{ pathname: `/management-submissions/submissions/edit/${item.id}` }} className="nav-link">
                                                     <img src={IconEdit} alt="Edit Icon" className="iconEdit" />
                                                 </Link>
                                                 <img

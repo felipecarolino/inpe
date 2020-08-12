@@ -155,7 +155,7 @@ form{
 }
 
 /* Component Create */
-.create-variable{
+.create-submission{
     display: flex;
     max-width: 1000px;
     margin-left: 30px;
@@ -163,29 +163,30 @@ form{
     box-sizing: border-box;
 }
 
-.create-variable-card{
+.create-submission-card{
     display: flex;
     flex: 1;
     border: none;
 }
 
-.create-variable-card .card-header{
+.create-submission-card .card-header{
     display: flex;
+    justify-content: flex-start;
 }
 
 .iconBack{
     margin-right: 15px;
 }
 
-.create-variable-card .card-header h5{
+.create-submission-card .card-header h5{
     margin: 0;
 }
 
-.create-variable-card .card-header .nav-link{
+.create-submission-card .card-header .nav-link{
     padding: 0;
 }
 
-.create-variable-card-body{
+.create-submission-card-body{
     padding: 0;
     margin-top: 10px;
 }
