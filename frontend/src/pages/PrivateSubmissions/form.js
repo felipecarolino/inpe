@@ -18,6 +18,7 @@ export default function FormVariables(props) {
     const [ra, setRa] = useState('');
     const [dec, setDec] = useState('');
     const [per, setPer] = useState('');
+    const [observations, setObservations] = useState('');
     const [id, setId] = useState(props.id);
 
     const Logout = () => {
@@ -28,29 +29,30 @@ export default function FormVariables(props) {
     useEffect(() => {
 
         if (props.id) {
-            const GetVariable = async () => {
-                const result = await api.get('variables/' + props.id);
+            const getSubmission = async () => {
+                const result = await api.get('submissions/' + props.id);
                 setName(result.data.data.name);
                 setRa(result.data.data.ra);
                 setDec(result.data.data.dec);
                 setPer(result.data.data.per);
+                setObservations(result.data.data.observations);
                 setId(props.id);
             };
-            GetVariable();
+            getSubmission();
         }
     }, [props.id]);
 
     async function create(data) {
         try {
-            await api.post('variables', data);
-            history.push('/cataclysmic-variables/variables');
+            await api.post('submissions', data);
+            history.push('/management-submissions/submissions');
         } catch (error) {
             if (error.response.data.message === "Token has expired" || error.response.data.message === "Token not provided") {
                 Logout();
             }
             setErrorsList([
                 {
-                    "id": 5, "message": "Error to create new variable"
+                    "id": 5, "message": "Error to create new submission"
                 },
                 error.response.data.errors.name ?
                     {
@@ -63,8 +65,8 @@ export default function FormVariables(props) {
 
     async function edit(data) {
         try {
-            await api.put('variables/' + props.id, data);
-            history.push('/cataclysmic-variables/variables');
+            await api.put('submissions/' + props.id, data);
+            history.push('/management-submissions/submissions');
         } catch (error) {
             if (error.response.data.message === "Token has expired" || error.response.data.message === "Token not provided") {
                 Logout();
@@ -72,7 +74,7 @@ export default function FormVariables(props) {
             setErrorsList([
                 ...errorsList,
                 {
-                    "id": 7, "message": "Error to edit variable"
+                    "id": 7, "message": "Error to edit submission"
                 }
             ]);
         }
@@ -118,7 +120,8 @@ export default function FormVariables(props) {
                 name,
                 ra,
                 dec,
-                per
+                per,
+                observations
             };
 
             if (id) {
@@ -190,6 +193,13 @@ export default function FormVariables(props) {
                             value={per}
                             onChange={(e) => setPer(e.target.value)}
                             placeholder="0.000000" />
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group controlId="variableObservations">
+                        <Form.Label>Observations</Form.Label>
+                        <Form.Control as="textarea" rows="3"
+                        onChange={(e) => setObservations(e.target.value)} />
                     </Form.Group>
                 </Form.Row>
                 <Button type="submit">Save</Button>

@@ -15,7 +15,7 @@ export default function Sidebar() {
                     drop="down"
                     title="Search"
                     variant="secondary" >
-                    <Link to="/management-submissions/search/name" className="nav-link">by Name</Link>
+                    <Link to="/management-submissions/search/id" className="nav-link">by ID</Link>
                 </DropdownButton>
             </Nav>
         </div>

@@ -1,4 +1,4 @@
-/* Component Variables */
+/* Component submissions */
 .submissions{
     display: flex;
     max-width: 1000px;
@@ -86,7 +86,7 @@
     background-color: #ddd;
 }
 
-.variables-table .table{
+.submissions-table .table{
     margin-bottom: 0;
 }
 
@@ -106,7 +106,7 @@ td a.nav-link{
 }
 
 /* Component View */
-.view-variable{
+.view-submission{
     display: flex;
     max-width: 1000px;
     margin-left: 30px;
@@ -114,13 +114,13 @@ td a.nav-link{
     box-sizing: border-box;
 }
 
-.view-variable-card{
+.view-submission-card{
     display: flex;
     flex: 1;
     border: none;
 }
 
-.view-variable-card .card-header{
+.view-submission-card .card-header{
     display: flex;
 }
 
@@ -128,15 +128,15 @@ td a.nav-link{
     margin-right: 15px;
 }
 
-.view-variable-card .card-header h5{
+.view-submission-card .card-header h5{
     margin: 0;
 }
 
-.view-variable-card .card-header .nav-link{
+.view-submission-card .card-header .nav-link{
     padding: 0;
 }
 
-.view-variable-card-body{
+.view-submission-card-body{
     padding: 0;
     margin-top: 10px;
 }
@@ -192,7 +192,7 @@ form{
 }
 
 /* Component Edit */
-.edit-variable{
+.edit-submission{
     display: flex;
     max-width: 1000px;
     margin-left: 30px;
@@ -200,13 +200,13 @@ form{
     box-sizing: border-box;
 }
 
-.edit-variable-card{
+.edit-submission-card{
     display: flex;
     flex: 1;
     border: none;
 }
 
-.edit-variable-card .card-header{
+.edit-submission-card .card-header{
     display: flex;
 }
 
@@ -214,41 +214,41 @@ form{
     margin-right: 15px;
 }
 
-.edit-variable-card .card-header h5{
+.edit-submission-card .card-header h5{
     margin: 0;
 }
 
-.edit-variable-card .card-header .nav-link{
+.edit-submission-card .card-header .nav-link{
     padding: 0;
 }
 
-.edit-variable-card-body{
+.edit-submission-card-body{
     padding: 0;
     margin-top: 10px;
 }
 
 
 @media only screen and (max-width: 576px){
-    /* Component Variables */
-    .variables{
+    /* Component submissions */
+    .submissions{
         margin: 0;
         padding: 10px;
         width: 100%;
     }
 
-    .variables-card .card-header{
+    .submissions-card .card-header{
         padding: 10px 0;
     }
 
-    .variables-table .table thead tr{
+    .submissions-table .table thead tr{
         text-align: center;
     }
 
-    .variables-table .table thead th {
+    .submissions-table .table thead th {
         padding: 6px;
     }
 
-    .variables-table .table td {
+    .submissions-table .table td {
         padding: 6px;
         text-align: center;
     }
@@ -258,13 +258,13 @@ form{
     }
 
     /* Component View */
-    .view-variable{
+    .view-submission{
         margin: 0;
         padding: 10px;
         width: 100%;
     }
 
-    .view-variable-card .card-header{
+    .view-submission-card .card-header{
         padding: 10px 0;
     }
 
@@ -278,24 +278,24 @@ form{
     }
 
     /* Component Create */
-    .create-variable{
+    .create-submission{
         margin: 0;
         padding: 10px;
         width: 100%;
     }
 
-    .create-variable-card .card-header{
+    .create-submission-card .card-header{
         padding: 10px 0;
     }
 
     /* Component Edit */
-    .edit-variable{
+    .edit-submission{
         margin: 0;
         padding: 10px;
         width: 100%;
     }
 
-    .edit-variable-card .card-header{
+    .edit-submission-card .card-header{
         padding: 10px 0;
     }
 }

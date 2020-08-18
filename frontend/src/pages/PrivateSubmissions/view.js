@@ -11,51 +11,55 @@ import './style.css';
 
 export default function View(props) {
 
-    const [variable, setVariable] = useState([]);
+    const [submission, setSubmission] = useState([]);
     const [name, setName] = useState('');
 
     useEffect(() => {
-        const GetVariable = async () => {
-            const result = await api.get('variables/' + props.match.params.id);
-            setVariable(result.data.data);
+        const getSubmission = async () => {
+            const result = await api.get('submissions/' + props.match.params.id);
+            setSubmission(result.data.data);
             setName(result.data.data.name);
         };
-        GetVariable();
+        getSubmission();
 
     }, [props.match.params.id]);
 
     return (
-        <div className="view-variable">
-            <Card className="view-variable-card">
+        <div className="view-submission">
+            <Card className="view-submission-card">
                 <Card.Header>
-                    <Link to="/cataclysmic-variables/variables" className="nav-link">
+                    <Link to="/management-submissions/submissions" className="nav-link">
                         <img src={IconBack} alt="Back Icon" className="iconBack" />
                     </Link>
-                    <h5>View Cataclysmic Variable</h5>
+                    <h5>View Submission</h5>
                 </Card.Header>
-                <Card.Body className="view-variable-card-body">
-                    <div className="view-variable-table">
+                <Card.Body className="view-submission-card-body">
+                    <div className="view-submission-table">
                         <Table striped bordered hover>
                             <tbody>
                                 <tr >
                                     <th className="w-25">ID</th>
-                                    <td>{variable.id}</td>
+                                    <td>{submission.id}</td>
                                 </tr>
                                 <tr >
                                     <th className="w-25">Name</th>
-                                    <td>{variable.name}</td>
+                                    <td>{submission.name}</td>
                                 </tr>
                                 <tr>
                                     <th className="w-25">RA</th>
-                                    <td>{variable.ra}</td>
+                                    <td>{submission.ra}</td>
                                 </tr>
                                 <tr>
                                     <th className="w-25">DEC</th>
-                                    <td>{variable.dec}</td>
+                                    <td>{submission.dec}</td>
                                 </tr>
                                 <tr>
                                     <th className="w-25">Orb_Per</th>
-                                    <td>{variable.per}</td>
+                                    <td>{submission.per}</td>
+                                </tr>
+                                <tr>
+                                    <th className="w-25">Observations</th>
+                                    <td>{submission.observations}</td>
                                 </tr>
                                 <tr>
                                     <th className="w-25">SIMBAD</th>
