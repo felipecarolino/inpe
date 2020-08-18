@@ -14,11 +14,21 @@ export default function PublicSubmissionsForm() {
     const [ra, setRa] = useState('');
     const [dec, setDec] = useState('');
     const [per, setPer] = useState('');
+    const [observations, setObservations] = useState('');
 
+    const [successAlert, setSuccessAlert] = useState("hidden");
+    const [successMessage, setSuccessMessage] = useState("");
 
     async function create(data) {
         try {
             await api.post('submissions', data);
+            setSuccessMessage("submission successfully sent!");
+            setSuccessAlert("block");
+            setTimeout(() => setSuccessAlert("hidden"),3000);
+            setName('');
+            setRa('');
+            setDec('');
+            setPer('');
         } catch (error) {
             setErrorsList([
                 {
@@ -70,10 +80,13 @@ export default function PublicSubmissionsForm() {
 
         if (formValidation(e)) {
             const data = {
-                name,
-                ra,
-                dec,
-                per
+                first_name: name,
+                last_name: name,
+                email: name,
+                institution: name,
+                department: name,
+                position: name,
+                observations
             };
 
             create(data);
@@ -86,6 +99,10 @@ export default function PublicSubmissionsForm() {
                 {[...errorsList].map((item) => (
                     <span key={item.id}>{item.message} <br /></span>
                 ))}
+            </div>
+
+            <div className={"alert alert-success " + successAlert} >
+                    <span>{successMessage} <br /></span>
             </div>
 
             <Form onSubmit={handleSave}>
@@ -139,6 +156,13 @@ export default function PublicSubmissionsForm() {
                             value={per}
                             onChange={(e) => setPer(e.target.value)}
                             placeholder="0.000000" />
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group controlId="variableObservations">
+                        <Form.Label>Observations</Form.Label>
+                        <Form.Control as="textarea" rows="3"
+                        onChange={(e) => setObservations(e.target.value)} />
                     </Form.Group>
                 </Form.Row>
                 <Form.Group>
