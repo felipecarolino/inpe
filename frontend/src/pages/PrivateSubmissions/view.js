@@ -12,13 +12,11 @@ import './style.css';
 export default function View(props) {
 
     const [submission, setSubmission] = useState([]);
-    const [name, setName] = useState('');
 
     useEffect(() => {
         const getSubmission = async () => {
             const result = await api.get('submissions/' + props.match.params.id);
             setSubmission(result.data.data);
-            setName(result.data.data.name);
         };
         getSubmission();
 
@@ -38,48 +36,36 @@ export default function View(props) {
                         <Table striped bordered hover>
                             <tbody>
                                 <tr >
-                                    <th className="w-25">ID</th>
+                                    <th>ID</th>
                                     <td>{submission.id}</td>
                                 </tr>
                                 <tr >
-                                    <th className="w-25">Name</th>
-                                    <td>{submission.name}</td>
+                                    <th>First Name</th>
+                                    <td>{submission.first_name}</td>
                                 </tr>
                                 <tr>
-                                    <th className="w-25">RA</th>
-                                    <td>{submission.ra}</td>
+                                    <th>Last Name</th>
+                                    <td>{submission.last_name}</td>
                                 </tr>
                                 <tr>
-                                    <th className="w-25">DEC</th>
-                                    <td>{submission.dec}</td>
+                                    <th>Email</th>
+                                    <td>{submission.email}</td>
                                 </tr>
                                 <tr>
-                                    <th className="w-25">Orb_Per</th>
-                                    <td>{submission.per}</td>
+                                    <th>Institution</th>
+                                    <td>{submission.institution}</td>
                                 </tr>
                                 <tr>
-                                    <th className="w-25">Observations</th>
+                                    <th>Department</th>
+                                    <td>{submission.department}</td>
+                                </tr>
+                                <tr>
+                                    <th>Position</th>
+                                    <td>{submission.position}</td>
+                                </tr>
+                                <tr>
+                                    <th>Observations</th>
                                     <td>{submission.observations}</td>
-                                </tr>
-                                <tr>
-                                    <th className="w-25">SIMBAD</th>
-                                    <td>
-                                        <a href={`http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${name}`}
-                                            target="_blank"
-                                            rel="noopener noreferrer">
-                                            View object in SIMBAD
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th className="w-25">ADS</th>
-                                    <td>
-                                        <a href={`https://ui.adsabs.harvard.edu/search/q=object:${name}`}
-                                            target="_blank"
-                                            rel="noopener noreferrer">
-                                            View object in ADS
-                                        </a>
-                                    </td>
                                 </tr>
                             </tbody>
                         </Table>

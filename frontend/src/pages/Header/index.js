@@ -44,8 +44,9 @@ export default function Header() {
                     <Nav className="mr-auto">
                     {isAuthenticated() ? <Link to="/user-management" className="nav-link">User Management</Link> : null}
                             <Link to="/cataclysmic-variables" className="nav-link">Cataclysmic Variables</Link>
-                            <Link to="/submissions" className="nav-link">Submissions</Link>
-                            {isAuthenticated() ? <Link to="/management-submissions" className="nav-link">Management Submissions</Link> : null}
+                            {isAuthenticated() ? <Link to="/management-submissions" className="nav-link">Management Submissions</Link>
+                                :
+                            <Link to="/submissions" className="nav-link">Submissions</Link>}
                             <Link to="/documentation" className="nav-link">Documentation</Link>
                     </Nav>
                     <Nav>

@@ -134,10 +134,12 @@ export default function Variables() {
                         <Table striped bordered hover>
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>RA</th>
-                                    <th>DEC</th>
-                                    <th>Orb_Per</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                    <th>Institution</th>
+                                    <th>Department</th>
+                                    <th>Position</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -145,10 +147,12 @@ export default function Variables() {
                                 {
                                     submissions.map((item, idx) => {
                                         return <tr key={item.id}>
-                                            <td>{item.name}</td>
-                                            <td>{item.ra}</td>
-                                            <td>{item.dec}</td>
-                                            <td>{item.per}</td>
+                                            <td>{item.first_name}</td>
+                                            <td>{item.last_name}</td>
+                                            <td>{item.email}</td>
+                                            <td>{item.institution}</td>
+                                            <td>{item.department}</td>
+                                            <td>{item.position}</td>
                                             <td>
                                                 <Link to={{ pathname: `/management-submissions/submissions/view/${item.id}` }} className="nav-link">
                                                     <img src={IconView} alt="View Icon" className="iconView" />

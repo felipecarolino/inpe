@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import InputMask from 'react-input-mask';
 
 import api from '../../services/api';
 
@@ -10,10 +9,12 @@ export default function PublicSubmissionsForm() {
 
     const [errorsList, setErrorsList] = useState([]);
     const [classErrors, setClassErros] = useState("hidden")
-    const [name, setName] = useState('');
-    const [ra, setRa] = useState('');
-    const [dec, setDec] = useState('');
-    const [per, setPer] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [institution, setInstitution] = useState('');
+    const [department, setDepartment] = useState('');
+    const [position, setPosition] = useState('');
     const [observations, setObservations] = useState('');
 
     const [successAlert, setSuccessAlert] = useState("hidden");
@@ -25,18 +26,21 @@ export default function PublicSubmissionsForm() {
             setSuccessMessage("submission successfully sent!");
             setSuccessAlert("block");
             setTimeout(() => setSuccessAlert("hidden"),3000);
-            setName('');
-            setRa('');
-            setDec('');
-            setPer('');
+            setFirstName('');
+            setLastName('');
+            setEmail('');
+            setInstitution('');
+            setDepartment('');
+            setPosition('');
+            setObservations('');
         } catch (error) {
             setErrorsList([
                 {
-                    "id": 5, "message": "Error to submit new variable"
+                    "id": 7, "message": "Error to submit new submission"
                 },
                 error.response.data.errors.name ?
                     {
-                        "id": 6, "message": error.response.data.errors.name
+                        "id": 8, "message": error.response.data.errors.name
                     } : {}
             ]);
             setClassErros("block");
@@ -49,18 +53,33 @@ export default function PublicSubmissionsForm() {
         let validade = true;
         e.preventDefault();
 
-        if (name === "") {
-            errors.push({ "id": "1", "message": "Name cannot be empty" });
+        if (firstName === "") {
+            errors.push({ "id": "1", "message": "First name cannot be empty" });
             validade = false
         };
 
-        if (ra === "") {
-            errors.push({ "id": "2", "message": "RA cannot be empty" });
+        if (lastName === "") {
+            errors.push({ "id": "2", "message": "Last name cannot be empty" });
             validade = false
         }
 
-        if (dec === "") {
-            errors.push({ "id": "3", "message": "DEC cannot be empty" });
+        if (email === "") {
+            errors.push({ "id": "3", "message": "Email cannot be empty" });
+            validade = false
+        }
+
+        if (institution === "") {
+            errors.push({ "id": "4", "message": "Institution cannot be empty" });
+            validade = false
+        }
+
+        if (department === "") {
+            errors.push({ "id": "5", "message": "Department cannot be empty" });
+            validade = false
+        }
+
+        if (position === "") {
+            errors.push({ "id": "6", "message": "Position cannot be empty" });
             validade = false
         }
 
@@ -80,12 +99,12 @@ export default function PublicSubmissionsForm() {
 
         if (formValidation(e)) {
             const data = {
-                first_name: name,
-                last_name: name,
-                email: name,
-                institution: name,
-                department: name,
-                position: name,
+                first_name: firstName,
+                last_name: lastName,
+                email,
+                institution,
+                department,
+                position,
                 observations
             };
 
@@ -107,61 +126,76 @@ export default function PublicSubmissionsForm() {
 
             <Form onSubmit={handleSave}>
                 <Form.Row>
-                    <Form.Group controlId="variableName">
-                        <Form.Label>Variable name</Form.Label>
+                    <Form.Group controlId="firstName">
+                        <Form.Label>First Name</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder="Enter name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Enter First Name"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
                         />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
-                    <Form.Group controlId="variableRa">
-                        <Form.Label>RA</Form.Label>
-                        <Input
-                            mask="99 99 99.9999999999"
-                            value={ra}
-                            onChange={(e) => setRa(e.target.value)}
-                            placeholder="hh mm ss.ssssssssss" />
+                    <Form.Group controlId="lastName">
+                        <Form.Label>Last Name</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter Last Name"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                        />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
-                    <Form.Group controlId="variableDec">
-                        <Form.Label>DEC</Form.Label>
-                        <Input
-                            formatChars={
-                                {
-                                    "9": "[0-9]",
-                                    "?": "[+,-]"
-                                }
-                            }
-                            mask="?99 99 99.999999999"
-                            value={dec}
-                            onChange={(e) => setDec(e.target.value)}
-                            placeholder="+/-dd mm ss.sssssssss" />
+                    <Form.Group controlId="email">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control
+                            type="email"
+                            placeholder="Enter Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
-                    <Form.Group controlId="variablePer">
-                        <Form.Label>Orb_Per</Form.Label>
-                        <Input
-                            formatChars={
-                                {
-                                    "9": "[0-9]"
-                                }
-                            }
-                            mask="9.999999"
-                            value={per}
-                            onChange={(e) => setPer(e.target.value)}
-                            placeholder="0.000000" />
+                    <Form.Group controlId="institution">
+                        <Form.Label>Institution</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter Institution"
+                            value={institution}
+                            onChange={(e) => setInstitution(e.target.value)}
+                        />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
-                    <Form.Group controlId="variableObservations">
+                    <Form.Group controlId="department">
+                        <Form.Label>Department</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter Department"
+                            value={department}
+                            onChange={(e) => setDepartment(e.target.value)}
+                        />
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group controlId="position">
+                        <Form.Label>Position</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter Position"
+                            value={position}
+                            onChange={(e) => setPosition(e.target.value)}
+                        />
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group controlId="Observations">
                         <Form.Label>Observations</Form.Label>
                         <Form.Control as="textarea" rows="3"
+                        value={observations}
                         onChange={(e) => setObservations(e.target.value)} />
                     </Form.Group>
                 </Form.Row>
@@ -176,15 +210,3 @@ export default function PublicSubmissionsForm() {
         </>
     );
 }
-
-const Input = (props) => (
-    <InputMask
-        formatChars={props.formatChars}
-        mask={props.mask}
-        maskChar={null}
-        value={props.value}
-        onChange={props.onChange}
-        placeholder={props.placeholder} >
-        {(inputProps) => <Form.Control {...inputProps} type="text" />}
-    </InputMask>
-);

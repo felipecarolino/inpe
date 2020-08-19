@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
-import InputMask from 'react-input-mask';
 
 import api from '../../services/api';
 
@@ -14,12 +13,17 @@ export default function FormVariables(props) {
     const history = useHistory();
     const [errorsList, setErrorsList] = useState([]);
     const [classErrors, setClassErros] = useState("hidden")
-    const [name, setName] = useState('');
-    const [ra, setRa] = useState('');
-    const [dec, setDec] = useState('');
-    const [per, setPer] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [institution, setInstitution] = useState('');
+    const [department, setDepartment] = useState('');
+    const [position, setPosition] = useState('');
     const [observations, setObservations] = useState('');
     const [id, setId] = useState(props.id);
+
+    const [successAlert, setSuccessAlert] = useState("hidden");
+    const [successMessage, setSuccessMessage] = useState("");
 
     const Logout = () => {
         history.push('/restrict-area');
@@ -31,10 +35,12 @@ export default function FormVariables(props) {
         if (props.id) {
             const getSubmission = async () => {
                 const result = await api.get('submissions/' + props.id);
-                setName(result.data.data.name);
-                setRa(result.data.data.ra);
-                setDec(result.data.data.dec);
-                setPer(result.data.data.per);
+                setFirstName(result.data.data.first_name);
+                setLastName(result.data.data.last_name);
+                setEmail(result.data.data.email);
+                setInstitution(result.data.data.institution);
+                setDepartment(result.data.data.department);
+                setPosition(result.data.data.position);
                 setObservations(result.data.data.observations);
                 setId(props.id);
             };
@@ -46,6 +52,9 @@ export default function FormVariables(props) {
         try {
             await api.post('submissions', data);
             history.push('/management-submissions/submissions');
+            setSuccessMessage("submission successfully sent!");
+            setSuccessAlert("block");
+            setTimeout(() => setSuccessAlert("hidden"),3000);
         } catch (error) {
             if (error.response.data.message === "Token has expired" || error.response.data.message === "Token not provided") {
                 Logout();
@@ -67,6 +76,9 @@ export default function FormVariables(props) {
         try {
             await api.put('submissions/' + props.id, data);
             history.push('/management-submissions/submissions');
+            setSuccessMessage("submission successfully sent!");
+            setSuccessAlert("block");
+            setTimeout(() => setSuccessAlert("hidden"),3000);
         } catch (error) {
             if (error.response.data.message === "Token has expired" || error.response.data.message === "Token not provided") {
                 Logout();
@@ -86,18 +98,33 @@ export default function FormVariables(props) {
         let validade = true;
         e.preventDefault();
 
-        if (name === "") {
-            errors.push({ "id": "1", "message": "Name cannot be empty" });
+        if (firstName === "") {
+            errors.push({ "id": "1", "message": "First name cannot be empty" });
             validade = false
         };
 
-        if (ra === "") {
-            errors.push({ "id": "2", "message": "RA cannot be empty" });
+        if (lastName === "") {
+            errors.push({ "id": "2", "message": "Last name cannot be empty" });
             validade = false
         }
 
-        if (dec === "") {
-            errors.push({ "id": "3", "message": "DEC cannot be empty" });
+        if (email === "") {
+            errors.push({ "id": "3", "message": "Email cannot be empty" });
+            validade = false
+        }
+
+        if (institution === "") {
+            errors.push({ "id": "4", "message": "Institution cannot be empty" });
+            validade = false
+        }
+
+        if (department === "") {
+            errors.push({ "id": "5", "message": "Department cannot be empty" });
+            validade = false
+        }
+
+        if (position === "") {
+            errors.push({ "id": "6", "message": "Position cannot be empty" });
             validade = false
         }
 
@@ -117,10 +144,12 @@ export default function FormVariables(props) {
 
         if (formValidation(e)) {
             const data = {
-                name,
-                ra,
-                dec,
-                per,
+                first_name: firstName,
+                last_name: lastName,
+                email,
+                institution,
+                department,
+                position,
                 observations
             };
 
@@ -142,80 +171,93 @@ export default function FormVariables(props) {
                 ))}
             </div>
 
+            <div className={"alert alert-success " + successAlert} >
+                    <span>{successMessage} <br /></span>
+            </div>
+
             <Form onSubmit={handleSave}>
                 <Form.Row>
-                    <Form.Group controlId="variableName">
-                        <Form.Label>Variable name</Form.Label>
+                    <Form.Group controlId="firstName">
+                        <Form.Label>First Name</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder="Enter name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Enter First Name"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
                         />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
-                    <Form.Group controlId="variableRa">
-                        <Form.Label>RA</Form.Label>
-                        <Input
-                            mask="99 99 99.9999999999"
-                            value={ra}
-                            onChange={(e) => setRa(e.target.value)}
-                            placeholder="hh mm ss.ssssssssss" />
+                    <Form.Group controlId="lastName">
+                        <Form.Label>Last Name</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter Last Name"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                        />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
-                    <Form.Group controlId="variableDec">
-                        <Form.Label>DEC</Form.Label>
-                        <Input
-                            formatChars={
-                                {
-                                    "9": "[0-9]",
-                                    "?": "[+,-]"
-                                }
-                            }
-                            mask="?99 99 99.999999999"
-                            value={dec}
-                            onChange={(e) => setDec(e.target.value)}
-                            placeholder="+/-dd mm ss.sssssssss" />
+                    <Form.Group controlId="email">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control
+                            type="email"
+                            placeholder="Enter Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
-                    <Form.Group controlId="variablePer">
-                        <Form.Label>Orb_Per</Form.Label>
-                        <Input
-                            formatChars={
-                                {
-                                    "9": "[0-9]"
-                                }
-                            }
-                            mask="9.999999"
-                            value={per}
-                            onChange={(e) => setPer(e.target.value)}
-                            placeholder="0.000000" />
+                    <Form.Group controlId="institution">
+                        <Form.Label>Institution</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter Institution"
+                            value={institution}
+                            onChange={(e) => setInstitution(e.target.value)}
+                        />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
-                    <Form.Group controlId="variableObservations">
+                    <Form.Group controlId="department">
+                        <Form.Label>Department</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter Department"
+                            value={department}
+                            onChange={(e) => setDepartment(e.target.value)}
+                        />
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group controlId="position">
+                        <Form.Label>Position</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter Position"
+                            value={position}
+                            onChange={(e) => setPosition(e.target.value)}
+                        />
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group controlId="Observations">
                         <Form.Label>Observations</Form.Label>
                         <Form.Control as="textarea" rows="3"
+                        value={observations}
                         onChange={(e) => setObservations(e.target.value)} />
                     </Form.Group>
                 </Form.Row>
+                <Form.Group>
+                    <Form.File>
+                        <Form.File.Label>File</Form.File.Label>
+                        <Form.File.Input />
+                    </Form.File>
+                </Form.Group>
                 <Button type="submit">Save</Button>
             </Form>
         </>
     );
 }
-
-const Input = (props) => (
-    <InputMask
-        formatChars={props.formatChars}
-        mask={props.mask}
-        maskChar={null}
-        value={props.value}
-        onChange={props.onChange}
-        placeholder={props.placeholder} >
-        {(inputProps) => <Form.Control {...inputProps} type="text" />}
-    </InputMask>
-);
