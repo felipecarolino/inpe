@@ -30,8 +30,8 @@ form {
 
 
 @media only screen and (max-width: 576px){
-    form{
-        padding-left: 0;
+    .public-submissions-form{
+        padding-left: 25px;
     }
 
     .form-group{
@@ -43,8 +43,19 @@ form {
         padding: 10px;
         width: 100%;
     }
+    .public-submissions-card{
+        width: 100%;
+    }
 
     .public-submissions-card .card-header{
         padding: 10px 0;
+    }
+
+    .public-submissions-card .card-header h5{
+        margin-left: 10px;
+    }
+
+    .public-submissions-card .card-header a{
+        margin-right: 5px;
     }
 }

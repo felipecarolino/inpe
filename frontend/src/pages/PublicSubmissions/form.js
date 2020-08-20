@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+
 import { Form, Button } from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal';
 
 import api from '../../services/api';
 
@@ -17,40 +19,58 @@ export default function PublicSubmissionsForm() {
     const [position, setPosition] = useState('');
     const [observations, setObservations] = useState('');
 
-    const [successAlert, setSuccessAlert] = useState("hidden");
-    const [successMessage, setSuccessMessage] = useState("");
+    const [successModalShow, setSuccessModalShow] = useState(false);
 
     const [file, setFile] = useState('');
 
+    function SuccessModal(props) {
+        return (
+            <Modal
+                {...props}
+                centered
+                animation={false}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Success!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    We’ve received your submission and we’re starting our review. Pay attention to your e-mail box, and at your spam folder, in case we reach out for more information.
+                    <br />
+                    We appreciate your interest in our portal.
+            </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={() => setSuccessModalShow(false)}>Confirm</Button>
+                </Modal.Footer>
+            </Modal>
+        );
+    }
+
     async function create(data) {
         try {
-            //await api.post('submissions', data);
-
             await api.post('submissions', data, { // receive two parameter endpoint url ,form data 
             })
-            .then(res => { // then print response status
-                console.warn(res);
-                
-            })
+                .then(res => { // then print response status
+                    console.warn(res);
+                    if (res.data.status_code === 200) {
+                        setFirstName('');
+                        setLastName('');
+                        setEmail('');
+                        setInstitution('');
+                        setDepartment('');
+                        setPosition('');
+                        setObservations('');
+                        setSuccessModalShow(true);
+                    }
 
-            setSuccessMessage("submission successfully sent!");
-            setSuccessAlert("block");
-            setTimeout(() => setSuccessAlert("hidden"),3000);
-            setFirstName('');
-            setLastName('');
-            setEmail('');
-            setInstitution('');
-            setDepartment('');
-            setPosition('');
-            setObservations('');
+                })
         } catch (error) {
             setErrorsList([
                 {
-                    "id": 7, "message": "Error to submit new submission"
+                    "id": 8, "message": "Error to submit new submission"
                 },
                 error.response.data.errors.name ?
                     {
-                        "id": 8, "message": error.response.data.errors.name
+                        "id": 9, "message": error.response.data.errors.name
                     } : {}
             ]);
             setClassErros("block");
@@ -93,6 +113,11 @@ export default function PublicSubmissionsForm() {
             validade = false
         }
 
+        if (file === "") {
+            errors.push({ "id": "7", "message": "File cannot be empty" });
+            validade = false
+        }
+
         if (errors.length > 0) {
             setClassErros("block");
         }
@@ -110,19 +135,7 @@ export default function PublicSubmissionsForm() {
         e.preventDefault();
 
         if (formValidation(e)) {
-           
-            /*const data = {
-                first_name: firstName,
-                last_name: lastName,
-                email,
-                institution,
-                department,
-                position,
-                observations
-                
-            };*/
-
-            const data = new FormData() 
+            const data = new FormData()
 
             data.append('file', file)
             data.append('first_name', firstName)
@@ -132,7 +145,7 @@ export default function PublicSubmissionsForm() {
             data.append('department', department)
             data.append('position', position)
             data.append('observations', observations)
-          
+
             console.warn(file);
 
             create(data);
@@ -147,11 +160,7 @@ export default function PublicSubmissionsForm() {
                 ))}
             </div>
 
-            <div className={"alert alert-success " + successAlert} >
-                    <span>{successMessage} <br /></span>
-            </div>
-
-            <Form onSubmit={handleSave}>
+            <Form onSubmit={handleSave} className="public-submissions-form">
                 <Form.Row>
                     <Form.Group controlId="firstName">
                         <Form.Label>First Name</Form.Label>
@@ -222,21 +231,28 @@ export default function PublicSubmissionsForm() {
                     <Form.Group controlId="Observations">
                         <Form.Label>Observations</Form.Label>
                         <Form.Control as="textarea" rows="3"
-                        value={observations}
-                        onChange={(e) => setObservations(e.target.value)} />
+                            value={observations}
+                            onChange={(e) => setObservations(e.target.value)} />
                     </Form.Group>
                 </Form.Row>
-                 <Form.Row>
-                        <Form.Group controlId="roleDescription">
-                            <Form.Label>File</Form.Label>
-                            <Form.Control
-                                type="file"
-                                onChange={(e) => setFile(e.target.files[0])}
-                            />
-                        </Form.Group>
-                    </Form.Row>
+                <Form.Row>
+                    <Form.Group controlId="file">
+                        <Form.Label>File</Form.Label>
+                        <Form.Control
+                            type="file"
+                            onChange={(e) => setFile(e.target.files[0])}
+                        />
+                    </Form.Group>
+                </Form.Row>
                 <Button type="submit">Submit</Button>
             </Form>
+
+            <SuccessModal
+                show={successModalShow}
+                onHide={() => {
+                    setSuccessModalShow(false)
+                }}
+            />
         </>
     );
 }

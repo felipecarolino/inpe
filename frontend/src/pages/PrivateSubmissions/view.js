@@ -67,6 +67,16 @@ export default function View(props) {
                                     <th>Observations</th>
                                     <td>{submission.observations}</td>
                                 </tr>
+                                <tr>
+                                    <th>File</th>
+                                    <td>
+                                        <a href={submission.filename}
+                                            target="_blank"
+                                            rel="noopener noreferrer">
+                                            Download
+                                        </a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </Table>
                     </div>
