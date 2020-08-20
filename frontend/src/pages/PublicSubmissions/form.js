@@ -20,9 +20,19 @@ export default function PublicSubmissionsForm() {
     const [successAlert, setSuccessAlert] = useState("hidden");
     const [successMessage, setSuccessMessage] = useState("");
 
+    const [file, setFile] = useState('');
+
     async function create(data) {
         try {
-            await api.post('submissions', data);
+            //await api.post('submissions', data);
+
+            await api.post('submissions', data, { // receive two parameter endpoint url ,form data 
+            })
+            .then(res => { // then print response status
+                console.warn(res);
+                
+            })
+
             setSuccessMessage("submission successfully sent!");
             setSuccessAlert("block");
             setTimeout(() => setSuccessAlert("hidden"),3000);
@@ -97,8 +107,11 @@ export default function PublicSubmissionsForm() {
 
     const handleSave = (e) => {
 
+        e.preventDefault();
+
         if (formValidation(e)) {
-            const data = {
+           
+            /*const data = {
                 first_name: firstName,
                 last_name: lastName,
                 email,
@@ -106,7 +119,21 @@ export default function PublicSubmissionsForm() {
                 department,
                 position,
                 observations
-            };
+                
+            };*/
+
+            const data = new FormData() 
+
+            data.append('file', file)
+            data.append('first_name', firstName)
+            data.append('last_name', lastName)
+            data.append('email', email)
+            data.append('institution', institution)
+            data.append('department', department)
+            data.append('position', position)
+            data.append('observations', observations)
+          
+            console.warn(file);
 
             create(data);
         }
@@ -199,12 +226,15 @@ export default function PublicSubmissionsForm() {
                         onChange={(e) => setObservations(e.target.value)} />
                     </Form.Group>
                 </Form.Row>
-                <Form.Group>
-                    <Form.File>
-                        <Form.File.Label>File</Form.File.Label>
-                        <Form.File.Input />
-                    </Form.File>
-                </Form.Group>
+                 <Form.Row>
+                        <Form.Group controlId="roleDescription">
+                            <Form.Label>File</Form.Label>
+                            <Form.Control
+                                type="file"
+                                onChange={(e) => setFile(e.target.files[0])}
+                            />
+                        </Form.Group>
+                    </Form.Row>
                 <Button type="submit">Submit</Button>
             </Form>
         </>

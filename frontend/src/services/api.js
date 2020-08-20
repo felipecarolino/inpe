@@ -3,6 +3,7 @@ import { getToken } from "./auth";
 
 const api = axios.create({
   baseURL: 'http://45.79.47.218/cvportal/backend/api/',
+
 });
 
 api.interceptors.request.use(async config => {
