@@ -8,11 +8,6 @@ import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-import IconView from './../../assets/img/eye.svg';
-import IconEdit from './../../assets/img/edit.svg';
-import IconDelete from './../../assets/img/trash.svg';
-import IconAdd from './../../assets/img/add.svg';
-
 import Pagination from "react-js-pagination";
 
 import { logout } from "../../services/auth";
@@ -100,12 +95,12 @@ export default function UsersManagement() {
                 <Card.Header>
                     <h5>Users List</h5>
                     <Link to="/user-management/users/create" className="nav-link">
-                        <img src={IconAdd} alt="Add Icon" className="iconAdd" />
+                        <img src='/img/add.svg' alt="Add Icon" className="iconAdd" />
                     </Link>
                 </Card.Header>
                 <Card.Body className="users-card-body">
                     <div className="users-table">
-                        <Table striped bordered hover>
+                        <Table striped bordered hover responsive>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -125,14 +120,14 @@ export default function UsersManagement() {
                                             <td>{item.role.name}</td>
                                             <td>
                                                 <Link to={{ pathname: `/user-management/users/view/${item.id}` }} className="nav-link">
-                                                    <img src={IconView} alt="View Icon" className="iconView" />
+                                                    <img src='/img/eye.svg' alt="View Icon" className="iconView" />
                                                 </Link>
                                                 <Link to={{ pathname: `/user-management/users/edit/${item.id}` }} className="nav-link">
-                                                    <img src={IconEdit} alt="Edit Icon" className="iconEdit" />
+                                                    <img src='/img/edit.svg' alt="Edit Icon" className="iconEdit" />
                                                 </Link>
                                                 <img
                                                     className="iconDelete"
-                                                    src={IconDelete} alt="Delete Icon"
+                                                    src='/img/trash.svg' alt="Delete Icon"
                                                     onClick={() => {
                                                         setId(item.id);
                                                         setModalShow(true);

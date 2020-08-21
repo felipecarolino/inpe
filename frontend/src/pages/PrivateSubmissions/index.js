@@ -8,11 +8,6 @@ import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-import IconView from './../../assets/img/eye.svg';
-import IconEdit from './../../assets/img/edit.svg';
-import IconDelete from './../../assets/img/trash.svg';
-import IconAdd from './../../assets/img/add.svg';
-
 import Pagination from "react-js-pagination";
 
 import { logout } from "../../services/auth";
@@ -125,13 +120,13 @@ export default function Variables() {
                     <h5>Submissions List</h5>
                     <div className="header-icons">
                         <Link to="/management-submissions/submissions/create" className="nav-link">
-                            <img src={IconAdd} alt="Add Icon" className="iconAdd" />
+                            <img src='/img/add.svg' alt="Add Icon" className="iconAdd" />
                         </Link>
                     </div>
                 </Card.Header>
                 <Card.Body className="submissions-card-body">
                     <div className="submissions-table">
-                        <Table striped bordered hover>
+                        <Table striped bordered hover responsive>
                             <thead>
                                 <tr>
                                     <th>First Name</th>
@@ -155,14 +150,14 @@ export default function Variables() {
                                             <td>{item.position}</td>
                                             <td>
                                                 <Link to={{ pathname: `/management-submissions/submissions/view/${item.id}` }} className="nav-link">
-                                                    <img src={IconView} alt="View Icon" className="iconView" />
+                                                    <img src='/img/eye.svg' alt="View Icon" className="iconView" />
                                                 </Link>
                                                 <Link to={{ pathname: `/management-submissions/submissions/edit/${item.id}` }} className="nav-link">
-                                                    <img src={IconEdit} alt="Edit Icon" className="iconEdit" />
+                                                    <img src='/img/edit.svg' alt="Edit Icon" className="iconEdit" />
                                                 </Link>
                                                 <img
                                                     className="iconDelete"
-                                                    src={IconDelete} alt="Delete Icon"
+                                                    src='/img/trash.svg' alt="Delete Icon"
                                                     onClick={() => {
                                                         setId(item.id);
                                                         setDeleteModalShow(true);

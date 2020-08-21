@@ -1,10 +1,6 @@
 import React from 'react';
 import './style.css';
 import { Link } from "react-router-dom";
-import logo from './../../assets/img/logo.png';
-import brazilThumbnail from './../../assets/img/brazil_thumbnail.png';
-import usaThumbnail from './../../assets/img/usa_thumbnail.png';
-import IconAccount from './../../assets/img/user.png';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
@@ -26,14 +22,14 @@ export default function Header() {
         <div className="header">
             <div className="header-top">
                 <div className="header-logo">
-                    <img className="logo" src={logo} alt="Logo inpe" />
+                    <img className="logo" src='/img/logo.png' alt="Logo inpe" />
                 </div>
                 <div className="header-title">
                     <h1>Cataclysmic Variables Portal</h1>
                 </div>
                 <div className="header-flags">
-                    <a href="#pt-br"><img src={brazilThumbnail} alt="Brazil flag thumbnail" className="header-flag-br" /></a>
-                    <a href="#en-us"><img src={usaThumbnail} alt="USA flag thumbnail" className="header-flag-us" /></a>
+                    <a href="#pt-br"><img src='/img/brazil_thumbnail.png' alt="Brazil flag thumbnail" className="header-flag-br" /></a>
+                    <a href="#en-us"><img src='/img/usa_thumbnail.png' alt="USA flag thumbnail" className="header-flag-us" /></a>
                 </div>
             </div>
 
@@ -53,7 +49,7 @@ export default function Header() {
                     {isAuthenticated() ?
                         <>
                         <Link to="/cataclysmic-variables/variables" className="nav-link" onClick={Logout} >{localStorage.getItem("user")} (Logout)</Link>
-                        <Link to="/restrict-area" className="user nav-link"><img src={IconAccount} alt="Account Icon" className="iconAccount" /></Link>
+                        <Link to="/restrict-area" className="user nav-link"><img src='/img/user.png' alt="Account Icon" className="iconAccount" /></Link>
                         </>
                             :
                         <Link to="/restrict-area" className="nav-link">Restrict Area</Link> }

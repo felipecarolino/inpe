@@ -5,8 +5,6 @@ import api from '../../services/api';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 
-import IconBack from './../../assets/img/arrowLeft.svg';
-
 import './style.css';
 
 export default function View(props) {
@@ -36,7 +34,7 @@ export default function View(props) {
             <Card className="view-user-card">
                 <Card.Header>
                     <Link to="/user-management/users" className="nav-link">
-                        <img src={IconBack} alt="Back Icon" className="iconBack" />
+                        <img src='/img/arrowLeft.svg' alt="Back Icon" className="iconBack" />
                     </Link>
                     <h5>View user</h5>
                 </Card.Header>

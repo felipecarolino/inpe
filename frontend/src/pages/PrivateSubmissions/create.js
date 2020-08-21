@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import FormSubmissions from './form';
 import Card from 'react-bootstrap/Card';
-import IconBack from './../../assets/img/arrowLeft.svg';
 
 export default function Create() {
 
@@ -12,7 +11,7 @@ export default function Create() {
             <Card className="create-submission-card">
                 <Card.Header className="create-submission-card-header">
                     <Link to="/management-submissions/submissions" className="nav-link">
-                        <img src={IconBack} alt="Back Icon" className="iconBack" />
+                        <img src='/img/arrowLeft.svg' alt="Back Icon" className="iconBack" />
                     </Link>
                     <h5>Create Submission</h5>
                 </Card.Header>

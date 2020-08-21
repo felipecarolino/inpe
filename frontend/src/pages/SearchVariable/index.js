@@ -4,7 +4,7 @@ import FormSearch from './form';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import Pagination from "react-js-pagination";
-import IconDownload from './../../assets/img/download.svg';
+
 import './style.css';
 
 export default function SearchVariable(props) {
@@ -120,7 +120,7 @@ export default function SearchVariable(props) {
                         <Card.Header>
                             <h5>Search Results</h5>
                             <Link to="#" className="nav-link">
-                                <img width="24px" src={IconDownload} onClick={() => exportCSVFile(catalog, 'Variables')} alt="Download Icon" className="iconDownload" />
+                                <img width="24px" src='/img/download.svg' onClick={() => exportCSVFile(catalog, 'Variables')} alt="Download Icon" className="iconDownload" />
                             </Link>
                         </Card.Header>
                         </div>

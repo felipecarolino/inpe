@@ -8,12 +8,6 @@ import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-import IconView from './../../assets/img/eye.svg';
-import IconEdit from './../../assets/img/edit.svg';
-import IconDelete from './../../assets/img/trash.svg';
-import IconAdd from './../../assets/img/add.svg';
-import IconDownload from './../../assets/img/download.svg';
-
 import Pagination from "react-js-pagination";
 
 import { isAuthenticated } from "./../../services/auth";
@@ -204,18 +198,18 @@ export default function Variables() {
                         {isAuthenticated()
                             ?
                             <Link to="/cataclysmic-variables/variables/create" className="nav-link">
-                                <img src={IconAdd} alt="Add Icon" className="iconAdd" />
+                                <img src='/img/add.svg' alt="Add Icon" className="iconAdd" />
                             </Link> : null}
 
                         <Link to="#" className="nav-link">
-                            <img width="24px" src={IconDownload} onClick={() => exportCSVFile('Variables')} alt="Download Icon" className="iconDownload" />
+                            <img width="24px" src='/img/download.svg' onClick={() => exportCSVFile('Variables')} alt="Download Icon" className="iconDownload" />
                         </Link>
 
                     </div>
                 </Card.Header>
                 <Card.Body className="variables-card-body">
                     <div className="variables-table">
-                        <Table striped bordered hover>
+                        <Table striped bordered hover responsive>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -235,16 +229,16 @@ export default function Variables() {
                                             <td>{item.per}</td>
                                             <td>
                                                 <Link to={{ pathname: `/cataclysmic-variables/variables/view/${item.id}` }} className="nav-link">
-                                                    <img src={IconView} alt="View Icon" className="iconView" />
+                                                    <img src='/img/eye.svg' alt="View Icon" className="iconView" />
                                                 </Link>
                                                 {isAuthenticated() ?
                                                     <>
                                                         <Link to={{ pathname: `/cataclysmic-variables/variables/edit/${item.id}` }} className="nav-link">
-                                                            <img src={IconEdit} alt="Edit Icon" className="iconEdit" />
+                                                            <img src='/img/edit.svg' alt="Edit Icon" className="iconEdit" />
                                                         </Link>
                                                         <img
                                                             className="iconDelete"
-                                                            src={IconDelete} alt="Delete Icon"
+                                                            src='/img/trash.svg' alt="Delete Icon"
                                                             onClick={() => {
                                                                 setId(item.id);
                                                                 setDeleteModalShow(true);

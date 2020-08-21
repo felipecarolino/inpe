@@ -4,8 +4,6 @@ import FormSubmissions from './form';
 
 import Card from 'react-bootstrap/Card';
 
-import IconBack from './../../assets/img/arrowLeft.svg';
-
 export default function Edit(props) {
 
 
@@ -14,7 +12,7 @@ export default function Edit(props) {
             <Card className="edit-submission-card">
                 <Card.Header>
                     <Link to="/management-submissions/submissions" className="nav-link">
-                        <img src={IconBack} alt="Back Icon" className="iconBack" />
+                        <img src='/img/arrowLeft.svg' alt="Back Icon" className="iconBack" />
                     </Link>
                     <h5>Edit submission</h5>
                 </Card.Header>
