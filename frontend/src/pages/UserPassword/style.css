@@ -34,6 +34,10 @@
     }
 
     .user-password-card .card-header{
-        padding: 10px 0;
+        padding: 10px 20px;
+    }
+
+    .user-password-card-body form{
+        padding: 0;
     }
 }

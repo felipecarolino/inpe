@@ -122,6 +122,7 @@ td a.nav-link{
 
 .view-submission-card .card-header{
     display: flex;
+    justify-content: flex-start;
 }
 
 .iconBack{
@@ -208,6 +209,7 @@ form{
 
 .edit-submission-card .card-header{
     display: flex;
+    justify-content: flex-start;
 }
 
 .iconBack{
@@ -237,7 +239,11 @@ form{
     }
 
     .submissions-card .card-header{
-        padding: 10px 0;
+        padding: 10px 20px;
+    }
+
+    .submissions-card .card-header .nav-link img{
+        margin: 0;
     }
 
     .submissions-table .table thead tr{
@@ -297,5 +303,9 @@ form{
 
     .edit-submission-card .card-header{
         padding: 10px 0;
+    }
+
+    .edit-submission-card-body form{
+        padding: 0;
     }
 }

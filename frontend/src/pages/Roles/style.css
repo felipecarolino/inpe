@@ -28,6 +28,10 @@
     padding: 0;
 }
 
+.roles-card .card-header .nav-link img{
+    margin: 0;
+}
+
 .roles-card-body{
     padding: 0;
 }
@@ -227,7 +231,7 @@ form{
     }
 
     .roles-card .card-header{
-        padding: 10px 0;
+        padding: 10px 20px;
     }
 
     .roles-table .table thead tr{

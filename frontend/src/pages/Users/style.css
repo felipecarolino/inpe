@@ -28,6 +28,10 @@
     padding: 0;
 }
 
+.users-card .card-header .nav-link img{
+    margin: 0;
+}
+
 .users-card-body{
     padding: 0;
 }
@@ -113,6 +117,7 @@ td a.nav-link{
 
 .view-user-card .card-header{
     display: flex;
+    justify-content: flex-start;
 }
 
 .iconBack{
@@ -162,6 +167,7 @@ form{
 
 .create-user-card .card-header{
     display: flex;
+    justify-content: flex-start;
 }
 
 .iconBack{
@@ -198,6 +204,7 @@ form{
 
 .edit-user-card .card-header{
     display: flex;
+    justify-content: flex-start;
 }
 
 .iconBack{
@@ -227,7 +234,7 @@ form{
     }
 
     .users-card .card-header{
-        padding: 10px 0;
+        padding: 10px 20px;
     }
 
     .users-table .table thead tr{

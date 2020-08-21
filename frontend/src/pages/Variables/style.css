@@ -122,6 +122,7 @@ td a.nav-link{
 
 .view-variable-card .card-header{
     display: flex;
+    justify-content: flex-start;
 }
 
 .iconBack{
@@ -171,6 +172,7 @@ form{
 
 .create-variable-card .card-header{
     display: flex;
+    justify-content: flex-start;
 }
 
 .iconBack{
@@ -207,6 +209,7 @@ form{
 
 .edit-variable-card .card-header{
     display: flex;
+    justify-content: flex-start;
 }
 
 .iconBack{
@@ -236,7 +239,7 @@ form{
     }
 
     .variables-card .card-header{
-        padding: 10px 0;
+        padding: 10px 20px;
     }
 
     .variables-table .table thead tr{
@@ -264,7 +267,7 @@ form{
     }
 
     .view-variable-card .card-header{
-        padding: 10px 0;
+        padding: 10px;
     }
 
     /* Component Form */
@@ -287,6 +290,10 @@ form{
         padding: 10px 0;
     }
 
+    .create-variable-card-body form {
+        padding: 0;
+    }
+
     /* Component Edit */
     .edit-variable{
         margin: 0;
@@ -296,5 +303,9 @@ form{
 
     .edit-variable-card .card-header{
         padding: 10px 0;
+    }
+
+    .edit-variable-card-body form {
+        padding: 0;
     }
 }
