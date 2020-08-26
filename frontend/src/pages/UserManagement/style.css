@@ -8,14 +8,14 @@
     width: 100%;
 }
 
-.sidebar{
+.sidebar-user-management{
     display: flex;
     max-width: 200px;
     justify-content: flex-start;
     flex: 1;
 }
 
-.nav{
+.sidebar-user-management .nav{
     display: flex;
     flex: 1;
 }
@@ -55,13 +55,13 @@ a:hover {
         flex-direction: column;
     }
 
-    .sidebar{
+    .sidebar-user-management{
         margin-bottom: 10px;
         max-width: 100%;
         margin: 0 auto;
     }
 
-    .nav{
+    .sidebar-user-management .nav{
         justify-content: center;
     }
 

@@ -8,14 +8,14 @@
     width: 100%;
 }
 
-.sidebar{
+.sidebar-cataclysmic-variables{
     display: flex;
     max-width: 200px;
     justify-content: flex-start;
     flex: 1;
 }
 
-.nav{
+.sidebar-cataclysmic-variables .nav{
     display: flex;
     flex: 1;
 }
@@ -71,14 +71,21 @@ a:hover {
         flex-direction: column;
     }
 
-    .sidebar{
+    .sidebar-cataclysmic-variables{
         margin-bottom: 10px;
         max-width: 100%;
-        margin: 0 auto;
     }
 
-    .nav{
+    .sidebar-cataclysmic-variables .nav{
         justify-content: center;
+    }
+
+    .list-link{
+        display: none;
+    }
+
+    .search-button{
+        margin-left: 10px;
     }
 
     .nav-link.disabled{

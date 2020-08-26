@@ -28,12 +28,8 @@
     padding: 0;
 }
 
-.header-icons{
-    display: flex;
-}
-
-.iconAdd{
-    margin-right: 15px;
+.download-catalog{
+    padding-left: 20px;
 }
 
 .variables-card-body{

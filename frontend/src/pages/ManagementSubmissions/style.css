@@ -8,14 +8,14 @@
     width: 100%;
 }
 
-.sidebar{
+.sidebar-management-submissions{
     display: flex;
     max-width: 200px;
     justify-content: flex-start;
     flex: 1;
 }
 
-.nav{
+.sidebar-management-submissions .nav{
     display: flex;
     flex: 1;
 }
@@ -71,13 +71,13 @@ a:hover {
         flex-direction: column;
     }
 
-    .sidebar{
+    .sidebar-management-submissions{
         margin-bottom: 10px;
         max-width: 100%;
         margin: 0 auto;
     }
 
-    .nav{
+    .sidebar-management-submissions .nav{
         justify-content: center;
     }
 

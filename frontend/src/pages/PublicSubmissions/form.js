@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
+import { useHistory } from "react-router-dom";
+
 import { Form, Button } from 'react-bootstrap';
-import Modal from 'react-bootstrap/Modal';
 
 import api from '../../services/api';
 
@@ -9,6 +10,7 @@ import './style.css';
 
 export default function PublicSubmissionsForm() {
 
+    const history = useHistory();
     const [errorsList, setErrorsList] = useState([]);
     const [classErrors, setClassErros] = useState("hidden")
     const [firstName, setFirstName] = useState('');
@@ -19,31 +21,7 @@ export default function PublicSubmissionsForm() {
     const [position, setPosition] = useState('');
     const [observations, setObservations] = useState('');
 
-    const [successModalShow, setSuccessModalShow] = useState(false);
-
     const [file, setFile] = useState('');
-
-    function SuccessModal(props) {
-        return (
-            <Modal
-                {...props}
-                centered
-                animation={false}
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title>Success!</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    We’ve received your submission and we’re starting our review. Pay attention to your e-mail box, and at your spam folder, in case we reach out for more information.
-                    <br />
-                    We appreciate your interest in our portal.
-            </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={() => setSuccessModalShow(false)}>Confirm</Button>
-                </Modal.Footer>
-            </Modal>
-        );
-    }
 
     async function create(data) {
         try {
@@ -59,7 +37,7 @@ export default function PublicSubmissionsForm() {
                         setDepartment('');
                         setPosition('');
                         setObservations('');
-                        setSuccessModalShow(true);
+                        history.push('/submissions/success');
                     }
 
                 })
@@ -246,13 +224,6 @@ export default function PublicSubmissionsForm() {
                 </Form.Row>
                 <Button type="submit">Submit</Button>
             </Form>
-
-            <SuccessModal
-                show={successModalShow}
-                onHide={() => {
-                    setSuccessModalShow(false)
-                }}
-            />
         </>
     );
 }

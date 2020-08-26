@@ -14,6 +14,10 @@
     justify-content: space-between;
 }
 
+.download-template{
+    padding-left: 20px;
+}
+
 .public-submissions-card-body{
     padding: 0;
     margin-top: 10px;
@@ -28,6 +32,34 @@ form {
     width: 100%;
 }
 
+.success-message{
+    display: flex;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.success-message-card{
+    margin: auto;
+    width: 50%;
+    display: flex;
+}
+
+.success-message-card .card-header{
+    justify-content: center;
+}
+
+.success-message-card-body{
+    padding: 0;
+    margin-top: 10px;
+}
+
+.success-message-card-body .card-text{
+    padding: 0 10px
+}
+
+.success-message-confirm{
+    margin-bottom: 15px;
+}
 
 @media only screen and (max-width: 576px){
     .public-submissions-form{
@@ -57,5 +89,14 @@ form {
 
     .public-submissions-card .card-header a{
         margin-right: 5px;
+    }
+
+    .success-message{
+        margin: 0;
+        padding: 10px;
+        width: 100%;
+    }
+    .success-message-card{
+        width: 100%;
     }
 }

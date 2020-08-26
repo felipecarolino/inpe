@@ -113,6 +113,13 @@ export default function Variables() {
         );
     }
 
+    function formatDate(serverDate) {
+        const date = new Date(serverDate)
+        const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'numeric', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false})
+        const [{ value: month }, , { value: day }, , { value: year }, , { value: hour }, , { value: minute },, { value: second}] = dateTimeFormat.formatToParts(date)
+        return(`${year}/${month}/${day} ${hour}:${minute}:${second}`)
+    }
+
     return (
         <div className="submissions">
             <Card className="submissions-card">
@@ -131,10 +138,10 @@ export default function Variables() {
                                 <tr>
                                     <th>First Name</th>
                                     <th>Last Name</th>
-                                    <th>Email</th>
                                     <th>Institution</th>
                                     <th>Department</th>
                                     <th>Position</th>
+                                    <th>Date</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -144,10 +151,10 @@ export default function Variables() {
                                         return <tr key={item.id}>
                                             <td>{item.first_name}</td>
                                             <td>{item.last_name}</td>
-                                            <td>{item.email}</td>
                                             <td>{item.institution}</td>
                                             <td>{item.department}</td>
                                             <td>{item.position}</td>
+                                            <td>{formatDate(item.created_at)}</td>
                                             <td>
                                                 <Link to={{ pathname: `/management-submissions/submissions/view/${item.id}` }} className="nav-link">
                                                     <img src='/img/eye.svg' alt="View Icon" className="iconView" />

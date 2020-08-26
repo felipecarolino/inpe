@@ -34,3 +34,7 @@ html, body {
 .navbar-nav{
     align-items: center;
 }
+
+.table{
+    white-space: nowrap;
+}

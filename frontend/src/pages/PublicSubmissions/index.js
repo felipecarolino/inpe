@@ -9,10 +9,12 @@ export default function Create() {
             <Card className="public-submissions-card">
                 <Card.Header>
                     <h5>Submit New Cataclysmic Variable</h5>
-                    <a href='/template.csv' download="template.csv">
-                        <img width="21px" src='/img/download.svg' alt="Download Icon" className="iconDownload" />
-                    </a>
                 </Card.Header>
+                <Card.Title>
+                    <a href='/template.csv' download="template.csv" className="nav-link download-template">
+                        Download Template
+                    </a>
+                </Card.Title>
                 <Card.Body className="public-submissions-card-body">
                     <PublicSubmissionsForm />
                 </Card.Body>

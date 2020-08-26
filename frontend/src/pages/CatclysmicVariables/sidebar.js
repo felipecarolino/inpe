@@ -7,11 +7,12 @@ import { Link } from "react-router-dom";
 export default function Sidebar() {
 
     return (
-        <div className="sidebar">
+        <div className="sidebar-cataclysmic-variables">
             <Nav defaultActiveKey="/users" variant="pills" className="flex-sm-column">
                 <Nav.Link eventKey="disabled" disabled>Cataclysmic Variables</Nav.Link>
-                <Link to="/cataclysmic-variables/variables" className="nav-link">List</Link>
+                <Link to="/cataclysmic-variables/variables" className="nav-link list-link">List</Link>
                 <DropdownButton
+                    className="search-button"
                     drop="down"
                     title="Search"
                     variant="secondary" >

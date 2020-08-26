@@ -32,10 +32,6 @@
     display: flex;
 }
 
-.iconAdd{
-    margin-right: 15px;
-}
-
 .submissions-card-body{
     padding: 0;
 }
@@ -229,6 +225,10 @@ form{
     margin-top: 10px;
 }
 
+.download-file-link{
+    margin: 0 25px 15px;
+}
+
 
 @media only screen and (max-width: 576px){
     /* Component submissions */
@@ -283,6 +283,10 @@ form{
         width: 100%;
     }
 
+    .download-file-link{
+        margin: 0 0 10px;
+    }
+
     /* Component Create */
     .create-submission{
         margin: 0;
@@ -308,4 +312,5 @@ form{
     .edit-submission-card-body form{
         padding: 0;
     }
+
 }

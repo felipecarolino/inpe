@@ -10,15 +10,24 @@ import './style.css';
 export default function View(props) {
 
     const [submission, setSubmission] = useState([]);
+    const [submissionDate, setSubmissionDate] = useState([]);
 
     useEffect(() => {
         const getSubmission = async () => {
             const result = await api.get('submissions/' + props.match.params.id);
             setSubmission(result.data.data);
+            setSubmissionDate(formatDate(result.data.data.created_at))
         };
         getSubmission();
 
     }, [props.match.params.id]);
+
+    function formatDate(serverDate) {
+        const date = new Date(serverDate)
+        const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'numeric', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false})
+        const [{ value: month }, , { value: day }, , { value: year }, , { value: hour }, , { value: minute },, { value: second}] = dateTimeFormat.formatToParts(date)
+        return(`${year}/${month}/${day} ${hour}:${minute}:${second}`)
+    }
 
     return (
         <div className="view-submission">
@@ -64,6 +73,10 @@ export default function View(props) {
                                 <tr>
                                     <th>Observations</th>
                                     <td>{submission.observations}</td>
+                                </tr>
+                                <tr>
+                                    <th>Date</th>
+                                    <td>{submissionDate}</td>
                                 </tr>
                                 <tr>
                                     <th>File</th>

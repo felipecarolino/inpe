@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export default function Sidebar() {
 
     return (
-        <div className="sidebar">
+        <div className="sidebar-management-submissions">
             <Nav variant="pills" className="flex-sm-column">
                 <Nav.Link eventKey="disabled" disabled>Management Submissions</Nav.Link>
                 <Link to="/management-submissions/submissions" className="nav-link">List</Link>

@@ -26,7 +26,7 @@ export default function SearchVariable(props) {
 
     useEffect(() => {
         setShowTable(true);
-        if (variable.length > 0){
+        if (variable.length > 0) {
             setShowHeader("block");
         }
     }, [variable])
@@ -117,12 +117,14 @@ export default function SearchVariable(props) {
                 <>
                     <Card className="search-variable-card">
                         <div className={showHeader}>
-                        <Card.Header>
-                            <h5>Search Results</h5>
-                            <Link to="#" className="nav-link">
-                                <img width="24px" src='/img/download.svg' onClick={() => exportCSVFile(catalog, 'Variables')} alt="Download Icon" className="iconDownload" />
-                            </Link>
-                        </Card.Header>
+                            <Card.Header>
+                                <h5>Search Results</h5>
+                            </Card.Header>
+                            <Card.Title>
+                                <Link to="#" className="nav-link download-catalog" onClick={() => exportCSVFile(catalog, 'Variables')}>
+                                    Download Results
+                                </Link>
+                            </Card.Title>
                         </div>
                         <Card.Body className="search-variable-card-body">
                             <div className="search-variable-table">
