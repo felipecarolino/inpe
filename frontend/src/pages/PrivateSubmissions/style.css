@@ -226,7 +226,8 @@ form{
 }
 
 .download-file-link{
-    margin: 0 25px 15px;
+    display: block;
+    margin-bottom: 15px;
 }
 
 

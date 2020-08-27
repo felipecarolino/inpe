@@ -210,17 +210,6 @@ export default function FormVariables(props) {
                 <span>{successMessage} <br /></span>
             </div>
 
-
-            {id ? <a href={filename}
-                target="_blank"
-                rel="noopener noreferrer">
-                <Button variant="primary"
-                    className="download-file-link">Download File</Button>
-            </a> : <a href='/template.csv' download="template.csv">
-                    <Button variant="primary"
-                        className="download-file-link">Download Template</Button>
-                </a>}
-
             <Form onSubmit={handleSave}>
                 <Form.Row>
                     <Form.Group controlId="firstName">
@@ -296,7 +285,17 @@ export default function FormVariables(props) {
                             onChange={(e) => setObservations(e.target.value)} />
                     </Form.Group>
                 </Form.Row>
-                <Form.Row>
+
+                {id ? <a href={filename}
+                    rel="noopener noreferrer"
+                    className="download-file-link"
+                    >
+                    {filename.split("/").pop()}
+                </a> : <a href='/template.csv' download="template.csv">
+                        Download Template
+                    </a>}
+
+                {id ? null : <Form.Row>
                     <Form.Group controlId="file">
                         <Form.Label>File</Form.Label>
                         <Form.Control
@@ -304,7 +303,7 @@ export default function FormVariables(props) {
                             onChange={(e) => setFile(e.target.files[0])}
                         />
                     </Form.Group>
-                </Form.Row>
+                </Form.Row>}
                 <Button type="submit">Save</Button>
             </Form>
         </>

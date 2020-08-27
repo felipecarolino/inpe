@@ -117,7 +117,7 @@ export default function Variables() {
         const date = new Date(serverDate)
         const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'numeric', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false})
         const [{ value: month }, , { value: day }, , { value: year }, , { value: hour }, , { value: minute },, { value: second}] = dateTimeFormat.formatToParts(date)
-        return(`${year}/${month}/${day} ${hour}:${minute}:${second}`)
+        return(`${year}-${month}-${day} ${hour}:${minute}:${second}`)
     }
 
     return (

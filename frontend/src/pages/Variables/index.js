@@ -202,7 +202,7 @@ export default function Variables() {
                 </Card.Header>
                 <Card.Title>
                     <Link to="#" className="nav-link download-catalog" onClick={() => exportCSVFile('Variables')}>
-                        Download Catalog
+                        Download Catalog <img src='/img/download.svg' alt="Download Icon" className="iconDownload" />
                     </Link>
                 </Card.Title>
                 <Card.Body className="variables-card-body">

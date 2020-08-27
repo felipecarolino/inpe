@@ -122,7 +122,7 @@ export default function SearchVariable(props) {
                             </Card.Header>
                             <Card.Title>
                                 <Link to="#" className="nav-link download-catalog" onClick={() => exportCSVFile(catalog, 'Variables')}>
-                                    Download Results
+                                    Download Results <img src='/img/download.svg' alt="Download Icon" className="iconDownload" />
                                 </Link>
                             </Card.Title>
                         </div>
