@@ -10,7 +10,7 @@ export default function Create() {
         <div className="create-submission">
             <Card className="create-submission-card">
                 <Card.Header className="create-submission-card-header">
-                    <Link to="/management-submissions/submissions" className="nav-link">
+                    <Link to="/submission-management/submissions" className="nav-link">
                         <img src='/img/arrowLeft.svg' alt="Back Icon" className="iconBack" />
                     </Link>
                     <h5>Create Submission</h5>

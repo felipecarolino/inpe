@@ -11,7 +11,7 @@ export default function Edit(props) {
         <div className="edit-submission">
             <Card className="edit-submission-card">
                 <Card.Header>
-                    <Link to="/management-submissions/submissions" className="nav-link">
+                    <Link to="/submission-management/submissions" className="nav-link">
                         <img src='/img/arrowLeft.svg' alt="Back Icon" className="iconBack" />
                     </Link>
                     <h5>Edit submission</h5>

@@ -126,7 +126,7 @@ export default function Variables() {
                 <Card.Header>
                     <h5>Submissions List</h5>
                     <div className="header-icons">
-                        <Link to="/management-submissions/submissions/create" className="nav-link">
+                        <Link to="/submission-management/submissions/create" className="nav-link">
                             <img src='/img/add.svg' alt="Add Icon" className="iconAdd" />
                         </Link>
                     </div>
@@ -156,10 +156,10 @@ export default function Variables() {
                                             <td>{item.position}</td>
                                             <td>{formatDate(item.created_at)}</td>
                                             <td>
-                                                <Link to={{ pathname: `/management-submissions/submissions/view/${item.id}` }} className="nav-link">
+                                                <Link to={{ pathname: `/submission-management/submissions/view/${item.id}` }} className="nav-link">
                                                     <img src='/img/eye.svg' alt="View Icon" className="iconView" />
                                                 </Link>
-                                                <Link to={{ pathname: `/management-submissions/submissions/edit/${item.id}` }} className="nav-link">
+                                                <Link to={{ pathname: `/submission-management/submissions/edit/${item.id}` }} className="nav-link">
                                                     <img src='/img/edit.svg' alt="Edit Icon" className="iconEdit" />
                                                 </Link>
                                                 <img

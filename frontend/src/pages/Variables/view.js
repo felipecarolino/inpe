@@ -36,10 +36,6 @@ export default function View(props) {
                         <Table striped bordered hover>
                             <tbody>
                                 <tr >
-                                    <th className="w-25">ID</th>
-                                    <td>{variable.id}</td>
-                                </tr>
-                                <tr >
                                     <th className="w-25">Name</th>
                                     <td>{variable.name}</td>
                                 </tr>

@@ -10,12 +10,12 @@ export default function Sidebar() {
         <div className="sidebar-management-submissions">
             <Nav variant="pills" className="flex-sm-column">
                 <Nav.Link eventKey="disabled" disabled>Management Submissions</Nav.Link>
-                <Link to="/management-submissions/submissions" className="nav-link">List</Link>
+                <Link to="/submission-management/submissions" className="nav-link">List</Link>
                 <DropdownButton
                     drop="down"
                     title="Search"
                     variant="secondary" >
-                    <Link to="/management-submissions/search/id" className="nav-link">by ID</Link>
+                    <Link to="/submission-management/search/id" className="nav-link">by ID</Link>
                 </DropdownButton>
             </Nav>
         </div>

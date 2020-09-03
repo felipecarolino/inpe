@@ -12,7 +12,7 @@ import EditSubmissions from '../PrivateSubmissions/edit';
 
 import { isAuthenticated } from "./../../services/auth";
 
-export default function ManagementSubmissions() {
+export default function SubmissionManagement() {
 
     const PrivateRoute = ({ component: Component, ...rest }) => (
         <Route
@@ -31,12 +31,12 @@ export default function ManagementSubmissions() {
         <div className="content">
             <Sidebar />
             <Switch>
-                <Route exact path="/management-submissions"> <Redirect to="/management-submissions/submissions" /> </Route>
-                <Route path="/management-submissions/submissions" exact component={Submissions} />
-                <Route path="/management-submissions/submissions/view/:id" component={ViewSubmissions} />
-                <PrivateRoute path="/management-submissions/submissions/create" component={CreateSubmissions} />
-                <PrivateRoute path="/management-submissions/submissions/edit/:id" component={EditSubmissions} />
-                {/* <Route path="/management-submissions/search/:type" component={SearchVariable} /> */}
+                <Route exact path="/submission-management"> <Redirect to="/submission-management/submissions" /> </Route>
+                <Route path="/submission-management/submissions" exact component={Submissions} />
+                <Route path="/submission-management/submissions/view/:id" component={ViewSubmissions} />
+                <PrivateRoute path="/submission-management/submissions/create" component={CreateSubmissions} />
+                <PrivateRoute path="/submission-management/submissions/edit/:id" component={EditSubmissions} />
+                {/* <Route path="/submission-management/search/:type" component={SearchVariable} /> */}
             </Switch>
         </div>
     )

@@ -33,7 +33,7 @@ export default function View(props) {
         <div className="view-submission">
             <Card className="view-submission-card">
                 <Card.Header>
-                    <Link to="/management-submissions/submissions" className="nav-link">
+                    <Link to="/submission-management/submissions" className="nav-link">
                         <img src='/img/arrowLeft.svg' alt="Back Icon" className="iconBack" />
                     </Link>
                     <h5>View Submission</h5>
