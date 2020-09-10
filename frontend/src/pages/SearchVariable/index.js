@@ -207,16 +207,16 @@ export default function SearchVariable(props) {
                 <>
                     <Card className="search-variable-card">
                         <div className={showHeader}>
-                            <Card.Header>
-                                <h5>Search Results</h5>
-                            </Card.Header>
                             <Card.Title>
                                 <Link to="#" className="nav-link download-catalog" onClick={() => exportCSVFile(catalog, 'Variables')}>
                                     Download Results <img src='/img/download.svg' alt="Download Icon" className="iconDownload" />
                                 </Link>
                             </Card.Title>
+                            <Card.Header>
+                                <h5>Search Results</h5>
+                            </Card.Header>
                         </div>
-                        <Card.Body className="search-variable-card-body">
+                        <Card.Body className={"search-variable-card-body " + showHeader}>
                             <div className="search-variable-table">
                                 <Table striped bordered hover responsive>
                                     <thead>

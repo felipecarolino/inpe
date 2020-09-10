@@ -43,10 +43,6 @@ export default function View(props) {
                         <Table striped bordered hover>
                             <tbody>
                                 <tr >
-                                    <th>ID</th>
-                                    <td>{submission.id}</td>
-                                </tr>
-                                <tr >
                                     <th>First Name</th>
                                     <td>{submission.first_name}</td>
                                 </tr>
