@@ -49,12 +49,13 @@ export default function Variables() {
     async function getAll() {
         let itemsFormatted = [];
         const result = await api.get('variables');
-        result.data.data.forEach((item) => {
+        result.data.forEach((item) => {
             itemsFormatted.push({
                 name: item.name.replace(/,/g, ''), // remove commas to avoid errors,
                 ra: item.ra,
                 dec: item.dec,
                 per: item.per,
+                type: item.type,
                 simbad: `http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${item.name}`,
                 ads: `https://ui.adsabs.harvard.edu/search/q=object:${item.name}`
             });
@@ -156,6 +157,7 @@ export default function Variables() {
             ra: "RA",
             dec: "DEC",
             per: "Orb_per",
+            type: "Type",
             simbad: "SIMBAD",
             ads: "ADS"
         };
@@ -214,6 +216,7 @@ export default function Variables() {
                                     <th>RA</th>
                                     <th>DEC</th>
                                     <th>Orb_Per</th>
+                                    <th>Type</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -225,6 +228,7 @@ export default function Variables() {
                                             <td>{item.ra}</td>
                                             <td>{item.dec}</td>
                                             <td>{item.per}</td>
+                                            <td>{item.type}</td>
                                             <td>
                                                 <Link to={{ pathname: `/cataclysmic-variables/variables/view/${item.id}` }} className="nav-link">
                                                     <img src='/img/eye.svg' alt="View Icon" className="iconView" />

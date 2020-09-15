@@ -86,6 +86,7 @@ export default function SearchVariable(props) {
             ra: "RA",
             dec: "DEC",
             per: "Orb_per",
+            type: "Type",
             simbad: "SIMBAD",
             ads: "ADS"
         };
@@ -225,6 +226,7 @@ export default function SearchVariable(props) {
                                             <th>RA</th>
                                             <th>DEC</th>
                                             <th>Orb_Per</th>
+                                            <th>Type</th>
                                             <th>SIMBAD</th>
                                             <th>ADS</th>
                                             <th>Actions</th>
@@ -238,6 +240,7 @@ export default function SearchVariable(props) {
                                                     <td>{item.ra}</td>
                                                     <td>{item.dec}</td>
                                                     <td>{item.per}</td>
+                                                    <td>{item.type}</td>
                                                     <td>
                                                         <a href={`http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${item.name}`}
                                                             target="_blank"

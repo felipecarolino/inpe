@@ -52,6 +52,10 @@ export default function View(props) {
                                     <td>{variable.per}</td>
                                 </tr>
                                 <tr>
+                                    <th className="w-25">Type</th>
+                                    <td>{variable.type}</td>
+                                </tr>
+                                <tr>
                                     <th className="w-25">SIMBAD</th>
                                     <td>
                                         <a href={`http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${name}`}

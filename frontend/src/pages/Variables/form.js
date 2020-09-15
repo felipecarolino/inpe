@@ -18,6 +18,7 @@ export default function FormVariables(props) {
     const [ra, setRa] = useState('');
     const [dec, setDec] = useState('');
     const [per, setPer] = useState('');
+    const [type, setType] = useState('');
     const [id, setId] = useState(props.id);
 
     const Logout = () => {
@@ -34,6 +35,7 @@ export default function FormVariables(props) {
                 setRa(result.data.data.ra);
                 setDec(result.data.data.dec);
                 setPer(result.data.data.per);
+                setType(result.data.data.type);
                 setId(props.id);
             };
             GetVariable();
@@ -118,7 +120,8 @@ export default function FormVariables(props) {
                 name,
                 ra,
                 dec,
-                per
+                per,
+                type
             };
 
             if (id) {
@@ -190,6 +193,17 @@ export default function FormVariables(props) {
                             value={per}
                             onChange={(e) => setPer(e.target.value)}
                             placeholder="0.000000" />
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group controlId="variableType">
+                        <Form.Label>Type</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter type"
+                            value={type}
+                            onChange={(e) => setType(e.target.value)}
+                        />
                     </Form.Group>
                 </Form.Row>
                 <Button type="submit">Save</Button>

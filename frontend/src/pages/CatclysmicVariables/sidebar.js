@@ -18,6 +18,7 @@ export default function Sidebar() {
                     variant="secondary" >
                     <Link to="/cataclysmic-variables/search/name" className="nav-link">by Name</Link>
                     <Link to="/cataclysmic-variables/search/coordinates" className="nav-link">by Coordinates</Link>
+                    <Link to="/cataclysmic-variables/search/type" className="nav-link">by Type</Link>
                 </DropdownButton>
             </Nav>
         </div>

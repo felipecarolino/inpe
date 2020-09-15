@@ -15,6 +15,7 @@ export default function FormSearch(props) {
     const [ra, setRa] = useState("");
     const [dec, setDec] = useState("");
     const [arcosec, setArcosec] = useState(5);
+    const [type, setType] = useState("");
 
     useEffect(() => {
         setErrorsList([]);
@@ -23,7 +24,7 @@ export default function FormSearch(props) {
 
     useEffect(() => {
         if (name && props.type === "name") {
-            searchName({name})
+            searchName({ name })
         }
 
         if (ra && dec && arcosec && props.type === "coordinates") {
@@ -33,6 +34,10 @@ export default function FormSearch(props) {
                 arcosec
             };
             searchCoordinates(data);
+        }
+
+        if (type && props.type === "type") {
+            searchType({ type })
         }
         // eslint-disable-next-line
     }, [props.currentPage])
@@ -89,15 +94,42 @@ export default function FormSearch(props) {
         }
     }
 
+    async function searchType(data) {
+        try {
+            const result = await api.post('variables/searchByType?page=' + props.currentPage, data);
+            if (JSON.parse(result.data.data).data[0] !== undefined) {
+                props.update(JSON.parse(result.data.data).data)
+                props.pagination(JSON.parse(result.data.data).total, props.currentPage, JSON.parse(result.data.data).per_page);
+            }
+            else {
+                setErrorsList([
+                    {
+                        "id": 2, "message": "Variable not found"
+                    }
+                ]);
+                setClassErros("block");
+                props.showTable(false);
+            }
+        } catch (error) {
+            setErrorsList([
+                {
+                    "id": 2, "message": "Error to search variable"
+                }
+            ]);
+            setClassErros("block");
+        }
+    }
+
     async function getAllByName(data) {
         let itemsFormatted = [];
         const result = await api.post('variables/searchByName', data);
-        result.data.data.forEach((item) => {
+        JSON.parse(result.data.data).data.forEach((item) => {
             itemsFormatted.push({
                 name: item.name.replace(/,/g, ''), // remove commas to avoid errors,
                 ra: item.ra,
                 dec: item.dec,
                 per: item.per,
+                type: item.type,
                 simbad: `http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${item.name}`,
                 ads: `https://ui.adsabs.harvard.edu/search/q=object:${item.name}`
             });
@@ -108,12 +140,30 @@ export default function FormSearch(props) {
     async function getAllByCoord(data) {
         let itemsFormatted = [];
         const result = await api.post('variables/searchByCoord', data);
-        result.data.data.forEach((item) => {
+        JSON.parse(result.data.data).data.forEach((item) => {
             itemsFormatted.push({
                 name: item.name.replace(/,/g, ''), // remove commas to avoid errors,
                 ra: item.ra,
                 dec: item.dec,
                 per: item.per,
+                type: item.type,
+                simbad: `http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${item.name}`,
+                ads: `https://ui.adsabs.harvard.edu/search/q=object:${item.name}`
+            });
+        });
+        props.catalog(itemsFormatted);
+    };
+
+    async function getAllByType(data) {
+        let itemsFormatted = [];
+        const result = await api.post('variables/searchByType', data);
+        JSON.parse(result.data.data).data.forEach((item) => {
+            itemsFormatted.push({
+                name: item.name.replace(/,/g, ''), // remove commas to avoid errors,
+                ra: item.ra,
+                dec: item.dec,
+                per: item.per,
+                type: item.type,
                 simbad: `http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${item.name}`,
                 ads: `https://ui.adsabs.harvard.edu/search/q=object:${item.name}`
             });
@@ -134,7 +184,14 @@ export default function FormSearch(props) {
             };
         }
 
-        else {
+        if (props.type === "type") {
+            if (type === "") {
+                errors.push({ "id": "1", "message": "Type cannot be empty" });
+                validade = false
+            };
+        }
+
+        if (props.type === "coordinates") {
             if (ra === "") {
                 errors.push({ "id": "1", "message": "RA cannot be empty" });
                 validade = false
@@ -173,7 +230,16 @@ export default function FormSearch(props) {
                 searchName(data);
                 getAllByName(data);
             }
-            else {
+
+            if (props.type === "type") {
+                const data = {
+                    type
+                };
+                searchType(data);
+                getAllByType(data);
+            }
+
+            if (props.type === "coordinates") {
                 const data = {
                     ra,
                     dec,
@@ -205,21 +271,39 @@ export default function FormSearch(props) {
                 </div>
 
                 {props.type === "name" ?
-                        <Form onSubmit={handleSave} className="form-name">
+                    <Form onSubmit={handleSave} className="form-name">
+                        <Form.Row>
+                            <Form.Group controlId="variableName">
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter variable name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                />
+                            </Form.Group>
+                        </Form.Row>
+                        <Button type="submit">Search</Button>
+                    </Form>
+
+                    :
+
+                    props.type === "type" ?
+
+                        <Form onSubmit={handleSave} className="form-type">
                             <Form.Row>
-                                <Form.Group controlId="variableName">
+                                <Form.Group controlId="variableType">
                                     <Form.Control
                                         type="text"
-                                        placeholder="Enter variable name"
-                                        value={name}
-                                        onChange={(e) => setName(e.target.value)}
+                                        placeholder="Enter variable type"
+                                        value={type}
+                                        onChange={(e) => setType(e.target.value)}
                                     />
                                 </Form.Group>
                             </Form.Row>
                             <Button type="submit">Search</Button>
                         </Form>
 
-                    :
+                        :
 
                         <Form onSubmit={handleSave} className="form-coordinates">
                             <Form.Row>
