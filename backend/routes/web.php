@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+/*
 Route::group(['middleware' => 'cors'], function(){
 	Route::get('/roles', 'Admin\RolesController@index')->name('roles.index');
 	Route::post('/roles', 'Admin\RolesController@create')->name('roles.create');
@@ -38,5 +38,6 @@ Route::group(['middleware' => 'cors'], function(){
 	Route::get('/variables/{id}', 'Admin\VariablesController@show')->name('variables.show');;
 	Route::delete('/variables/{id}', 'Admin\VariablesController@destroy')->name('variables.destroy');
 	
-});
+});*/
+
 	

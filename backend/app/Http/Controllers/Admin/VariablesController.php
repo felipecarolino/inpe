@@ -203,6 +203,41 @@ class VariablesController extends ApiController
     	 
     }
 
+    public function searchByType(Request $request)
+    {
+    	 
+    	$count = 5;
+    
+    	$pageNumber = isset($_GET['page'])?$_GET['page']:1;
+    	 
+    
+    	try{
+    		$type = isset($request->type)?$request->type:null;
+    
+    	
+    		
+    		//$variables = Variables::where('Name_RK','like','%'.$name.'%')->get();
+    
+    		$variables = array();
+    		if ($type)
+    			$variables = Variables::where('type','like','%'.$type.'%')->paginate($count, ['*'], 'page', $pageNumber)->toJson(JSON_PRETTY_PRINT);
+    
+    		$result['data'] = $variables;
+    		$result['status'] = true;
+    		 
+    	}catch(\Exception $e){
+    		$result['status'] = false;
+    		$result['message'] = 'Operation failed due to '. $e->getMessage();
+    	}
+    
+    	if($result['status']){
+    		return $this->success($result['data']);
+    	}else{
+    		return $this->fail($result['message']);
+    	}
+    
+    
+    }
 
     
     public function update(UpdateVariablesRequest $request,$id)

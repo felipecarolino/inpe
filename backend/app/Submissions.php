@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @package App
  * @property string $title
 */
-class Variables extends Model
+class Submissions extends Model
 {
-    protected $fillable = ['name','ra','dec','per','type'];
+    protected $fillable = ['first_name','last_name','email','institution','department','position','website','observations','filename'];
     protected $hidden = [];
     
     use SoftDeletes;
@@ -23,5 +23,6 @@ class Variables extends Model
 
         //Role::observe(new \App\Observers\UserActionsObserver);
     }
+    
     
 }

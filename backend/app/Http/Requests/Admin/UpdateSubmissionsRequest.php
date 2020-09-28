@@ -8,7 +8,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UpdateVariablesRequest extends FormRequest
+class UpdateSubmissionsRequest extends FormRequest
 {
      /**
      * Get the validation rules that apply to the request.
@@ -18,9 +18,11 @@ class UpdateVariablesRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:3|unique:variables,name,'.$this->id,
-           	'ra' => 'required',
-        	'dec' => 'required',
+            'first_name'=> 'required',
+        	'last_name'=> 'required',
+        	'email'=> 'required|email|',
+        	'institution'=> 'required',
+        	'department'=> 'required'
         ];
     }
     
@@ -33,9 +35,11 @@ class UpdateVariablesRequest extends FormRequest
     public function messages()
     {
     	return [
-    			'name' => 'Name field is required',
-    			'ra.required' => 'RA field is required',
-    			'dec.required' => 'RA field is required',
+    			'first_name.required' => 'First name field is required',
+    			'last_name.required' => 'Last name field is required',
+    			'email.required' => 'Email field is required',
+    			'institution.required' => 'Institution field is required',
+    			'department.required' => 'Departament field is required',
     	];
     }
     /**
