@@ -24,11 +24,13 @@ export default function Routes() {
         />
       );
 
+    const root = "localhost:3000";
+
     return (
         <div className="routes">
             <Switch>
                 <Route exact path="/"> <Redirect to="/cataclysmic-variables/variables" /> </Route>
-                <Route path="/restrict-area" exact component={Login}/>
+                <Route path={root + "/restrict-area"} exact component={Login}/>
                 <PrivateRoute path="/user-management" component={UserManagement}/>
                 <Route path='/cataclysmic-variables' component={CataclysmicVariables}/>
                 <Route path='/submissions' component={Submissions}/>
