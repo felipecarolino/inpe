@@ -25,7 +25,7 @@ export default function Header() {
                     <img className="logo" src='/img/logo.png' alt="Logo inpe" />
                 </div>
                 <div className="header-title">
-                    <h1>Cataclysmic Variables Portal</h1>
+                <Link to="/" className="nav-link"><h1>Cataclysmic Variables Portal</h1></Link>
                 </div>
                 <div className="header-flags">
                     <a href="#pt-br"><img src='/img/brazil_thumbnail.png' alt="Brazil flag thumbnail" className="header-flag-br" /></a>
@@ -39,7 +39,7 @@ export default function Header() {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
                     {isAuthenticated() ? <Link to="/user-management" className="nav-link">User Management</Link> : null}
-                            <Link to="/cataclysmic-variables" className="nav-link">Cataclysmic Variables</Link>
+                            <Link to="/cataclysmic-variables" className="nav-link">Catalog</Link>
                             {isAuthenticated() ? <Link to="/submission-management" className="nav-link">Submission Management</Link>
                                 :
                             <Link to="/submissions" className="nav-link">Submissions</Link>}
@@ -52,7 +52,7 @@ export default function Header() {
                         <Link to="/restrict-area" className="user nav-link"><img src='/img/user.png' alt="Account Icon" className="iconAccount" /></Link>
                         </>
                             :
-                        <Link to="/restrict-area" className="nav-link">Restrict Area</Link> }
+                        <Link to="/restrict-area" className="nav-link">Restricted Area</Link> }
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

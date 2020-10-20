@@ -261,7 +261,7 @@ export default function FormSearch(props) {
             <div className="search-form">
 
                 <Navbar bg="light" className="title">
-                    <Navbar.Brand>Search results by {props.type}</Navbar.Brand>
+                    <Navbar.Brand>Search objects by {props.type}</Navbar.Brand>
                 </Navbar>
 
                 <div className={"alert alert-danger " + classErrors} >
@@ -308,7 +308,7 @@ export default function FormSearch(props) {
                         <Form onSubmit={handleSave} className="form-coordinates">
                             <Form.Row>
                                 <Form.Group controlId="variableRa">
-                                    <Form.Label>RA</Form.Label>
+                                    <Form.Label>RA (J2000.0)</Form.Label>
                                     <Input
                                         mask="99 99 99.99"
                                         value={ra}
@@ -318,7 +318,7 @@ export default function FormSearch(props) {
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group controlId="variableDec">
-                                    <Form.Label>DEC</Form.Label>
+                                    <Form.Label>DEC (J2000.0)</Form.Label>
                                     <Input
                                         formatChars={
                                             {
@@ -334,7 +334,7 @@ export default function FormSearch(props) {
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group controlId="variableArcosec">
-                                    <Form.Label>Arcosec</Form.Label>
+                                    <Form.Label>Radius of the cone search in arcsec</Form.Label>
                                     <Form.Control
                                         type="number"
                                         placeholder="Enter variable Arcosec"

@@ -6,6 +6,7 @@ import Submissions from './pages/Submissions/index';
 import SubmissionManagement from './pages/SubmissionManagement/index';
 import Documentation from './pages/Documentation/index';
 import Login from './pages/Login/index';
+import Home from './pages/Home/index';
 
 import { isAuthenticated } from "./services/auth";
 
@@ -27,7 +28,7 @@ export default function Routes() {
     return (
         <div className="routes">
             <Switch>
-                <Route exact path="/"> <Redirect to="/cataclysmic-variables/variables" /> </Route>
+                <Route exact path="/" component={Home}/> 
                 <Route path="/restrict-area" exact component={Login}/>
                 <PrivateRoute path="/user-management" component={UserManagement}/>
                 <Route path='/cataclysmic-variables' component={CataclysmicVariables}/>

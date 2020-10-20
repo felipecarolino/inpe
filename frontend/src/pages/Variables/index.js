@@ -154,9 +154,9 @@ export default function Variables() {
 
         let headers = {
             name: 'Name', // remove commas to avoid errors
-            ra: "RA",
-            dec: "DEC",
-            per: "Orb_per",
+            ra: "RA (J2000.0)",
+            dec: "DEC (J2000.0)",
+            per: "Orbital period (d)",
             type: "Type",
             simbad: "SIMBAD",
             ads: "ADS"
@@ -213,9 +213,9 @@ export default function Variables() {
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>RA</th>
-                                    <th>DEC</th>
-                                    <th>Orb_Per</th>
+                                    <th>RA (J2000.0)</th>
+                                    <th>DEC (J2000.0)</th>
+                                    <th>Orbital period (d)</th>
                                     <th>Type</th>
                                     <th>Actions</th>
                                 </tr>
@@ -225,8 +225,8 @@ export default function Variables() {
                                     variables.map((item, idx) => {
                                         return <tr key={item.id}>
                                             <td>{item.name}</td>
-                                            <td>{item.ra}</td>
-                                            <td>{item.dec}</td>
+                                            <td>{item.ra.substr(0, 11)}</td>
+                                            <td>{item.dec.substr(0, 12)}</td>
                                             <td>{item.per}</td>
                                             <td>{item.type}</td>
                                             <td>

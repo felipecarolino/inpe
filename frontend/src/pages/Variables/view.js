@@ -11,12 +11,16 @@ export default function View(props) {
 
     const [variable, setVariable] = useState([]);
     const [name, setName] = useState('');
+    const [ra, setRa] = useState('');
+    const [dec, setDec] = useState('');
 
     useEffect(() => {
         const GetVariable = async () => {
             const result = await api.get('variables/' + props.match.params.id);
             setVariable(result.data.data);
             setName(result.data.data.name);
+            setRa(result.data.data.ra.substr(0, 11));
+            setDec(result.data.data.dec.substr(0, 12));
         };
         GetVariable();
 
@@ -29,7 +33,7 @@ export default function View(props) {
                     <Link to="/cataclysmic-variables/variables" className="nav-link">
                         <img src='/img/arrowLeft.svg' alt="Back Icon" className="iconBack" />
                     </Link>
-                    <h5>View Cataclysmic Variable</h5>
+                    <h5>Object information</h5>
                 </Card.Header>
                 <Card.Body className="view-variable-card-body">
                     <div className="view-variable-table">
@@ -37,18 +41,18 @@ export default function View(props) {
                             <tbody>
                                 <tr >
                                     <th className="w-25">Name</th>
-                                    <td>{variable.name}</td>
+                                    <td>{name}</td>
                                 </tr>
                                 <tr>
-                                    <th className="w-25">RA</th>
-                                    <td>{variable.ra}</td>
+                                    <th className="w-25">RA (J2000.0)</th>
+                                    <td>{ra}</td>
                                 </tr>
                                 <tr>
-                                    <th className="w-25">DEC</th>
-                                    <td>{variable.dec}</td>
+                                    <th className="w-25">DEC (J2000.0)</th>
+                                    <td>{dec}</td>
                                 </tr>
                                 <tr>
-                                    <th className="w-25">Orb_Per</th>
+                                    <th className="w-25">Orbital period (d)</th>
                                     <td>{variable.per}</td>
                                 </tr>
                                 <tr>

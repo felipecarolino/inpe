@@ -156,17 +156,17 @@ export default function FormVariables(props) {
                 </Form.Row>
                 <Form.Row>
                     <Form.Group controlId="variableRa">
-                        <Form.Label>RA</Form.Label>
+                        <Form.Label>RA (J2000.0)</Form.Label>
                         <Input
                             mask="99 99 99.9999999999"
                             value={ra}
                             onChange={(e) => setRa(e.target.value)}
-                            placeholder="hh mm ss.ssssssssss" />
+                            placeholder="hh mm ss.ss" />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
                     <Form.Group controlId="variableDec">
-                        <Form.Label>DEC</Form.Label>
+                        <Form.Label>DEC (J2000.0)</Form.Label>
                         <Input
                             formatChars={
                                 {
@@ -177,12 +177,12 @@ export default function FormVariables(props) {
                             mask="?99 99 99.999999999"
                             value={dec}
                             onChange={(e) => setDec(e.target.value)}
-                            placeholder="+/-dd mm ss.sssssssss" />
+                            placeholder="+/-dd mm ss.ss" />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
                     <Form.Group controlId="variablePer">
-                        <Form.Label>Orb_Per</Form.Label>
+                        <Form.Label>Orbital period (d)</Form.Label>
                         <Input
                             formatChars={
                                 {

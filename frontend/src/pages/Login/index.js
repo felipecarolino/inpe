@@ -12,7 +12,7 @@ export default function Login() {
     return (
         <div className="view-login">
             <Card className="login-card">
-                <Card.Header as="h5">Restrict Area</Card.Header>
+                <Card.Header as="h5">Restricted Area</Card.Header>
                 <Card.Body>
                     {isAuthenticated() ? <View /> : <Form />}
                 </Card.Body>

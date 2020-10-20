@@ -83,9 +83,9 @@ export default function SearchVariable(props) {
 
         let headers = {
             name: 'Name', // remove commas to avoid errors
-            ra: "RA",
-            dec: "DEC",
-            per: "Orb_per",
+            ra: "RA (J2000.0)",
+            dec: "DEC (J2000.0)",
+            per: "Orbital period (d)",
             type: "Type",
             simbad: "SIMBAD",
             ads: "ADS"
@@ -214,7 +214,7 @@ export default function SearchVariable(props) {
                                 </Link>
                             </Card.Title>
                             <Card.Header>
-                                <h5>Search Results</h5>
+                                <h5>Search objects by {props.match.params.type}</h5>
                             </Card.Header>
                         </div>
                         <Card.Body className={"search-variable-card-body " + showHeader}>
@@ -223,9 +223,9 @@ export default function SearchVariable(props) {
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>RA</th>
-                                            <th>DEC</th>
-                                            <th>Orb_Per</th>
+                                            <th>RA (J2000.0)</th>
+                                            <th>DEC (J2000.0)</th>
+                                            <th>Orbital period (d)</th>
                                             <th>Type</th>
                                             <th>SIMBAD</th>
                                             <th>ADS</th>
@@ -237,8 +237,8 @@ export default function SearchVariable(props) {
                                             variable.map((item, idx) => {
                                                 return <tr key={item.id}>
                                                     <td>{item.name}</td>
-                                                    <td>{item.ra}</td>
-                                                    <td>{item.dec}</td>
+                                                    <td>{item.ra.substr(0, 11)}</td>
+                                                    <td>{item.dec.substr(0, 12)}</td>
                                                     <td>{item.per}</td>
                                                     <td>{item.type}</td>
                                                     <td>

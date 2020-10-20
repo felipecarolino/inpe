@@ -1,13 +1,17 @@
-.documentation .container{
-    display: flex;
-    justify-content: center;
+.cv-img{
+    max-width: 350px;
+    max-height: 350px;
+    float: left;
+    margin-right: 15px;
+}
+
+.container{
+    overflow: hidden;
 }
 
 .container p{
     display: block;
     text-align: justify;
-    font-size: 17px;
-    color: black;
 }
 
 .jumbotron{
@@ -15,16 +19,16 @@
 }
 
 /* unvisited link */
-.documentation-link:link {
+.home-link:link {
     color: #1a0dab;
 }
   
 /* visited link */
-.documentation-link:visited {
+.home-link:visited {
     color: #609;
 }
 
 /* selected link */
-.documentation-link:active {
+.home-link:active {
     color: blue;
 }
