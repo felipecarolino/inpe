@@ -26,6 +26,7 @@ export default function Header() {
                 </div>
                 <div className="header-title">
                     <Link to="/" className="nav-link"><h1>Cataclysmic Variables Portal</h1></Link>
+                    <h3>Preliminary version! Do not use it!</h3>
                 </div>
                 <div className="header-flags">
                     <a href="#pt-br"><img src='/img/brazil_thumbnail.png' alt="Brazil flag thumbnail" className="header-flag-br" /></a>
