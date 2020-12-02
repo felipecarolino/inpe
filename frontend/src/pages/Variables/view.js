@@ -72,7 +72,7 @@ export default function View(props) {
                                 <tr>
                                     <th className="w-25">ADS</th>
                                     <td>
-                                        <a href={`https://ui.adsabs.harvard.edu/search/q=object:${name}`}
+                                        <a href={`https://ui.adsabs.harvard.edu/search/q=object:("${name}")`}
                                             target="_blank"
                                             rel="noopener noreferrer">
                                             View object in ADS

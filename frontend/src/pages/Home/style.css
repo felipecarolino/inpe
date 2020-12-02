@@ -1,12 +1,11 @@
 .cv-img{
     max-width: 350px;
     max-height: 350px;
-    float: left;
-    margin-right: 15px;
 }
 
 .container{
     overflow: hidden;
+    display: flex;
 }
 
 .container p{
@@ -16,6 +15,14 @@
 
 .jumbotron{
     background-color: white;
+}
+
+.text-div{
+    margin-left: 15px;
+}
+
+figcaption {
+    text-align: center;
 }
 
 /* unvisited link */
@@ -32,3 +39,13 @@
 .home-link:active {
     color: blue;
 }
+
+@media only screen and (max-width: 576px){
+    .container{
+        display: block;
+    }
+
+    .div-img{
+        text-align: center;
+    }
+ }

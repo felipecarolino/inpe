@@ -249,7 +249,7 @@ export default function SearchVariable(props) {
                                                             </a>
                                                     </td>
                                                     <td>
-                                                        <a href={`https://ui.adsabs.harvard.edu/search/q=object:${item.name}`}
+                                                        <a href={`https://ui.adsabs.harvard.edu/search/q=object:("${item.name}")`}
                                                             target="_blank"
                                                             rel="noopener noreferrer">
                                                             View object in ADS
