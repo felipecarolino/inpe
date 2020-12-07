@@ -242,26 +242,26 @@ export default function SearchVariable(props) {
                                                     <td>{item.per}</td>
                                                     <td>{item.type}</td>
                                                     <td>
-                                                        <a href={`http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${item.name}`}
+                                                        <a href={`http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${item.name.indexOf("+") > -1 ? item.name.replace(/\+/g, "%2b") : item.name}`}
                                                             target="_blank"
                                                             rel="noopener noreferrer">
                                                             View object in SIMBAD
                                                             </a>
                                                     </td>
                                                     <td>
-                                                        <a href={`https://ui.adsabs.harvard.edu/search/q=object:("${item.name}")`}
+                                                        <a href={`https://ui.adsabs.harvard.edu/search/q=object:("${item.name.indexOf("+") > -1 ? item.name.replace(/\+/g, "%2b") : item.name}")`}
                                                             target="_blank"
                                                             rel="noopener noreferrer">
                                                             View object in ADS
                                                             </a>
                                                     </td>
                                                     <td>
-                                                        <Link to={{ pathname: `/cataclysmic-variables/variables/view/${item.id}` }} className="nav-link">
+                                                        <Link to={{ pathname: `/cataclysmic-variables/variables/view/${item.id}` }} className="nav-link" target="_blank">
                                                             <img src='/img/eye.svg' alt="View Icon" className="iconView" />
                                                         </Link>
                                                         {isAuthenticated() ?
                                                             <>
-                                                                <Link to={{ pathname: `/cataclysmic-variables/variables/edit/${item.id}` }} className="nav-link">
+                                                                <Link to={{ pathname: `/cataclysmic-variables/variables/edit/${item.id}` }} className="nav-link" target="_blank">
                                                                     <img src='/img/edit.svg' alt="Edit Icon" className="iconEdit" />
                                                                 </Link>
                                                                 <img

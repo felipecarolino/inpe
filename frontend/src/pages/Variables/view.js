@@ -62,7 +62,7 @@ export default function View(props) {
                                 <tr>
                                     <th className="w-25">SIMBAD</th>
                                     <td>
-                                        <a href={`http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${name}`}
+                                        <a href={`http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${name.indexOf("+") > -1 ? name.replace(/\+/g, "%2b") : name}`}
                                             target="_blank"
                                             rel="noopener noreferrer">
                                             View object in SIMBAD
@@ -72,7 +72,7 @@ export default function View(props) {
                                 <tr>
                                     <th className="w-25">ADS</th>
                                     <td>
-                                        <a href={`https://ui.adsabs.harvard.edu/search/q=object:("${name}")`}
+                                        <a href={`https://ui.adsabs.harvard.edu/search/q=object:("${name.indexOf("+") > -1 ? name.replace(/\+/g, "%2b") : name}")`}
                                             target="_blank"
                                             rel="noopener noreferrer">
                                             View object in ADS

@@ -230,12 +230,12 @@ export default function Variables() {
                                             <td>{item.per}</td>
                                             <td>{item.type}</td>
                                             <td>
-                                                <Link to={{ pathname: `/cataclysmic-variables/variables/view/${item.id}` }} className="nav-link">
+                                                <Link to={{ pathname: `/cataclysmic-variables/variables/view/${item.id}` }} className="nav-link" target="_blank">
                                                     <img src='/img/eye.svg' alt="View Icon" className="iconView" />
                                                 </Link>
                                                 {isAuthenticated() ?
                                                     <>
-                                                        <Link to={{ pathname: `/cataclysmic-variables/variables/edit/${item.id}` }} className="nav-link">
+                                                        <Link to={{ pathname: `/cataclysmic-variables/variables/edit/${item.id}` }} className="nav-link" target="_blank">
                                                             <img src='/img/edit.svg' alt="Edit Icon" className="iconEdit" />
                                                         </Link>
                                                         <img
